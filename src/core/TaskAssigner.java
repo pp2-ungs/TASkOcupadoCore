@@ -9,7 +9,7 @@ public class TaskAssigner {
 	
 	@SuppressWarnings("deprecation")
 	private Set<Observer> observers;
-	private Map<Task, Set<Member>> assignedTasks;
+	private Map<Task, Set<Member>> assignedTasks;	// not taskAssigned jsajaja
 
 	// TODO
 	public TaskAssigner() {
