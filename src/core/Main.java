@@ -3,10 +3,10 @@ package core;
 public class Main {
 	
 	public static void main(String[] args) {
-		TaskAssigner taskAssigner = new TaskAssigner();
+		TASkOcupado tasocupado = new TASkOcupado();
 		Task t = new Task("Afiliarse a la Cámpora");
 		Member m = new Member("Gonza");
-		taskAssigner.assignTask(t, m);
+		tasocupado.assignTaskToMember(t, m);
 	}
 
 }
