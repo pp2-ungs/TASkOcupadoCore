@@ -4,15 +4,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TASkOcupado {
+	
 	private TaskAssigner taskAssigner;
 	private Set<Member> group;
 	private Set<Task> tasks;
 	
 	public TASkOcupado() {
 		taskAssigner = new TaskAssigner();
-		group = new HashSet<Member>();
-		tasks = new HashSet<Task>();
-		//tasks = obtainTasksFromCalendar(null);
+		
+		// FIXME: bothering
+		//group = new HashSet<Member>();
+		//tasks = new HashSet<Task>();
 	}
 
 	public void addMember(String member) {
