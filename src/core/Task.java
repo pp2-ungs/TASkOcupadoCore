@@ -1,6 +1,6 @@
 package core;
 
-// Clase vacía porque las tareas se traen del calendario externo.
+// Clase vacía: las tareas se traen un calendario externo.
 public class Task {
 	
 	private String description;

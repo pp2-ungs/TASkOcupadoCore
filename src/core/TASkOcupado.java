@@ -12,9 +12,8 @@ public class TASkOcupado {
 	public TASkOcupado() {
 		taskAssigner = new TaskAssigner();
 		
-		// FIXME: bothering
-		//group = new HashSet<Member>();
-		//tasks = new HashSet<Task>();
+		group = new HashSet<Member>();
+		tasks = new HashSet<Task>();
 	}
 
 	public void addMember(String member) {

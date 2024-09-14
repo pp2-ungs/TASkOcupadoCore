@@ -1,6 +1,6 @@
 package core;
 
-// Clase vacía porque los miembros se traen del calendario externo.
+// Clase vacía: los miembros se traen un calendario externo.
 public class Member {
 	
 	private String name;

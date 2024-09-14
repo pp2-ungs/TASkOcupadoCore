@@ -1,6 +1,6 @@
 package core;
 
-// Calendarios externos
+// Calendarios externos.
 public interface Calendar {
 
 }
