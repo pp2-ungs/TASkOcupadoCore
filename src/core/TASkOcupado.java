@@ -25,9 +25,16 @@ public class TASkOcupado {
 	}
 	
 	public void assignTask(String task, String member) {
-		// TODO: this is really a search from the two sets
-		Task t = new Task(task);
-		Member m = new Member(member);
-		this.taskAssigner.assignTask(t, m);
+		Task assignedTask = tasks.stream()
+			    .filter(t -> t.getDescription().equals(task))
+			    .findFirst()
+			    .orElse(new Task("Null task"));	// FIXME: patrón Special Case / Null Object
+
+		Member assignated =  group.stream()
+			    .filter(m -> m.getName().equals(member))
+			    .findFirst()
+			    .orElse(new Member("Null member"));	// FIXME: patrón Special Case / Null Object
+		
+		this.taskAssigner.assignTask(assignedTask, assignated);
 	}
 }
