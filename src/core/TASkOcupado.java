@@ -38,7 +38,7 @@ public class TASkOcupado implements core.Observable {
 			    .findFirst()
 			    .orElse(new Task(task));	// FIXME: patrón Special Case / Null Object
 		
-		Member assignated =  group.stream()
+		Member assignated = group.stream()
 			    .filter(m -> m.getName().equals(member))
 			    .findFirst()
 			    .orElse(new Member("Null member"));	// FIXME: patrón Special Case / Null Object
