@@ -1,41 +1,38 @@
 package views;
 
-import java.lang.ModuleLayer.Controller;
 import java.util.Observable;
 import java.util.Observer;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-
+import controllers.TASkOcupadoController;
 import core.ConcreteNotificator;
 import core.Notificator;
 import core.TASkOcupado;
 import core.TaskAssigner;
-import javax.swing.JLabel;
 
 @SuppressWarnings("deprecation")
 public class TASkOcupadoView extends JFrame implements Observer { // Hay que ver bien si es una herencia (Podría tener un JFrame como atributo)
 	
 	private TASkOcupado taskOcupado;
-	private Controller controller;
+	private TASkOcupadoController controller;
 	
-	public TASkOcupadoView() {
-		setTitle("TASkOcupado");
-		setSize(800, 600);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+	public TASkOcupadoView(TASkOcupado taskOcupado) {
+		this.taskOcupado = taskOcupado;
+		controller = new TASkOcupadoController(this.taskOcupado, this);
+		init();
+	}
+	
+	private void init() {
 		setVisible(true);
+		setSize(800, 600);
 		setResizable(false);
-		getContentPane().setLayout(null);
+		setTitle("TASkOcupado");
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 784, 561);
-		getContentPane().add(panel);
-		panel.setLayout(null);
+		TaskAssignerPanel taskAssignerPanel = new TaskAssignerPanel(controller);
+		getContentPane().add(taskAssignerPanel);
 		
-		JLabel lblNewLabel = new JLabel("Hola xd");
-		lblNewLabel.setBounds(317, 260, 157, 53);
-		panel.add(lblNewLabel);
+		repaint();
 	}
 
 	public static void main(String[] args) {
@@ -49,7 +46,7 @@ public class TASkOcupadoView extends JFrame implements Observer { // Hay que ver
 		
 		TASkOcupado taskOcupado = new TASkOcupado(taskAssigner);
 		
-		TASkOcupadoView view = new TASkOcupadoView();
+		TASkOcupadoView view = new TASkOcupadoView(taskOcupado);
 
 		taskOcupado.addObserver(view);
 		

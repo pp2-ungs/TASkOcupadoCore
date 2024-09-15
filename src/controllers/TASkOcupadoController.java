@@ -26,6 +26,8 @@ public class TASkOcupadoController implements Observer {
 		taskOcupado.getData();
 		// view.hide(coso);
 	}
-	
-	// TODO: method handleEvent
+
+	public void assignTask(String taskName, String memberName) {
+        taskOcupado.assignTask(taskName, memberName);
+    }
 }
