@@ -10,7 +10,6 @@ public class ConcreteNotificator extends Notificator {
 		System.out.println(arg);
 	}
 	
-	
 	public void notify(Object msg) {
 		// TODO: how's this different from the other one?
 		System.out.println(msg);

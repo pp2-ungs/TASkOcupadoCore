@@ -10,7 +10,7 @@ public class TASkOcupado {
 	private Set<Task> tasks;
 	
 	public TASkOcupado(TaskAssigner t) {
-		taskAssigner = new TaskAssigner();
+		taskAssigner = t;
 		group = new HashSet<>();
 		tasks = new HashSet<>();
 	}
@@ -33,7 +33,7 @@ public class TASkOcupado {
 		Task assignedTask = tasks.stream()
 			    .filter(t -> t.getDescription().equals(task))
 			    .findFirst()
-			    .orElse(new Task("Null task"));	// FIXME: patrón Special Case / Null Object
+			    .orElse(new Task(task));	// FIXME: patrón Special Case / Null Object
 
 		Member assignated =  group.stream()
 			    .filter(m -> m.getName().equals(member))

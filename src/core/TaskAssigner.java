@@ -3,13 +3,12 @@ package core;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
 
 // Asigna tareas a miembros, y sabe qué tareas se asignaron a cuáles miembros.
 @SuppressWarnings("deprecation")
-public class TaskAssigner extends Observable {
+public class TaskAssigner {
 	
 	private Set<Observer> observers;
 	private Map<Task, Set<Member>> assignedTasks;	// not taskAssigned jsajaja
@@ -22,11 +21,11 @@ public class TaskAssigner extends Observable {
 
 	// TODO
 	public void assignTask(Task t, Member m) {
-		assignedTasks.putIfAbsent(t, new HashSet<>());
+		assignedTasks.put(t, new HashSet<>());
 		assignedTasks.get(t).add(m);
 		
+		// TODO: ask if this is okay
 		notifyObservers(t, m);
-		//System.out.println("Viva Perón!");
 	}
 	
 	// TODO: think about if we really need this
@@ -43,8 +42,10 @@ public class TaskAssigner extends Observable {
     }
     
     private void notifyObservers(Task t, Member m) {
-    	String notification = "Se le asignó la tarea " + t.getDescription() + " al miembro " + m.getName();
-        observers.forEach(observer -> observer.update(this, notification));
+    	String notification = "Se le asignó la tarea '" + t.getDescription() + "' al miembro " + m.getName();
+    	
+    	// FIXME: this is not ok! it's just because we don't extend Observable
+    	observers.forEach(observer -> observer.update(null, notification));
     }
 
 }
