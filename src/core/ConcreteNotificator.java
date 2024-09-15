@@ -13,5 +13,6 @@ public class ConcreteNotificator extends Notificator {
 	
 	public void notify(Object msg) {
 		// TODO: how's this different from the other one?
+		System.out.println(msg);
 	}
 }
