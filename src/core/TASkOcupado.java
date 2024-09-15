@@ -1,9 +1,11 @@
 package core;
 
 import java.util.HashSet;
+import java.util.Observer;
 import java.util.Set;
 
-public class TASkOcupado {
+@SuppressWarnings("deprecation")
+public class TASkOcupado implements core.Observable {
 	
 	private TaskAssigner taskAssigner;
 	private Set<Member> group;
@@ -51,5 +53,19 @@ public class TASkOcupado {
 
 	public void debug() {
 		taskAssigner.debug();
+	}
+	
+	// TODO: check, código repetido
+	// preguntar si esto es válido, ya que no sé
+	// si realmente hace falta que TASkOcupado
+	// sea observable
+	@Override
+	public void addObserver(Observer observer) {
+		taskAssigner.addObserver(observer);
+	}
+
+	@Override
+	public void removeObserver(Observer observer) {
+		taskAssigner.removeObserver(observer);
 	}
 }
