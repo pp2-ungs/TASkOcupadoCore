@@ -50,7 +50,6 @@ public class TASkOcupado implements core.Observable {
 		taskAssigner.assignTask(t, m);
 	}
 
-
 	public void debug() {
 		taskAssigner.debug();
 	}
@@ -67,5 +66,11 @@ public class TASkOcupado implements core.Observable {
 	@Override
 	public void removeObserver(Observer observer) {
 		taskAssigner.removeObserver(observer);
+	}
+	
+	// TODO: implement
+	public Object getData() {
+		// taskAssigner.getData();
+		return new Object();
 	}
 }
