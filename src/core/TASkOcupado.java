@@ -12,8 +12,8 @@ public class TASkOcupado {
 	public TASkOcupado() {
 		taskAssigner = new TaskAssigner();
 		
-		group = new HashSet<Member>();
-		tasks = new HashSet<Task>();
+		group = new HashSet<>();
+		tasks = new HashSet<>();
 	}
 
 	public void addMember(String member) {
