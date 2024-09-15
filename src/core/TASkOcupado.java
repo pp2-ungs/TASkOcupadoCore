@@ -11,7 +11,6 @@ public class TASkOcupado {
 	
 	public TASkOcupado() {
 		taskAssigner = new TaskAssigner();
-		
 		group = new HashSet<>();
 		tasks = new HashSet<>();
 	}

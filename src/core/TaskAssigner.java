@@ -1,5 +1,7 @@
 package core;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Observer;
 import java.util.Set;
@@ -13,11 +15,14 @@ public class TaskAssigner {
 
 	// TODO
 	public TaskAssigner() {
+		observers = new HashSet<>();
+		assignedTasks = new HashMap<>();
 	}
 
 	// TODO
 	public void assignTask(Task t, Member m) {
-		// tasksAssigned ← task, member
+		assignedTasks.putIfAbsent(t, new HashSet<>());
+		assignedTasks.get(t).add(m);
 		System.out.println("Viva Perón!");
 	}
 	
