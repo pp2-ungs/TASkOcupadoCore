@@ -4,15 +4,15 @@ import java.util.Observable;
 import java.util.Observer;
 
 import core.TASkOcupado;
-import views.View;
+import views.TASkOcupadoView;
 
 @SuppressWarnings("deprecation")
 public class TASkOcupadoController implements Observer {
 	
 	TASkOcupado taskOcupado; // model
-	View view;	// view
+	TASkOcupadoView view;	// view
 	
-	public TASkOcupadoController(TASkOcupado t, View v) {
+	public TASkOcupadoController(TASkOcupado t, TASkOcupadoView v) {
 		taskOcupado = t;
 		view = v;
 		
