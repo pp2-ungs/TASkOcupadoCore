@@ -29,17 +29,27 @@ public class TASkOcupado {
 		return new HashSet<>();
 	}
 	
+	// FIXME: Si se usan Strings en los key, se repiten los keys en el map
 	public void assignTask(String task, String member) {
 		Task assignedTask = tasks.stream()
 			    .filter(t -> t.getDescription().equals(task))
 			    .findFirst()
 			    .orElse(new Task(task));	// FIXME: patrón Special Case / Null Object
-
+		
 		Member assignated =  group.stream()
 			    .filter(m -> m.getName().equals(member))
 			    .findFirst()
 			    .orElse(new Member("Null member"));	// FIXME: patrón Special Case / Null Object
 		
-		this.taskAssigner.assignTask(assignedTask, assignated);
+		taskAssigner.assignTask(assignedTask, assignated);
+	}
+	
+	public void assignTask(Task t, Member m) {
+		taskAssigner.assignTask(t, m);
+	}
+
+
+	public void debug() {
+		taskAssigner.debug();
 	}
 }

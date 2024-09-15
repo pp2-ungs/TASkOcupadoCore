@@ -1,7 +1,14 @@
 package core;
 
 public class Main {
-	
+
+	// startdebugging
+	public final static Task taskLoca = new Task("Bañarse");
+	public final static Member xime = new Member("Ebertz");
+	public final static Member gonza = new Member("López");
+	public final static Member hdr = new Member("Rondelli");
+	//stopdebugging
+
 	public static void main(String[] args) {
 		TaskAssigner taskAssigner = new TaskAssigner();
 		Notificator notificator = new ConcreteNotificator();
@@ -34,12 +41,22 @@ public class Main {
 			taskOcupado.assignTask("Comer cada 36 horas", "Hernán");
 			Thread.sleep(milliseconds);
 			
-			taskOcupado.assignTask("Dormir", "Hernán");
-			taskOcupado.assignTask("Hacer chistes malos", "Hernán");
-			
+			taskOcupado.assignTask("Dormir", "Hernán"); // perdón?
+			taskOcupado.assignTask("Hacer chistes malos", "Hernán"); // 😒
+			taskOcupado.assignTask("Ir a entrenar", "Xime");
+			taskOcupado.assignTask("Ir a entrenar", "Xime");
+			taskOcupado.assignTask("Ir a entrenar", "Xime");
+			taskOcupado.assignTask("Ir a entrenar", "Xime");
+			taskOcupado.assignTask(taskLoca, xime);
+			taskOcupado.assignTask(taskLoca, xime);
+			taskOcupado.assignTask(taskLoca, xime);
+			taskOcupado.assignTask(taskLoca, gonza);
+			taskOcupado.assignTask(taskLoca, hdr);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		taskOcupado.debug();
 	}
 }

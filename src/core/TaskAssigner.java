@@ -21,11 +21,26 @@ public class TaskAssigner {
 
 	// TODO
 	public void assignTask(Task t, Member m) {
-		assignedTasks.put(t, new HashSet<>());
+		if (!assignedTasks.containsKey(t)) {
+			assignedTasks.put(t, new HashSet<>());
+		}
 		assignedTasks.get(t).add(m);
 		
 		// TODO: ask if this is okay
 		notifyObservers(t, m);
+	}
+	
+	public void debug() {
+		System.out.println("StartDebugging");
+		System.out.println(assignedTasks.get(new Task("Ir a entrenar")));
+		for (Task t : assignedTasks.keySet()) {
+			System.out.print(t + ": " + t.getDescription() + " → Members: ");
+			for (Member m : assignedTasks.get(t)) {
+				System.out.print(m.getName() + ", ");
+			}
+			System.out.println();
+        }
+		System.out.println("StopDebugging");
 	}
 	
 	// TODO: think about if we really need this
