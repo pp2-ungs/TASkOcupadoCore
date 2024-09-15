@@ -9,7 +9,7 @@ public class TASkOcupado {
 	private Set<Member> group;
 	private Set<Task> tasks;
 	
-	public TASkOcupado() {
+	public TASkOcupado(TaskAssigner t) {
 		taskAssigner = new TaskAssigner();
 		group = new HashSet<>();
 		tasks = new HashSet<>();
@@ -17,11 +17,16 @@ public class TASkOcupado {
 
 	public void addMember(String member) {
 		// TODO: call to an external class?
-		getTasksFromCalendars(member);	// we're doing two things
+		Member m = new Member(member);
+		Set<Task> t = getTasksFromCalendars(member);	// we're doing two things
+		
+		group.add(m);
+		tasks.addAll(t);
 	}
 	
-	private void getTasksFromCalendars(String member) {
-		// TODO: 1. this is not void, 2. think about this
+	private Set<Task> getTasksFromCalendars(String member) {
+		// TODO: call to an external class?
+		return new HashSet<>();
 	}
 	
 	public void assignTask(String task, String member) {
