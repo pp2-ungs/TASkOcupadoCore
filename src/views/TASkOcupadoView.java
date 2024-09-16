@@ -7,6 +7,7 @@ import controllers.TASkOcupadoController;
 import core.ConcreteNotificator;
 import core.Notificator;
 import core.TASkOcupado;
+import core.TASkOcupadoFactory;
 import core.TaskAssigner;
 
 @SuppressWarnings({ "deprecation", "serial" })
@@ -18,6 +19,7 @@ public class TASkOcupadoView extends JFrame implements Observer { // Hay que ver
 	public TASkOcupadoView(TASkOcupado t) {
 		taskOcupado = t;
 		controller = new TASkOcupadoController(taskOcupado, this);
+		taskOcupado.addObserver(this);
 		init();
 	}
 	
@@ -36,18 +38,23 @@ public class TASkOcupadoView extends JFrame implements Observer { // Hay que ver
 	}
 
 	public static void main(String[] args) {
-		TaskAssigner taskAssigner = new TaskAssigner(); // Esto me parece que lo hace el taskOcupado
-		Notificator notificator = new ConcreteNotificator();
-		// TASkOcupado taskOcupado = TASkOcupadoFactory.create();
+		/* TODO: Todo esto que está comentado para mí vuela
+		//TaskAssigner taskAssigner = new TaskAssigner(); // Esto me parece que lo hace el taskOcupado
+		//Notificator notificator = new ConcreteNotificator();
+		
 		
 		// TODO: esto es raro, necesitamos una clase que construya,
 		// o se lo pasamos a task ocupado y que lo pase a task assigner
-		taskAssigner.addObserver(notificator); // Esto me parece que lo hace el taskOcupado
+		//taskAssigner.addObserver(notificator); // Esto me parece que lo hace el taskOcupado
 		
-		TASkOcupado taskOcupado = new TASkOcupado(taskAssigner);
-		TASkOcupadoView view = new TASkOcupadoView(taskOcupado);
+		//TASkOcupado taskOcupado = new TASkOcupado(taskAssigner);
+		//TASkOcupadoView view = new TASkOcupadoView(taskOcupado);
 
-		taskOcupado.addObserver(view);
+		//taskOcupado.addObserver(view);
+		*/
+		
+		TASkOcupado taskOcupado = TASkOcupadoFactory.create();
+		new TASkOcupadoView(taskOcupado);
 	}
 
 	@Override
