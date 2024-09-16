@@ -9,8 +9,8 @@ import views.TASkOcupadoView;
 @SuppressWarnings("deprecation")
 public class TASkOcupadoController implements Observer {
 	
-	TASkOcupado taskOcupado; // model
-	TASkOcupadoView view;	// view
+	private TASkOcupado taskOcupado; // model
+	private TASkOcupadoView view;	// view
 	
 	public TASkOcupadoController(TASkOcupado t, TASkOcupadoView v) {
 		taskOcupado = t;

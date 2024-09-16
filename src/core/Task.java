@@ -27,6 +27,5 @@ public class Task {
 		}
 		return this == obj || this.description.equals(((Task) obj).description);
 	}
-	
-	
+
 }
