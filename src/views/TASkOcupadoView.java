@@ -7,11 +7,11 @@ import controllers.TASkOcupadoController;
 import core.ConcreteNotificator;
 import core.Notificator;
 import core.TASkOcupado;
-import core.TASkOcupadoFactory;
 import core.TaskAssigner;
+import service.TASkOcupadoFactory;
 
 @SuppressWarnings({ "deprecation", "serial" })
-public class TASkOcupadoView extends JFrame implements Observer { // Hay que ver bien si es una herencia (Podría tener un JFrame como atributo)
+public class TASkOcupadoView extends JFrame implements Observer {
 	
 	private TASkOcupado taskOcupado;
 	private TASkOcupadoController controller;
@@ -53,8 +53,7 @@ public class TASkOcupadoView extends JFrame implements Observer { // Hay que ver
 		//taskOcupado.addObserver(view);
 		*/
 		
-		TASkOcupado taskOcupado = TASkOcupadoFactory.create();
-		new TASkOcupadoView(taskOcupado);
+		new TASkOcupadoView(TASkOcupadoFactory.create());
 	}
 
 	@Override
