@@ -18,8 +18,9 @@ public class TASkOcupadoView extends JFrame implements Observer {
 	
 	public TASkOcupadoView(TASkOcupado t) {
 		taskOcupado = t;
-		controller = new TASkOcupadoController(taskOcupado, this);
 		taskOcupado.addObserver(this);
+		controller = new TASkOcupadoController(taskOcupado, this);
+		
 		init();
 	}
 	
@@ -53,7 +54,7 @@ public class TASkOcupadoView extends JFrame implements Observer {
 		//taskOcupado.addObserver(view);
 		*/
 		
-		new TASkOcupadoView(TASkOcupadoFactory.create());
+		new TASkOcupadoView(TASkOcupadoFactory.create(""));
 	}
 
 	@Override

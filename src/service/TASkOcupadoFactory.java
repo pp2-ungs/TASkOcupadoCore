@@ -7,12 +7,12 @@ import core.TaskAssigner;
 
 public class TASkOcupadoFactory {
 
-	public static TASkOcupado create() {
-		TaskAssigner taskAssigner = new TaskAssigner();
-		Notificator notificator = new ConcreteNotificator();
-		taskAssigner.addObserver(notificator);
+	public static TASkOcupado create(String path) {
+		//TaskAssigner taskAssigner = new TaskAssigner();
+		//Notificator notificator = new ConcreteNotificator();
+		//taskAssigner.addObserver(notificator);
 		
-		return new TASkOcupado(taskAssigner);
+		return new TASkOcupado(TaskAssignerFactory.create(path));
 	}
 
 }
