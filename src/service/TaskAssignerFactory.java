@@ -1,6 +1,5 @@
 package service;
 
-import java.util.Set;
 import core.ConcreteNotificator;
 import core.Notificator;
 import core.TaskAssigner;

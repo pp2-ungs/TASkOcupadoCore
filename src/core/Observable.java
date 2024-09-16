@@ -2,7 +2,6 @@ package core;
 
 import java.util.Observer;
 
-@SuppressWarnings("deprecation")
 public interface Observable {
 
 	// TODO: nuestra implementación de Observer
