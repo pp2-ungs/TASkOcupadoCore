@@ -16,6 +16,7 @@ public class TASkOcupado implements core.Observable {
 		taskAssigner = t;
 		group = new HashSet<>();
 		tasks = new HashSet<>();
+		observers =  new HashSet<>();
 	}
 	
 	/*/

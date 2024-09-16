@@ -9,15 +9,15 @@ import core.Notificator;
 import core.TASkOcupado;
 import core.TaskAssigner;
 
-@SuppressWarnings("deprecation")
+@SuppressWarnings({ "deprecation", "serial" })
 public class TASkOcupadoView extends JFrame implements Observer { // Hay que ver bien si es una herencia (Podría tener un JFrame como atributo)
 	
 	private TASkOcupado taskOcupado;
 	private TASkOcupadoController controller;
 	
-	public TASkOcupadoView(TASkOcupado taskOcupado) {
-		this.taskOcupado = taskOcupado;
-		controller = new TASkOcupadoController(this.taskOcupado, this);
+	public TASkOcupadoView(TASkOcupado t) {
+		taskOcupado = t;
+		controller = new TASkOcupadoController(taskOcupado, this);
 		init();
 	}
 	
