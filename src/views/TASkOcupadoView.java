@@ -4,10 +4,7 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JFrame;
 import controllers.TASkOcupadoController;
-import core.ConcreteNotificator;
-import core.Notificator;
 import core.TASkOcupado;
-import core.TaskAssigner;
 import service.TASkOcupadoFactory;
 
 @SuppressWarnings({ "deprecation", "serial" })
