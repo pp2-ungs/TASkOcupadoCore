@@ -43,11 +43,6 @@ public class TaskAssigner implements core.Observable {
 		System.out.println("StopDebugging");
 	}
 	
-	// TODO: think about if we really need this
-	public boolean hasChanged() {
-		return false;
-	}
-	
 	@Override
 	public void addObserver(Observer observer) {
         observers.add(observer);
@@ -62,6 +57,7 @@ public class TaskAssigner implements core.Observable {
     	String notification = "Se le asignó la tarea '" + t.getDescription() + "' al miembro " + m.getName();
     	
     	// FIXME: this is not ok! it's just because we don't extend Observable
+    	// esto a mano
     	observers.forEach(observer -> observer.update(null, notification));
     }
 

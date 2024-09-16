@@ -10,12 +10,26 @@ public class TASkOcupado implements core.Observable {
 	private TaskAssigner taskAssigner;
 	private Set<Member> group;
 	private Set<Task> tasks;
+	private Set<Observer> observers;
 	
 	public TASkOcupado(TaskAssigner t) {
 		taskAssigner = t;
 		group = new HashSet<>();
 		tasks = new HashSet<>();
 	}
+	
+	/*/
+	// TODO: preguntar
+	public TASkOcupado(TaskAssigner taskAssigner, Set<Member> group, Set<Task> tasks) {
+		this.taskAssigner = taskAssigner;
+		this.group = group;
+		this.tasks = tasks;
+	}
+	
+	public void addMember(Member member) {
+		group.add(member);
+	}
+	/*/
 
 	public void addMember(String member) {
 		// TODO: call to an external class?
@@ -28,10 +42,11 @@ public class TASkOcupado implements core.Observable {
 	
 	private Set<Task> getTasksFromCalendars(String member) {
 		// TODO: call to an external class?
+		// Set<Task> s = TaskSearcher.searchTasks(member); 
 		return new HashSet<>();
 	}
+	//*/
 	
-	// FIXME: Si se usan Strings en los key, se repiten los keys en el map
 	public void assignTask(String task, String member) {
 		Task assignedTask = tasks.stream()
 			    .filter(t -> t.getDescription().equals(task))
@@ -53,24 +68,21 @@ public class TASkOcupado implements core.Observable {
 	public void debug() {
 		taskAssigner.debug();
 	}
-	
-	// TODO: check, código repetido
-	// preguntar si esto es válido, ya que no sé
-	// si realmente hace falta que TASkOcupado
-	// sea observable
+
 	@Override
 	public void addObserver(Observer observer) {
-		taskAssigner.addObserver(observer);
+		observers.add(observer);
 	}
 
 	@Override
 	public void removeObserver(Observer observer) {
-		taskAssigner.removeObserver(observer);
+		observers.remove(observer);
 	}
 	
 	// TODO: implement
 	public Object getData() {
 		// taskAssigner.getData();
+		// + group + tasks
 		return new Object();
 	}
 }

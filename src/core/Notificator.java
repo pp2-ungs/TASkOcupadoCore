@@ -5,6 +5,7 @@ import java.util.Observer;
 @SuppressWarnings("deprecation")
 public abstract class Notificator implements Observer {
 	
-	// TODO: check this, it's doing nothing ;)
+	// TODO: ask, clase abstracta o interface?
+	public abstract void notify(Object msg);
 	
 }

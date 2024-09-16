@@ -38,23 +38,16 @@ public class TASkOcupadoView extends JFrame implements Observer { // Hay que ver
 	public static void main(String[] args) {
 		TaskAssigner taskAssigner = new TaskAssigner(); // Esto me parece que lo hace el taskOcupado
 		Notificator notificator = new ConcreteNotificator();
+		// TASkOcupado taskOcupado = TASkOcupadoFactory.create();
 		
 		// TODO: esto es raro, necesitamos una clase que construya,
 		// o se lo pasamos a task ocupado y que lo pase a task assigner
 		taskAssigner.addObserver(notificator); // Esto me parece que lo hace el taskOcupado
 		
-		
 		TASkOcupado taskOcupado = new TASkOcupado(taskAssigner);
-		
 		TASkOcupadoView view = new TASkOcupadoView(taskOcupado);
 
 		taskOcupado.addObserver(view);
-		
-		//view.addModel(taskOcupado);
-		
-		//Controller controller = new Controller(taskOcupado, view);
-		//view.addController(c);
-		// Se me hacen raros los add...() de la view
 	}
 
 	@Override
