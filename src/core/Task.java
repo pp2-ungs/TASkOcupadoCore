@@ -22,14 +22,11 @@ public class Task {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!(obj instanceof Task))
-			return false;
-		Task other = (Task) obj;
-		return description.equals(other.description);
+		if (this.getClass() != obj.getClass()) {
+			throw new IllegalArgumentException("?wrong argument " + obj.getClass() + ": " + obj);
+		}
+		return this == obj || this.description.equals(((Task) obj).description);
 	}
 	
 	
-
 }

@@ -22,14 +22,10 @@ public class Member {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!(obj instanceof Member))
-			return false;
-		Member other = (Member) obj;
-		return name.equals(other.name);
+		if (this.getClass() != obj.getClass()) {
+			throw new IllegalArgumentException("?wrong argument " + obj.getClass() + ": " + obj);
+		}
+		return this == obj || this.name.equals(((Member) obj).name);
 	}
-	
-	
 
 }
