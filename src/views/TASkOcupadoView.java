@@ -3,6 +3,7 @@ package views;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JFrame;
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import controllers.TASkOcupadoController;
 import core.TASkOcupado;
 import service.TASkOcupadoFactory;
@@ -22,6 +23,8 @@ public class TASkOcupadoView extends JFrame implements Observer {
 	}
 	
 	private void init() {
+		FlatMacDarkLaf.setup();
+		
 		setVisible(true);
 		setSize(800, 600);
 		setResizable(false);
@@ -31,6 +34,8 @@ public class TASkOcupadoView extends JFrame implements Observer {
 		
 		TaskAssignerPanel taskAssignerPanel = new TaskAssignerPanel(controller);
 		getContentPane().add(taskAssignerPanel);
+		
+		
 		
 		repaint();
 	}
