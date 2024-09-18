@@ -1,7 +1,9 @@
 package core;
 
-import java.util.HashSet;
 import java.util.Set;
+
+import plugin.DataLoader;
+import plugin.PluginFactory;
 
 public class Resources {
 	
@@ -9,11 +11,9 @@ public class Resources {
 	private Set<Task> tasks;
 	
 	public Resources() {
-		tasks = new HashSet<>();
-		members = new HashSet<>();
-		// TODO: buscar las cosas
-		// acá necesitamos una interface para hacer plugin?
-		// y cambiar lo que leemos dado el entorno?
+		DataLoader data = PluginFactory.loadInstances();
+		tasks = data.loadTasks();
+		members = data.loadMembers();
 	}
 	
 	// TODO: hacer bien
