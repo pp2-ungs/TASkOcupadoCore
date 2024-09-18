@@ -3,27 +3,29 @@ package views;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JFrame;
-import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+//import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import controllers.TASkOcupadoController;
 import core.TASkOcupado;
-import service.TASkOcupadoFactory;
+import core.TaskAssigner;
 
 @SuppressWarnings({ "deprecation", "serial" })
 public class TASkOcupadoView extends JFrame implements Observer {
 	
 	private TASkOcupado taskOcupado;
+	private TaskAssigner taskAssigner;
 	private TASkOcupadoController controller;
 	
 	public TASkOcupadoView(TASkOcupado t) {
 		taskOcupado = t;
-		taskOcupado.addObserver(this);
+		taskAssigner = t.getTaskAssigner();
+		taskAssigner.addObserver(this);
 		controller = new TASkOcupadoController(taskOcupado, this);
 		
 		init();
 	}
 	
 	private void init() {
-		FlatMacDarkLaf.setup();
+		//FlatMacDarkLaf.setup();
 		
 		setVisible(true);
 		setSize(800, 600);
@@ -41,22 +43,7 @@ public class TASkOcupadoView extends JFrame implements Observer {
 	}
 
 	public static void main(String[] args) {
-		/* TODO: Todo esto que está comentado para mí vuela
-		//TaskAssigner taskAssigner = new TaskAssigner(); // Esto me parece que lo hace el taskOcupado
-		//Notificator notificator = new ConcreteNotificator();
-		
-		
-		// TODO: esto es raro, necesitamos una clase que construya,
-		// o se lo pasamos a task ocupado y que lo pase a task assigner
-		//taskAssigner.addObserver(notificator); // Esto me parece que lo hace el taskOcupado
-		
-		//TASkOcupado taskOcupado = new TASkOcupado(taskAssigner);
-		//TASkOcupadoView view = new TASkOcupadoView(taskOcupado);
-
-		//taskOcupado.addObserver(view);
-		*/
-		
-		new TASkOcupadoView(TASkOcupadoFactory.create(""));
+		new TASkOcupadoView(new TASkOcupado());
 	}
 
 	@Override

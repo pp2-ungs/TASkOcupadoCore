@@ -15,6 +15,7 @@ public class TaskAssigner implements core.Observable {
 
 	// TODO
 	public TaskAssigner() {
+		// TODO: buscar los observers en con Discovery
 		observers = new HashSet<>();
 		assignedTasks = new HashMap<>();
 	}
@@ -26,7 +27,6 @@ public class TaskAssigner implements core.Observable {
 		}
 		assignedTasks.get(t).add(m);
 		
-		// TODO: ask if this is okay
 		notifyObservers(t, m);
 	}
 	

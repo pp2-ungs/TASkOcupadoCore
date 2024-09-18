@@ -10,18 +10,14 @@ public class Main {
 	//stopdebugging
 
 	public static void main(String[] args) {
-		TaskAssigner taskAssigner = new TaskAssigner();
+
 		Notificator notificator = new ConcreteNotificator();
 		
-		// TODO: what are we going to do about this?
-		// it seems like we need to instantiate TaskAssigner before
-		// TASkOcupado, so we can build it with it's Observers
-		taskAssigner.addObserver(notificator);
-		
-		TASkOcupado taskOcupado = new TASkOcupado(taskAssigner);
-		taskOcupado.addMember("Gonza");	// one task
-		taskOcupado.addMember("Hernán");	// more than one task
-		taskOcupado.addMember("Xime");	// without tasks
+		TASkOcupado taskOcupado = new TASkOcupado();
+		taskOcupado.getTaskAssigner().addObserver(notificator);
+//		taskOcupado.addMember("Gonza");	// one task
+//		taskOcupado.addMember("Hernán");	// more than one task
+//		taskOcupado.addMember("Xime");	// without tasks
 		
 		// init app:
 		// taskOcupado.obtainMembersFromCalendar();
@@ -47,11 +43,11 @@ public class Main {
 			taskOcupado.assignTask("Ir a entrenar", "Xime");
 			taskOcupado.assignTask("Ir a entrenar", "Xime");
 			taskOcupado.assignTask("Ir a entrenar", "Xime");
-			taskOcupado.assignTask(taskLoca, xime);
-			taskOcupado.assignTask(taskLoca, xime);
-			taskOcupado.assignTask(taskLoca, xime);
-			taskOcupado.assignTask(taskLoca, gonza);
-			taskOcupado.assignTask(taskLoca, hdr);
+//			taskOcupado.assignTask(taskLoca, xime);
+//			taskOcupado.assignTask(taskLoca, xime);
+//			taskOcupado.assignTask(taskLoca, xime);
+//			taskOcupado.assignTask(taskLoca, gonza);
+//			taskOcupado.assignTask(taskLoca, hdr);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
