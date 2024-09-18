@@ -8,7 +8,7 @@ import java.util.Set;
 
 // Asigna tareas a miembros, y sabe qué tareas se asignaron a cuáles miembros.
 @SuppressWarnings("deprecation")
-public class TaskAssigner implements core.Observable {
+public class TaskAssigner implements obs.Observable {
 	
 	private Set<Observer> observers;
 	private Map<Task, Set<Member>> assignedTasks;
