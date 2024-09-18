@@ -18,7 +18,7 @@ public class TASkOcupadoController implements Observer {
 		taskOcupado = t;
 		view = v;
 		
-		taskAssigner.addObserver(this);
+		//taskAssigner.addObserver(this);
 	}
 	
 	@Override
