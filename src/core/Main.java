@@ -1,6 +1,15 @@
 package core;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.lang.reflect.Type;
+import java.util.Set;
+
 import ext.SMSNotificator;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class Main {
 
@@ -13,48 +22,21 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		Notificator notificator = new SMSNotificator();
-		
-		TASkOcupado taskOcupado = new TASkOcupado();
-		taskOcupado.getTaskAssigner().addObserver(notificator);
-//		taskOcupado.addMember("Gonza");	// one task
-//		taskOcupado.addMember("Hernán");	// more than one task
-//		taskOcupado.addMember("Xime");	// without tasks
-		
-		// init app:
-		// taskOcupado.obtainMembersFromCalendar();
-		// taskOcupado.obtainTasksFromCalendar();
-		
-		// GUI:
-		
+		FileReader jsonReader;
 		try {
-			int milliseconds = 400;
+			jsonReader = new FileReader("resources/members.json");
+			Gson gson = new Gson();
 			
-			taskOcupado.assignTask("Desafiliarse de la Cámpora", "Gonza");
-			Thread.sleep(milliseconds);
-	
-			taskOcupado.assignTask("Ir a entrenar", "Hernán");
-			Thread.sleep(milliseconds + 200);
+            Type memberSetType = new TypeToken<Set<Member>>() {}.getType();
+            Set<Member> members = gson.fromJson(jsonReader, memberSetType);
+            
+            for (Member member : members) {
+                System.out.println(member);
+            }
 			
-			taskOcupado.assignTask("Comer cada 36 horas", "Hernán");
-			Thread.sleep(milliseconds);
-			
-			taskOcupado.assignTask("Dormir", "Hernán"); // perdón?
-			taskOcupado.assignTask("Hacer chistes malos", "Hernán"); // 😒
-			taskOcupado.assignTask("Ir a entrenar", "Xime");
-			taskOcupado.assignTask("Ir a entrenar", "Xime");
-			taskOcupado.assignTask("Ir a entrenar", "Xime");
-			taskOcupado.assignTask("Ir a entrenar", "Xime");
-//			taskOcupado.assignTask(taskLoca, xime);
-//			taskOcupado.assignTask(taskLoca, xime);
-//			taskOcupado.assignTask(taskLoca, xime);
-//			taskOcupado.assignTask(taskLoca, gonza);
-//			taskOcupado.assignTask(taskLoca, hdr);
-		} catch (InterruptedException e) {
+		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		taskOcupado.debug();
 	}
 }
