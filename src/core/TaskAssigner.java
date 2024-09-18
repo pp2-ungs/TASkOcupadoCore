@@ -3,11 +3,11 @@ package core;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Observer;
 import java.util.Set;
 
+import obs.Observer;
+
 // Asigna tareas a miembros, y sabe qué tareas se asignaron a cuáles miembros.
-@SuppressWarnings("deprecation")
 public class TaskAssigner implements obs.Observable {
 	
 	private Set<Observer> observers;
@@ -55,10 +55,9 @@ public class TaskAssigner implements obs.Observable {
     
     private void notifyObservers(Task t, Member m) {
     	String notification = "Se le asignó la tarea '" + t.getDescription() + "' al miembro " + m.getName();
-    	
-    	// FIXME: this is not ok! it's just because we don't extend Observable
-    	// esto a mano
-    	observers.forEach(observer -> observer.update(null, notification));
+
+    	// FIXME: como tenemos Observer y no notificator, no tenemos .notify
+    	observers.forEach(observer -> observer.update(notification));
     }
 
 }

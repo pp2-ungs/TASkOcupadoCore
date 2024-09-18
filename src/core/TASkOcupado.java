@@ -1,6 +1,6 @@
 package core;
 
-public class TASkOcupado{
+public class TASkOcupado {
 	
 	private TaskAssigner taskAssigner;
 	private Resources resources;

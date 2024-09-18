@@ -1,14 +1,13 @@
 package views;
 
-import java.util.Observable;
-import java.util.Observer;
 import javax.swing.JFrame;
 //import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import controllers.TASkOcupadoController;
 import core.TASkOcupado;
 import core.TaskAssigner;
+import obs.Observer;
 
-@SuppressWarnings({ "deprecation", "serial" })
+@SuppressWarnings({ "serial" })
 public class TASkOcupadoView extends JFrame implements Observer {
 	
 	private TASkOcupado taskOcupado;
@@ -47,8 +46,7 @@ public class TASkOcupadoView extends JFrame implements Observer {
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
-		// Object data = model.getData();
-		// updateView(data);
+	public void update(Object obj) {
+		// TODO Auto-generated method stub
 	}
 }

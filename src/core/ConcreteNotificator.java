@@ -1,12 +1,9 @@
 package core;
 
-import java.util.Observable;
-
 public class ConcreteNotificator implements Notificator {
 
-	@SuppressWarnings("deprecation")
 	@Override
-	public void update(Observable o, Object arg) {
+	public void update(Object arg) {
 		// TODO: Preguntar
 		notify(arg);
 	}
