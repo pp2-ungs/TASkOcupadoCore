@@ -1,6 +1,6 @@
 package core;
 
-import ext.ConcreteNotificator;
+import ext.SMSNotificator;
 
 public class Main {
 
@@ -13,7 +13,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		Notificator notificator = new ConcreteNotificator();
+		Notificator notificator = new SMSNotificator();
 		
 		TASkOcupado taskOcupado = new TASkOcupado();
 		taskOcupado.getTaskAssigner().addObserver(notificator);

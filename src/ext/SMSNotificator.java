@@ -2,7 +2,7 @@ package ext;
 
 import core.Notificator;
 
-public class ConcreteNotificator implements Notificator {
+public class SMSNotificator implements Notificator {
 
 	@Override
 	public void update(Object arg) {
