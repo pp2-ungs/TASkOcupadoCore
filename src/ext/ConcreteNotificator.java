@@ -1,4 +1,6 @@
-package core;
+package ext;
+
+import core.Notificator;
 
 public class ConcreteNotificator implements Notificator {
 

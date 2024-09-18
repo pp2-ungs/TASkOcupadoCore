@@ -1,5 +1,7 @@
 package core;
 
+import ext.ConcreteNotificator;
+
 public class Main {
 
 	// startdebugging
