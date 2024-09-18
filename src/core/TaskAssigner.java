@@ -11,7 +11,7 @@ import java.util.Set;
 public class TaskAssigner implements core.Observable {
 	
 	private Set<Observer> observers;
-	private Map<Task, Set<Member>> assignedTasks;	// not taskAssigned jsajaja
+	private Map<Task, Set<Member>> assignedTasks;
 
 	// TODO
 	public TaskAssigner() {

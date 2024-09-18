@@ -48,6 +48,7 @@ public class TASkOcupado implements core.Observable {
 	}
 	//*/
 	
+	// FIXME: Single responsability. Está buscando tasks y members, además de asignar tareas.
 	public void assignTask(String task, String member) {
 		Task assignedTask = tasks.stream()
 			    .filter(t -> t.getDescription().equals(task))

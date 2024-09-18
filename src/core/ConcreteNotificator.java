@@ -2,7 +2,7 @@ package core;
 
 import java.util.Observable;
 
-public class ConcreteNotificator extends Notificator {
+public class ConcreteNotificator implements Notificator {
 
 	@SuppressWarnings("deprecation")
 	@Override
