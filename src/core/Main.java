@@ -1,16 +1,11 @@
 package core;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
 import java.util.Set;
-
-import ext.SMSNotificator;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.*;
 
 public class Main {
 
@@ -37,7 +32,6 @@ public class Main {
             }
 			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
