@@ -12,7 +12,7 @@ public class Data {
         DataLoader dataLoader = PluginFactory.loadInstances();
 
         //FIXME: ver JSONLoader.java
-        /*
+        //*
         members = dataLoader.loadMembers();
         tasks = dataLoader.loadTasks();
         /*/
