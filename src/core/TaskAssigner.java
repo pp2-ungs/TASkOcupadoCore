@@ -1,11 +1,14 @@
 package core;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import obs.Observer;
+import discovery.Discoverer;
 
 // Asigna tareas a miembros, y sabe qué tareas se asignaron a cuáles miembros.
 public class TaskAssigner implements obs.Observable {
@@ -15,9 +18,19 @@ public class TaskAssigner implements obs.Observable {
 
 	// TODO
 	public TaskAssigner() {
-		// TODO: buscar los observers en con Discovery
-		observers = new HashSet<>();
-		assignedTasks = new HashMap<>();
+		try {
+			Set<Object> objects = Discoverer.discover("bin/ext", "ext", obs.Observer.class);
+			
+			observers = objects.stream()
+			        .filter(obj -> obj instanceof obs.Observer)
+			        .map(obj -> (obs.Observer) obj)
+			        .collect(Collectors.toSet());
+				
+			assignedTasks = new HashMap<>();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	// TODO

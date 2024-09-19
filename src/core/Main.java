@@ -27,12 +27,12 @@ public class Main {
 		String[] members = taskOcupado.getMembers();
 		String[] tasks = taskOcupado.getTasks();
 		
-		for(String s : members) {
-			System.out.println(s);
+		for(String member : members) {
+			System.out.println("Member: " + member);
 		}
 		
-		for(String s : tasks) {
-			System.out.println(s);
+		for(String task : tasks) {
+			System.out.println("Task: " + task);
 		}
 		
 	}
