@@ -8,7 +8,16 @@ public class Main {
         String[] members = taskOcupado.getMembers();
         String[] tasks = taskOcupado.getTasks();
 
+        for(String member : members) {
+            System.out.println(member);
+        }
+        
+        for(String task : tasks) {
+            System.out.println(task);
+        }
+        
         taskOcupado.assignTask(tasks[0], members[0]);
+        
         // Observaciones:
         //
         // 1. Core no hace nada, sólo asigna tareas. Si queremos que core
