@@ -19,10 +19,10 @@ public class TaskAssigner implements Observable {
     public TaskAssigner() {
         assignedTasks = new HashMap<>();
         try {
-            Set<Object> objects = Discoverer.discover(AppSettings.RESOURCES_DIR, Observer.class);
+            Set<Object> objects = Discoverer.discover(AppSettings.TASKOCUPADO_EXT_DIR, Observer.class);
 
             observers = objects.stream()
-                    .filter(obj -> obj instanceof Observer)
+                    //.filter(obj -> obj instanceof Observer) Esto lo hace el Discoverer
                     .map(obj -> (Observer) obj)
                     .collect(Collectors.toSet());
             System.out.println("Observers encontrados:" + observers);
