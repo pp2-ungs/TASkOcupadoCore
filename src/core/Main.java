@@ -10,6 +10,7 @@ import ext.SMSNotificator;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.*;
 
 public class Main {
 
@@ -25,14 +26,13 @@ public class Main {
 		FileReader jsonReader;
 		try {
 			jsonReader = new FileReader("resources/members.json");
+			
 			Gson gson = new Gson();
 			
             Type memberSetType = new TypeToken<Set<Member>>() {}.getType();
-            Set<Member> members = gson.fromJson(jsonReader, memberSetType);
-            
-            for (Member member : members) {
-                System.out.println(member);
-            }
+            Member members = gson.fromJson(jsonReader, Member.class);
+
+            System.out.println(members.getName());
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
