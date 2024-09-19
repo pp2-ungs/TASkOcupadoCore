@@ -5,8 +5,6 @@ public class TASkOcupado {
 	private TaskAssigner taskAssigner;
 	private Resources resources;
 	
-	// TODO: IMPORTANTE definir: hacemos un getTaskAssigner()
-	// o le seteamos un task assigner?
 	public TASkOcupado() {
 		taskAssigner = new TaskAssigner();
 		resources = new Resources();
@@ -14,6 +12,14 @@ public class TASkOcupado {
 	
 	public TaskAssigner getTaskAssigner() {
 		return taskAssigner;
+	}
+	
+	public String[] getMembers() {
+		return (String[]) resources.getMembers();
+	}
+	
+	public String[] getTasks() {
+		return (String[]) resources.getTasks();
 	}
 	
 	public void assignTask(String task, String member) {

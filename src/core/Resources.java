@@ -30,5 +30,13 @@ public class Resources {
 			    .findFirst()
 			    .orElse(new Task(taskDescription));
 	}
+	
+	public Object[] getMembers() {
+		return members.toArray();
+	}
+	
+	public Object[] getTasks() {
+		return tasks.toArray();
+	}
 
 }

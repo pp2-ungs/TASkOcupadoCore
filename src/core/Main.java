@@ -22,23 +22,18 @@ public class Main {
 	//stopdebugging
 
 	public static void main(String[] args) {
-
-		FileReader jsonReader;
-		try {
-			jsonReader = new FileReader("resources/members.json");
-			
-			Gson gson = new Gson();
-			
-            Type memberSetType = new TypeToken<Set<Member>>() {}.getType();
-            Set<Member> members = gson.fromJson(jsonReader, memberSetType);
-
-            for(Member m : members) {
-            	System.out.println(m.getName());
-            }
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		TASkOcupado taskOcupado = new TASkOcupado();
+		
+		String[] members = taskOcupado.getMembers();
+		String[] tasks = taskOcupado.getTasks();
+		
+		for(String s : members) {
+			System.out.println(s);
 		}
+		
+		for(String s : tasks) {
+			System.out.println(s);
+		}
+		
 	}
 }
