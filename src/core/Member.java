@@ -6,15 +6,9 @@ import java.util.Objects;
 public class Member {
 	
 	private String name;
-	
-	public Member() { }
 
 	public Member(String name) {
 		this.name = name;
-	}
-	
-	public void setName(String n) {
-		name = n;
 	}
 
 	public String getName() {
