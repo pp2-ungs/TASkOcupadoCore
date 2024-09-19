@@ -19,14 +19,13 @@ public class TaskAssigner implements Observable {
     public TaskAssigner() {
         assignedTasks = new HashMap<>();
         try {
-            Set<Object> objects = Discoverer.discover("../TASkOcupadoExt/src/ext/", Observer.class);
+            Set<Object> objects = Discoverer.discover("/home/hdr/resources", Observer.class);
 
             observers = objects.stream()
                     .filter(obj -> obj instanceof Observer)
                     .map(obj -> (Observer) obj)
                     .collect(Collectors.toSet());
             System.out.println("Observers encontrados:" + observers);
-
         } catch (FileNotFoundException e) {
             observers = new HashSet<>();
             e.printStackTrace();
