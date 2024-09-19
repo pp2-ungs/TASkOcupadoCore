@@ -27,13 +27,6 @@ public class Main {
 		String[] members = taskOcupado.getMembers();
 		String[] tasks = taskOcupado.getTasks();
 		
-		for(String member : members) {
-			System.out.println("Member: " + member);
-		}
-		
-		for(String task : tasks) {
-			System.out.println("Task: " + task);
-		}
-		
+		taskOcupado.assignTask(tasks[0], members[0]);
 	}
 }

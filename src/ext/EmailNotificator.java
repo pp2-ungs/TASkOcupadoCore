@@ -6,14 +6,12 @@ public class EmailNotificator implements Notificator {
 
 	@Override
 	public void update(Object obj) {
-		// TODO Auto-generated method stub
-		
+		notify(obj);
 	}
 
 	@Override
 	public void notify(Object msg) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Soy EmailNotificator y me notificaron: \n" + msg.toString());
 	}
 
 }
