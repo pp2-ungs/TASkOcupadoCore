@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import obs.Observer;
 import discovery.Discoverer;
 
@@ -19,7 +18,7 @@ public class TaskAssigner implements obs.Observable {
 	// TODO
 	public TaskAssigner() {
 		try {
-			Set<Object> objects = Discoverer.discover("bin/ext", "ext", obs.Observer.class);
+			Set<Object> objects = Discoverer.discover("./", obs.Observer.class);
 			
 			observers = objects.stream()
 			        .filter(obj -> obj instanceof obs.Observer)
@@ -28,7 +27,6 @@ public class TaskAssigner implements obs.Observable {
 				
 			assignedTasks = new HashMap<>();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
