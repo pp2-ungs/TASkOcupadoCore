@@ -30,9 +30,11 @@ public class Main {
 			Gson gson = new Gson();
 			
             Type memberSetType = new TypeToken<Set<Member>>() {}.getType();
-            Member members = gson.fromJson(jsonReader, Member.class);
+            Set<Member> members = gson.fromJson(jsonReader, memberSetType);
 
-            System.out.println(members.getName());
+            for(Member m : members) {
+            	System.out.println(m.getName());
+            }
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
