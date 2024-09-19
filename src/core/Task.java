@@ -34,4 +34,8 @@ public class Task {
 		return this == obj || this.description.equals(((Task) obj).description);
 	}
 
+	@Override
+	public String toString() {
+		return description;
+	}
 }

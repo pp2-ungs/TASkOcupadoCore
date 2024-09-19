@@ -34,4 +34,9 @@ public class Member {
 		return this == obj || this.name.equals(((Member) obj).name);
 	}
 
+	@Override
+	public String toString() {
+		return name;
+	}
+
 }
