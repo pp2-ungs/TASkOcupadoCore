@@ -9,10 +9,11 @@ import core.Notificator;
 
 public class Discoverer {
 
-	public static Set<Class<?>> discover(String path, String packageName, Class<?> targetInterface) throws FileNotFoundException {
+	@SuppressWarnings("deprecation")
+	public static Set<Object> discover(String path, String packageName, Class<?> targetInterface) throws FileNotFoundException {
 
 		File directory = new File(path);
-		Set<Class<?>> foundClasses = new HashSet<>();
+		Set<Object> foundClasses = new HashSet<>();
 
 		if (!directory.exists() || !directory.isDirectory()) {
 			throw new FileNotFoundException("The specified directory is not valid: " + path);
@@ -28,9 +29,9 @@ public class Discoverer {
 					cls = Class.forName(packageName + "." + className);
 
 					if (targetInterface.isAssignableFrom(cls) && !cls.isInterface()) {
-						foundClasses.add(cls);
+						foundClasses.add(cls.newInstance());
 					}
-				} catch (ClassNotFoundException e) {
+				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 					e.printStackTrace();
 				}
 			}

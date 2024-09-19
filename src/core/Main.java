@@ -1,12 +1,5 @@
 package core;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.lang.reflect.Type;
-import java.util.Set;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
 public class Main {
 
 	// startdebugging
@@ -17,22 +10,11 @@ public class Main {
 	//stopdebugging
 
 	public static void main(String[] args) {
-
-		FileReader jsonReader;
-		try {
-			jsonReader = new FileReader("resources/members.json");
-			
-			Gson gson = new Gson();
-			
-            Type memberSetType = new TypeToken<Set<Member>>() {}.getType();
-            Set<Member> members = gson.fromJson(jsonReader, memberSetType);
-
-            for(Member m : members) {
-            	System.out.println(m.getName());
-            }
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		TASkOcupado taskOcupado = new TASkOcupado();
+		
+		String[] members = taskOcupado.getMembers();
+		String[] tasks = taskOcupado.getTasks();
+		
+		taskOcupado.assignTask(tasks[0], members[0]);
 	}
 }

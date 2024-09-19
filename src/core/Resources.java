@@ -30,5 +30,17 @@ public class Resources {
 			    .findFirst()
 			    .orElse(new Task(taskDescription));
 	}
+	
+	public Object[] getMembers() {
+		return members.stream()
+                .map(Member::toString)
+                .toArray(String[]::new);
+	}
+	
+	public Object[] getTasks() {
+		return tasks.stream()
+                .map(Task::toString)
+                .toArray(String[]::new);
+	}
 
 }
