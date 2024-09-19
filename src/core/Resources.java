@@ -32,11 +32,15 @@ public class Resources {
 	}
 	
 	public Object[] getMembers() {
-		return members.toArray();
+		return members.stream()
+                .map(Member::toString)
+                .toArray(String[]::new);
 	}
 	
 	public Object[] getTasks() {
-		return tasks.toArray();
+		return tasks.stream()
+                .map(Task::toString)
+                .toArray(String[]::new);
 	}
 
 }
