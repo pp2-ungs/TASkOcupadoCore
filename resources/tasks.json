@@ -1,8 +1,8 @@
 [
-    {"descripcion": "Desafiliarse de la Cámpora"},
-	{"descripcion": "Desafiliarse de la Cámpora"},
-	{"descripcion": "Ir a entrenar"},
-	{"descripcion": "Comer cada 36 horas"},
-	{"descripcion": "Ir a entrenar"},
-	{"descripcion": "dormir"}
+    {"description": "Desafiliarse de la Cámpora"},
+	{"description": "Desafiliarse de la Cámpora"},
+	{"description": "Ir a entrenar"},
+	{"description": "Comer cada 36 horas"},
+	{"description": "Ir a entrenar"},
+	{"description": "dormir"}
 ]
