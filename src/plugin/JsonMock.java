@@ -2,6 +2,7 @@ package plugin;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.HashSet;
 import java.util.Set;
 
 import com.google.gson.Gson;
@@ -20,18 +21,18 @@ public class JsonMock implements DataLoader {
 		FileReader jsonReader;
 		try {
 			jsonReader = new FileReader("resources/members.json");
+			
 			Gson gson = new Gson();
 			
             Type memberSetType = new TypeToken<Set<Member>>() {}.getType();
             Set<Member> members = gson.fromJson(jsonReader, memberSetType);
 
-            return members; // Devuelve el conjunto de miembros
-			
+            return members;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return new HashSet<>();
 	}
 
 	@Override
@@ -41,8 +42,8 @@ public class JsonMock implements DataLoader {
 			jsonReader = new FileReader("resources/tasks.json");
 			Gson gson = new Gson();
 			
-            Type memberSetType = new TypeToken<Set<Task>>() {}.getType();
-            Set<Task> tasks = gson.fromJson(jsonReader, memberSetType);
+            Type taskSetType = new TypeToken<Set<Task>>() {}.getType();
+            Set<Task> tasks = gson.fromJson(jsonReader, taskSetType);
 
             return tasks; // Devuelve el conjunto de miembros
 			
@@ -50,7 +51,7 @@ public class JsonMock implements DataLoader {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return new HashSet<>();
 	}
 
 }
