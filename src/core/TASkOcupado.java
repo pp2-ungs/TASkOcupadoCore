@@ -1,7 +1,7 @@
 package core;
 
 public class TASkOcupado {
-
+    
     private TaskAssigner taskAssigner;
     private Data data;
 

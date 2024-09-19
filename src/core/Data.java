@@ -1,6 +1,5 @@
 package core;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class Data {
@@ -10,21 +9,9 @@ public class Data {
 
     public Data() {
         DataLoader dataLoader = PluginFactory.loadInstances();
-
-        //FIXME: ver JSONLoader.java
-        //*
+        
         members = dataLoader.loadMembers();
         tasks = dataLoader.loadTasks();
-        /*/
-        members = new HashSet<>();
-        tasks = new HashSet<>();
-        members.add(new Member("Kimba"));
-        members.add(new Member("Battle Cat"));
-        members.add(new Member("Cristina"));
-        tasks.add(new Task("Comer"));
-        tasks.add(new Task("Dormir"));
-        tasks.add(new Task("Decir miau"));
-        //*/
     }
 
     // TODO: hacer bien
@@ -43,7 +30,6 @@ public class Data {
                 .orElse(new Task("<Unknown task>")); // FIXME
     }
 
-    // FIXME no son getters
     public Object[] getMembers() {
         return members.stream()
                 .map(Member::toString)

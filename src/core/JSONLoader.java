@@ -6,15 +6,10 @@ import java.util.Set;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 public class JSONLoader implements DataLoader {
-
-    public static final String HOME = System.getProperty("user.home");
-    public static final String SLASH = File.separator;
-    public static final String RESOURCES_DIR = HOME + SLASH + "resources" + SLASH;
 
     @Override
     public Set<Member> loadMembers() {
@@ -25,7 +20,7 @@ public class JSONLoader implements DataLoader {
             }.getType();
 
             Set<Member> members = gson.fromJson(
-                    new JsonReader(new FileReader(RESOURCES_DIR + "members.json")),
+                    new JsonReader(new FileReader(AppSettings.RESOURCES_DIR + "members.json")),
                     memberSetType
             );
             return members;
@@ -45,7 +40,7 @@ public class JSONLoader implements DataLoader {
             Type taskSetType = new TypeToken<Set<Task>>() {
             }.getType();
             Set<Task> tasks = gson.fromJson(
-                    new JsonReader(new FileReader(RESOURCES_DIR + "tasks.json")),
+                    new JsonReader(new FileReader(AppSettings.RESOURCES_DIR + "tasks.json")),
                     taskSetType
             );
 

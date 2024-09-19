@@ -19,7 +19,7 @@ public class TaskAssigner implements Observable {
     public TaskAssigner() {
         assignedTasks = new HashMap<>();
         try {
-            Set<Object> objects = Discoverer.discover("/home/hdr/resources", Observer.class);
+            Set<Object> objects = Discoverer.discover(AppSettings.RESOURCES_DIR, Observer.class);
 
             observers = objects.stream()
                     .filter(obj -> obj instanceof Observer)
