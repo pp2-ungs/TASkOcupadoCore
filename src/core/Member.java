@@ -6,9 +6,11 @@ import java.util.Objects;
 public class Member {
 
     private String name;
+    private String email;
 
-    public Member(String name) {
+    public Member(String name, String email) {
         this.name = name;
+        this.email = email;
     }
 
     @Override
@@ -28,6 +30,10 @@ public class Member {
         return name;
     }
 
+    public String getEmail() {
+        return email;
+    }
+    
     @Override
     public String toString() {
         return name;

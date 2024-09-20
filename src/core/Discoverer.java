@@ -52,7 +52,7 @@ public class Discoverer {
                 }
             }
         } catch (IOException e) {
-            System.err.println("Error reading jar file: " + e.getMessage());
+            System.err.println("?error reading jar file: " + e.getMessage());
         }
 
         return implementations;
@@ -68,7 +68,7 @@ public class Discoverer {
             }
         } catch (InstantiationException | NoSuchMethodException | InvocationTargetException
                 | IllegalAccessException e) {
-            System.err.println("Error instantiating class: " + e.getMessage());
+            System.err.println("?error instantiating class: " + e.getMessage());
         }
     }
 
@@ -78,7 +78,7 @@ public class Discoverer {
             String canonicalClassName = className.replace("/", ".").replace(".class", "");
             return Class.forName(canonicalClassName, true, classLoader);
         } catch (IOException | ClassNotFoundException e) {
-            System.err.println("Error loading class from jar: " + e.getMessage());
+            System.err.println("?error loading class from jar: " + e.getMessage());
             return null;
         }
     }

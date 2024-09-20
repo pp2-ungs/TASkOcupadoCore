@@ -3,7 +3,7 @@ package core;
 public class NullMember extends Member {
     
     public NullMember() {
-        super("Null Member");
+        super("Null Member", "null email");
     }
     
     public boolean isNull() {

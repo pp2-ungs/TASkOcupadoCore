@@ -51,7 +51,7 @@ public class TaskAssigner implements Observable {
         String notification = "(" + timeStampOfNotification + ")  Task: [" + task.getDescription() + "]  →  Member: [" + member.getName() + "]\n";
 
         // FIXME: como tenemos Observer y no notificator, no tenemos .notify
-        observers.forEach(observer -> observer.update(notification));
+        observers.forEach(observer -> observer.update(task, member, notification));
     }
 
 }

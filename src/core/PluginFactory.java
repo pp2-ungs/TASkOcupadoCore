@@ -19,13 +19,13 @@ public class PluginFactory {
     public static Object loadInstance(Class iface) {
         String implName = props.getProperty(iface.getName());
         if (implName == null) {
-            throw new RuntimeException("implementation not specified for "
+            throw new RuntimeException("?implementation not specified for "
                     + iface.getName() + " in PluginFactory properties.");
         }
         try {
             return Class.forName(implName).newInstance();
         } catch (Exception ex) {
-            throw new RuntimeException("factory unable to construct instance of " + iface.getName());
+            throw new RuntimeException("?factory unable to construct instance of " + iface.getName());
         }
     }
 }
