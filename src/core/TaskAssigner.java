@@ -22,7 +22,6 @@ public class TaskAssigner implements Observable {
             Set<Object> objects = Discoverer.discover(AppSettings.TASKOCUPADO_EXT_DIR, Observer.class);
 
             observers = objects.stream()
-                    //.filter(obj -> obj instanceof Observer) Esto lo hace el Discoverer
                     .map(obj -> (Observer) obj)
                     .collect(Collectors.toSet());
             System.out.println("Observers encontrados:" + observers);
@@ -32,14 +31,12 @@ public class TaskAssigner implements Observable {
         }
     }
 
-    // TODO
-    public void assignTask(Task t, Member m) {
-        if (!assignedTasks.containsKey(t)) {
-            assignedTasks.put(t, new HashSet<>());
+    public void assignTask(Task task, Member member) {
+        if (!assignedTasks.containsKey(task)) {
+            assignedTasks.put(task, new HashSet<>());
         }
-        assignedTasks.get(t).add(m);
-
-        notifyObservers(t, m);
+        assignedTasks.get(task).add(member);
+        notifyObservers(task, member);
     }
 
     @Override

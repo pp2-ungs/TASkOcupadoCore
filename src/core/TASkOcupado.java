@@ -4,17 +4,10 @@ public class TASkOcupado {
     
     private TaskAssigner taskAssigner;
     private Data data;
-
-    // TODO: IMPORTANTE definir: hacemos un getTaskAssigner()
-    // o le seteamos un task assigner?
+    
     public TASkOcupado() {
         taskAssigner = new TaskAssigner();
         data = new Data();
-    }
-
-    // FIXME Se usa?
-    public TaskAssigner getTaskAssigner() {
-        return taskAssigner;
     }
 
     public void assignTask(String task, String member) {
