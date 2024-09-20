@@ -9,13 +9,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 
-// Asigna tareas a miembros, y sabe qué tareas se asignaron a cuáles miembros.
 public class TaskAssigner implements Observable {
 
     private Map<Task, Set<Member>> assignedTasks;
     private Set<Observer> observers;
 
-    // TODO
     public TaskAssigner() {
         assignedTasks = new HashMap<>();
         try {
@@ -24,7 +22,6 @@ public class TaskAssigner implements Observable {
             observers = objects.stream()
                     .map(obj -> (Observer) obj)
                     .collect(Collectors.toSet());
-            System.out.println("Observers encontrados:" + observers);
         } catch (FileNotFoundException e) {
             observers = new HashSet<>();
             e.printStackTrace();

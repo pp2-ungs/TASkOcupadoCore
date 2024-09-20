@@ -17,16 +17,16 @@ public class TASkOcupado {
         taskAssigner.assignTask(assignedTask, assignated);
     }
 
-    public void addObserverToAssigner(Observer obserber) {
-        taskAssigner.addObserver(obserber);
+    public void addObserverToAssigner(Observer observer) {
+        taskAssigner.addObserver(observer);
     }
 
     public String[] obtainMembers() {
-        return (String[]) data.getMembers();
+        return data.getMembers();
     }
 
     public String[] obtainTasks() {
-        return (String[]) data.getTasks();
+        return data.getTasks();
     }
 
 }
