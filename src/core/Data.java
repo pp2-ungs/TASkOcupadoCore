@@ -8,7 +8,7 @@ public class Data {
     private Set<Task> tasks;
 
     public Data() {
-        DataLoader dataLoader = PluginFactory.loadInstance();
+        DataLoader dataLoader = (DataLoader) PluginFactory.loadInstance(DataLoader.class);
         
         members = dataLoader.loadMembers();
         tasks = dataLoader.loadTasks();

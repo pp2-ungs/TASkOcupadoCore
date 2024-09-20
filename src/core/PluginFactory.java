@@ -5,20 +5,27 @@ import java.util.Properties;
 
 public class PluginFactory {
 
-    public static DataLoader loadInstance() {
-        Properties prop = new Properties();
-        try (FileInputStream fis = new FileInputStream(AppSettings.RESOURCES_DIR + "config.properties")) {
-            prop.load(fis);
-            String loaderType = prop.getProperty("dataLoader");
+    private static Properties props = new Properties();
 
-            if (loaderType.equals("json")) 
-            	return new JSONLoader();
-            else if (loaderType.equals("calendar")) 
-            	return new CalendarLoader();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
+    static {
+        try {
+            FileInputStream fis = new FileInputStream(AppSettings.RESOURCES_DIR + "config.properties");
+            props.load(fis);
+        } catch (Exception ex) {
+            throw new ExceptionInInitializerError(ex);
         }
-        return new NullDataLoader();
+    }
+
+    public static Object loadInstance(Class iface) {
+        String implName = props.getProperty(iface.getName());
+        if (implName == null) {
+            throw new RuntimeException("implementation not specified for "
+                    + iface.getName() + " in PluginFactory properties.");
+        }
+        try {
+            return Class.forName(implName).newInstance();
+        } catch (Exception ex) {
+            throw new RuntimeException("factory unable to construct instance of " + iface.getName());
+        }
     }
 }
