@@ -1,8 +1,10 @@
 [
-    {"description": "Desafiliarse de la Cámpora"},
-	{"description": "Desafiliarse de la Cámpora"},
-	{"description": "Ir a entrenar"},
+    {"description": "Aprobar al grupo 1"},
+	{"description": "Comprar Smalltalk Best Practice Patterns firmado por Ken Beck"},
+	{"description": "Tocar la guitarra y el bajo"},
+	{"description": "Ir al gym"},
+	{"description": "Corregir errores gramaticales"},
 	{"description": "Comer cada 36 horas"},
-	{"description": "Ir a entrenar"},
+	{"description": "Enojarse"},
 	{"description": "Dormir"}
 ]

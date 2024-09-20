@@ -15,9 +15,6 @@ public class Main {
         for (String task : tasks) {
             System.out.println(task);
         }
-
-        if (tasks.length > 0 && members.length > 0)
-            taskOcupado.assignTask(tasks[0], members[0]);
         
     }
 }
