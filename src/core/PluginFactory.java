@@ -19,6 +19,6 @@ public class PluginFactory {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return new NullDataLoader();
     }
 }
