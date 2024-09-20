@@ -21,7 +21,7 @@ public class TASkOcupado {
         taskAssigner.addObserver(observer);
     }
 
-    // FIXME estos dos no son getters
+    // FIXME no esta bien
     public String[] obtainMembers() {
         return (String[]) data.getMembers();
     }

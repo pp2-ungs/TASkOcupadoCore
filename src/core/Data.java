@@ -14,8 +14,6 @@ public class Data {
         tasks = dataLoader.loadTasks();
     }
 
-    // TODO: hacer bien
-    // no son getters
     public Member obtainMember(String name) {
         return members.stream()
                 .filter(m -> m.getName().equals(name))
