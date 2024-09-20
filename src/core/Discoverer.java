@@ -27,7 +27,7 @@ public class Discoverer {
     }
 
     private static void findClassesInPath(File path, Class<?> targetInterface, Set<Object> implementations) {
-        if (path.isDirectory()) {
+        if (path.isDirectory() && path.getName().equals("src")) {
             File[] files = path.listFiles();
             if (files != null) {
                 for (File file : files) {
