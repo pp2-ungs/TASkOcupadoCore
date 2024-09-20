@@ -28,13 +28,13 @@ public class Data {
                 .orElse(new NullTask());
     }
 
-    public Object[] getMembers() {
+    public String[] getMembers() {
         return members.stream()
                 .map(Member::toString)
                 .toArray(String[]::new);
     }
 
-    public Object[] getTasks() {
+    public String[] getTasks() {
         return tasks.stream()
                 .map(Task::toString)
                 .toArray(String[]::new);

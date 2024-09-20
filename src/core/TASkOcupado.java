@@ -22,11 +22,11 @@ public class TASkOcupado {
     }
 
     public String[] obtainMembers() {
-        return (String[]) data.getMembers();
+        return data.getMembers();
     }
 
     public String[] obtainTasks() {
-        return (String[]) data.getTasks();
+        return data.getTasks();
     }
 
 }
