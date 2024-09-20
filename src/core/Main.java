@@ -5,8 +5,8 @@ public class Main {
     public static void main(String[] args) {
         TASkOcupado taskOcupado = new TASkOcupado();
 
-        String[] members = taskOcupado.getMembers();
-        String[] tasks = taskOcupado.getTasks();
+        String[] members = taskOcupado.obtainMembers();
+        String[] tasks = taskOcupado.obtainTasks();
 
         for (String member : members) {
             System.out.println(member);
@@ -16,7 +16,8 @@ public class Main {
             System.out.println(task);
         }
 
-        taskOcupado.assignTask(tasks[0], members[0]);
+        if (tasks.length > 0 && members.length > 0)
+            taskOcupado.assignTask(tasks[0], members[0]);
 
         // Observaciones:
         //

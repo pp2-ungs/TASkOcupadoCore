@@ -29,11 +29,11 @@ public class TASkOcupado {
     }
 
     // FIXME estos dos no son getters
-    public String[] getMembers() {
+    public String[] obtainMembers() {
         return (String[]) data.getMembers();
     }
 
-    public String[] getTasks() {
+    public String[] obtainTasks() {
         return (String[]) data.getTasks();
     }
 
