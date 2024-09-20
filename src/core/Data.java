@@ -14,20 +14,18 @@ public class Data {
         tasks = dataLoader.loadTasks();
     }
 
-    // TODO: hacer bien
-    // no son getters
     public Member obtainMember(String name) {
         return members.stream()
                 .filter(m -> m.getName().equals(name))
                 .findFirst()
-                .orElse(new Member("<Unknown member>")); // FIXME: patrón Special Case / Null Object
+                .orElse(new NullMember());
     }
 
     public Task obtainTask(String taskDescription) {
         return tasks.stream()
                 .filter(t -> t.getDescription().equals(taskDescription))
                 .findFirst()
-                .orElse(new Task("<Unknown task>")); // FIXME
+                .orElse(new NullTask());
     }
 
     public Object[] getMembers() {

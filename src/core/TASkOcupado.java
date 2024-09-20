@@ -4,17 +4,10 @@ public class TASkOcupado {
     
     private TaskAssigner taskAssigner;
     private Data data;
-
-    // TODO: IMPORTANTE definir: hacemos un getTaskAssigner()
-    // o le seteamos un task assigner?
+    
     public TASkOcupado() {
         taskAssigner = new TaskAssigner();
         data = new Data();
-    }
-
-    // FIXME Se usa?
-    public TaskAssigner getTaskAssigner() {
-        return taskAssigner;
     }
 
     public void assignTask(String task, String member) {
@@ -24,11 +17,11 @@ public class TASkOcupado {
         taskAssigner.assignTask(assignedTask, assignated);
     }
 
-    public void addObserverToAssigner(Observer obserber) {
-        taskAssigner.addObserver(obserber);
+    public void addObserverToAssigner(Observer observer) {
+        taskAssigner.addObserver(observer);
     }
 
-    // FIXME estos dos no son getters
+    // FIXME no esta bien
     public String[] obtainMembers() {
         return (String[]) data.getMembers();
     }

@@ -9,37 +9,31 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 
-// Asigna tareas a miembros, y sabe qué tareas se asignaron a cuáles miembros.
 public class TaskAssigner implements Observable {
 
     private Map<Task, Set<Member>> assignedTasks;
     private Set<Observer> observers;
 
-    // TODO
     public TaskAssigner() {
         assignedTasks = new HashMap<>();
         try {
             Set<Object> objects = Discoverer.discover(AppSettings.TASKOCUPADO_EXT_DIR, Observer.class);
 
             observers = objects.stream()
-                    //.filter(obj -> obj instanceof Observer) Esto lo hace el Discoverer
                     .map(obj -> (Observer) obj)
                     .collect(Collectors.toSet());
-            System.out.println("Observers encontrados:" + observers);
         } catch (FileNotFoundException e) {
             observers = new HashSet<>();
             e.printStackTrace();
         }
     }
 
-    // TODO
-    public void assignTask(Task t, Member m) {
-        if (!assignedTasks.containsKey(t)) {
-            assignedTasks.put(t, new HashSet<>());
+    public void assignTask(Task task, Member member) {
+        if (!assignedTasks.containsKey(task)) {
+            assignedTasks.put(task, new HashSet<>());
         }
-        assignedTasks.get(t).add(m);
-
-        notifyObservers(t, m);
+        assignedTasks.get(task).add(member);
+        notifyObservers(task, member);
     }
 
     @Override
