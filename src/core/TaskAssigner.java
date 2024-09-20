@@ -15,7 +15,6 @@ public class TaskAssigner implements Observable {
     private Map<Task, Set<Member>> assignedTasks;
     private Set<Observer> observers;
 
-    // TODO
     public TaskAssigner() {
         assignedTasks = new HashMap<>();
         try {

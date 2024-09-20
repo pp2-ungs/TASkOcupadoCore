@@ -17,8 +17,8 @@ public class TASkOcupado {
         taskAssigner.assignTask(assignedTask, assignated);
     }
 
-    public void addObserverToAssigner(Observer obserber) {
-        taskAssigner.addObserver(obserber);
+    public void addObserverToAssigner(Observer observer) {
+        taskAssigner.addObserver(observer);
     }
 
     // FIXME estos dos no son getters
