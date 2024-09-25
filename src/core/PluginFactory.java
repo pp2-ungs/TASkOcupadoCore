@@ -9,7 +9,7 @@ public class PluginFactory {
 
     static {
         try {
-            FileInputStream fis = new FileInputStream(AppSettings.RESOURCES_DIR + "config.properties");
+            FileInputStream fis = new FileInputStream(CoreSettings.RESOURCES_DIR + "config.properties");
             props.load(fis);
         } catch (Exception ex) {
             throw new ExceptionInInitializerError(ex);

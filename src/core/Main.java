@@ -8,13 +8,16 @@ public class Main {
         String[] members = taskOcupado.obtainMembers();
         String[] tasks = taskOcupado.obtainTasks();
 
+        System.out.println("Tasks:");
+        for (String task : tasks) {
+            System.out.println(task);
+        }
+
+        System.out.println("Members:");
         for (String member : members) {
             System.out.println(member);
         }
 
-        for (String task : tasks) {
-            System.out.println(task);
-        }
-        
     }
+
 }
