@@ -17,7 +17,7 @@ public class TaskAssigner implements Observable {
     public TaskAssigner() {
         assignedTasks = new HashMap<>();
         try {
-            Set<Object> objects = Discoverer.discover(CoreSettings.TASKOCUPADO_EXT_DIR_DIST, Observer.class);
+            Set<Object> objects = Discoverer.discover(CoreSettings.EXTENSIONS, Observer.class);
             System.out.println("debugging: " + objects);
             observers = objects.stream()
                     .map(obj -> (Observer) obj)

@@ -20,7 +20,7 @@ public class JSONLoader implements DataLoader {
             }.getType();
 
             Set<Member> members = gson.fromJson(
-                    new JsonReader(new FileReader(CoreSettings.RESOURCES_DIR + "members.json")),
+                    new JsonReader(new FileReader(CoreSettings.RESOURCES + "members.json")),
                     memberSetType
             );
             return members;
@@ -40,7 +40,7 @@ public class JSONLoader implements DataLoader {
             Type taskSetType = new TypeToken<Set<Task>>() {
             }.getType();
             Set<Task> tasks = gson.fromJson(
-                    new JsonReader(new FileReader(CoreSettings.RESOURCES_DIR + "tasks.json")),
+                    new JsonReader(new FileReader(CoreSettings.RESOURCES + "tasks.json")),
                     taskSetType
             );
 
