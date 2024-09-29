@@ -50,8 +50,10 @@ public class TaskAssigner implements Observable {
         String timeStampOfNotification = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm'hs'"));
         String notification = "(" + timeStampOfNotification + ")  Task: [" + task.getDescription() + "]  →  Member: [" + member.getName() + "]\n";
 
+        NotificationDTO notificationDTO = new NotificationDTO(task, member, notification);
+        
         // FIXME: como tenemos Observer y no notificator, no tenemos .notify
-        observers.forEach(observer -> observer.update(task, member, notification));
+        observers.forEach(observer -> observer.update(notificationDTO));
     }
 
 }
