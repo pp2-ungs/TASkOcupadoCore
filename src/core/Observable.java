@@ -1,5 +1,6 @@
 package core;
 
+// DONE
 public interface Observable {
 
     public void addObserver(Observer observer);

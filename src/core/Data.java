@@ -2,16 +2,17 @@ package core;
 
 import java.util.Set;
 
+// FIXME
 public class Data {
 
     private Set<Member> members;
     private Set<Task> tasks;
 
     public Data() {
-        DataLoader dataLoader = (DataLoader) PluginFactory.loadInstance(DataLoader.class);
+        DataSetLoader loader = (DataSetLoader) PluginFactory.loadInstance(DataSetLoader.class);
         
-        members = dataLoader.loadMembers();
-        tasks = dataLoader.loadTasks();
+        members = loader.loadSet(Member.class);
+        tasks = loader.loadSet(Task.class);
     }
 
     public Member obtainMember(String name) {

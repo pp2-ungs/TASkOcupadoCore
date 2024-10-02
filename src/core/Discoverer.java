@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+// FIXME
 public class Discoverer {
 
     public static Set<Object> discover(String path, Class<?> targetInterface) throws FileNotFoundException {

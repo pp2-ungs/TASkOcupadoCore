@@ -3,19 +3,16 @@ package core;
 import java.util.HashSet;
 import java.util.Set;
 
-public class NullDataLoader implements DataLoader {
+// ??? Esta clase queda, ó dijo Javier que hay que sacarla?
+public class NullDataLoader<T> implements DataSetLoader {
     
     @Override
-    public Set<Member> loadMembers() {
-        return new HashSet<>();
-    }
-
-    @Override
-    public Set<Task> loadTasks() {
+    public Set<T> loadSet(Class classObject) {
         return new HashSet<>();
     }
 
     public boolean isNull() {
         return true;
     }
+
 }

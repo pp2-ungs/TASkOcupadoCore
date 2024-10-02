@@ -3,6 +3,7 @@ package core;
 import java.io.FileInputStream;
 import java.util.Properties;
 
+// FIXME
 public class PluginFactory {
 
     private static Properties props = new Properties();

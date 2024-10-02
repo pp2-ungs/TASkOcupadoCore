@@ -1,56 +1,34 @@
 package core;
 
-import java.lang.reflect.Type;
-import java.util.HashSet;
-import java.util.Set;
-import com.google.gson.*;
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.lang.reflect.Type;
+import java.util.HashSet;
+import java.util.Set;
 
-public class JSONLoader implements DataLoader {
-
-    @Override
-    public Set<Member> loadMembers() {
-        try {
-            Gson gson = new Gson();
-
-            Type memberSetType = new TypeToken<Set<Member>>() {
-            }.getType();
-
-            Set<Member> members = gson.fromJson(
-                    new JsonReader(new FileReader(CoreSettings.RESOURCES + "members.json")),
-                    memberSetType
-            );
-            return members;
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return new HashSet<>();
-    }
+// DONE
+// JSONLoader no sabe nada, sólo sabe que tiene que cargar archivos .json.
+public class JSONLoader<T> implements DataSetLoader {
 
     @Override
-    public Set<Task> loadTasks() {
+    public Set<T> loadSet(Class classObject) {
+        Gson gson = new Gson();
+        String fileName = CoreSettings.RESOURCES + classObject.getSimpleName() + ".json";
+        Type dataSetType = TypeToken.getParameterized(Set.class, classObject).getType();
+
+        FileReader fileReader = null;
         try {
-            Gson gson = new Gson();
-
-            Type taskSetType = new TypeToken<Set<Task>>() {
-            }.getType();
-            Set<Task> tasks = gson.fromJson(
-                    new JsonReader(new FileReader(CoreSettings.RESOURCES + "tasks.json")),
-                    taskSetType
-            );
-
-            return tasks;
-
+            fileReader = new FileReader(fileName);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("?" + fileName + " not found");
+            System.out.println("?using empty set");
+            return new HashSet<>();
         }
 
-        return new HashSet<>();
+        return gson.fromJson(new JsonReader(fileReader), dataSetType);
     }
 
 }

@@ -3,15 +3,12 @@ package core;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CalendarLoader implements DataLoader {
+// DONE
+// CalendarLoader no sabe nada, única responsabilidad cargar datos de calendarios.
+public class CalendarLoader<T> implements DataSetLoader {
 
     @Override
-    public Set<Member> loadMembers() {
-        return new HashSet<>();
-    }
-
-    @Override
-    public Set<Task> loadTasks() {
+    public Set<T> loadSet(Class classObject) {
         return new HashSet<>();
     }
 

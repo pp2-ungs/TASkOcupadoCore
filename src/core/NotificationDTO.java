@@ -1,5 +1,6 @@
 package core;
 
+// FIXME
 public class NotificationDTO {
     
     private Task task;
