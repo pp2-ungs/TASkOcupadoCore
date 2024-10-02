@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 // FIXME
+// esto está bien
 public class PluginFactory {
 
     private static Properties props = new Properties();
