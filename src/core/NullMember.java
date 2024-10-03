@@ -2,6 +2,8 @@ package core;
 
 // ??? Esta clase queda, ó dijo Javier que hay que sacarla?
 // X: se va. dijo que ya tenemos mucho
+// REMOVEME
+/*
 public class NullMember extends Member {
     
     public NullMember() {
@@ -12,3 +14,4 @@ public class NullMember extends Member {
         return true;
     }
 }
+*/
