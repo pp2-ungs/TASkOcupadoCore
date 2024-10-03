@@ -1,13 +1,9 @@
 /*
 class TASkOcupado {
 
-    // Esto ya está en el init() de TASkOcupado, lo que hay que ver es sólo qué
-    // devuelve.
-
-    // X: acá me concentré en la idea del Adapter. lo que importa es el Adapter,
-    // y puse todo para que se entienda bien la idea. A parte, fijate que no
-    // está completamente así...
-    public TaskAssignerAdapter init() {
+    // H: para mí el init() debería devolver el coso que tenga adentro lo
+    // observable y todos los datos.
+    public Coso init() {
         Set<Observer> observers = Discoverer.discover(...);
         TaskAssignment taskAssignment = new TaskAssignment();
 
@@ -17,7 +13,51 @@ class TASkOcupado {
         Repository allResources = new Repository(data); // ? check si esto está okay. podría ser uno por tipo de recurso
 
         TaskAssignerAdapter adapter = new TaskAssignerAdapter(taskAssigner, allResources);
-        return adapter;
+        return Coso;
+    }
+}
+
+// La diferencia de coso o TaskAssignerAdapter solo son los datos.
+// No sé si me cierran los datos sueltos.
+public class Coso {
+    private TaskAssigner taskAssigner; // el observable
+    private Set<Task> tasks; // todas las tasks
+    private Set<Member> members; // todos los members
+    
+    // Métodos para que los use la UI
+
+    public String[] obtainMembers() {
+        return data.getMembers();
+    }
+
+    public String[] obtainTasks() {
+        return data.getTasks();
+    }
+
+    public Task obtainTask(String taskDescription) {
+        return tasks.stream()
+                .filter(t -> t.getDescription().equals(taskDescription))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public Member obtainMember(String name) {
+        return members.stream()
+                .filter(m -> m.getName().equals(name))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public String[] getTasks() {
+        return tasks.stream()
+                .map(Task::toString)
+                .toArray(String[]::new);
+    }
+
+    public String[] getMembers() {
+        return members.stream()
+                .map(Member::toString)
+                .toArray(String[]::new);
     }
 }
 
@@ -45,10 +85,6 @@ class TaskAssignerAdapter {
     }
 }
 
-// Esto ya está así en la UI
-
-// Vuelvo a lo que dije arriba: la idea era mostrar cómo anda con el adapter :D
-// si te fijas, ahora tiene un objeto TaskAssignerAdapter, no un TaskAssigner
 class UI {
   TaskAssignerAdapter adapter;
   
