@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-// Responsabilidad: asignar las tareas.
+// Responsabilidad: establecer la asignación.
 public class TaskAssignment {
     
     private Map<Task, Set<Member>> assignedTasks;

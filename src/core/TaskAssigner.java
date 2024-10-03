@@ -4,7 +4,15 @@ import java.util.Set;
 
 // FIXME
 
-// Responsabilidad: notificar las asignaciones a los observers.
+// Textual del documento:
+//
+// "US1: Notificación de asignación de tareas
+// Quiero notificar a un miembro  cuando se le asigne una tarea."
+//
+// Teniendo la US1 en mente, y lo que puse de responsabilidad de esta clase, es
+// claro que esta clase es el core de la funcionalidad.
+// 
+// Responsabilidad: asignar las tareas a notificar.
 public class TaskAssigner implements Observable {
 
     private TaskAssignment taskAssignment;
@@ -15,6 +23,7 @@ public class TaskAssigner implements Observable {
         this.observers = observers;
     }
 
+    // Hace dos cosas.
     public void assignTask(Task task, Member member) {
         taskAssignment.assignTask(task, member);
         notifyObservers(task, member);

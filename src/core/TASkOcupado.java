@@ -12,7 +12,7 @@ public class TASkOcupado {
     // ??? Dijo Javier que acá no debería tener nada?
     // X: si, solo crea y muere
     private TaskAssigner taskAssigner;
-    private CoreRepository data;
+    private CoreData data;
     
     public TASkOcupado() {
         init();
@@ -25,7 +25,7 @@ public class TASkOcupado {
         DataSetLoader loader = (DataSetLoader) plugin.getPlugin(DataSetLoader.class);
 
         // Cargar datos
-        CoreRepository repository = new CoreRepository(loader);
+        CoreData coreData = new CoreData(loader);
         // var tasks = loader.loadSet(Task.class);
         // var members = loader.loadSet(Member.class);
 
@@ -43,7 +43,8 @@ public class TASkOcupado {
         // Estas dos líneas no deberían estar, el init() debería devolver el
         // modelo. Aparentemente, el modelo debería ser el taskAssigner.
         this.taskAssigner = taskAssigner; // remove me
-        this.data = repository; // remove me
+        this.data = coreData; // remove me
+        //return coso/adapter;
     }
 
 
