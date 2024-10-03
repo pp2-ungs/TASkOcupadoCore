@@ -3,6 +3,10 @@ class TASkOcupado {
 
     // Esto ya está en el init() de TASkOcupado, lo que hay que ver es sólo qué
     // devuelve.
+
+    // X: acá me concentré en la idea del Adapter. lo que importa es el Adapter,
+    // y puse todo para que se entienda bien la idea. A parte, fijate que no
+    // está completamente así...
     public TaskAssignerAdapter init() {
         Set<Observer> observers = Discoverer.discover(...);
         TaskAssignment taskAssignment = new TaskAssignment();
@@ -42,6 +46,9 @@ class TaskAssignerAdapter {
 }
 
 // Esto ya está así en la UI
+
+// Vuelvo a lo que dije arriba: la idea era mostrar cómo anda con el adapter :D
+// si te fijas, ahora tiene un objeto TaskAssignerAdapter, no un TaskAssigner
 class UI {
   TaskAssignerAdapter adapter;
   
