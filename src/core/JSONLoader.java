@@ -15,6 +15,8 @@ import java.util.Set;
 // ???
 // Está hardcodeado el path de RESOURCES, aunque esto es una implementación de
 // testing únicamente.
+// X: esta clase se supone que tiene que ir en Resources como un .class
+// por ahí no hace falta que hardcodee el path de RESOURCES
 public class JSONLoader<T> implements DataSetLoader {
 
     @Override
