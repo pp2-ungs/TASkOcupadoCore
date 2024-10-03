@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class TASkOcupado {
     
     // ??? Dijo Javier que acá no debería tener nada?
+    // X: si, solo crea y muere
     private TaskAssigner taskAssigner;
     private CoreRepository data;
     
