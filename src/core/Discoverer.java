@@ -13,6 +13,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 // FIXME
+// X: aca no hay que hacer nada, no?
 public class Discoverer {
 
     public static Set<Object> discover(String path, Class<?> targetInterface) {
