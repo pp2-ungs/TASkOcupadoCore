@@ -15,11 +15,12 @@ import java.util.jar.JarFile;
 // FIXME
 public class Discoverer {
 
-    public static Set<Object> discover(String path, Class<?> targetInterface) throws FileNotFoundException {
+    public static Set<Object> discover(String path, Class<?> targetInterface) {
         File directory = new File(path);
         
         if (!directory.exists() || !directory.isDirectory()) {
-            throw new FileNotFoundException("?invalid directory: " + path);
+            //throw new FileNotFoundException("?invalid directory: " + path);
+            throw new RuntimeException("?invalid directory: " + path);
         }
 
         Set<Object> implementations = new HashSet<>();

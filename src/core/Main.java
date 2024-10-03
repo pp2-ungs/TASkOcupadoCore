@@ -1,6 +1,6 @@
 package core;
 
-// FIXME
+// Esto es para pruebas, no es parte del Core. 
 public class Main {
 
     public static void main(String[] args) {

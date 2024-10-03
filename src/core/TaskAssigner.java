@@ -1,32 +1,23 @@
 package core;
 
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.stream.Collectors;
 
 // FIXME
+// Ya no conoce al Discoverer
+//
+// ???
+// Dijo Javier que esto no debería ser observable? no se oye bien en el audio.
 public class TaskAssigner implements Observable {
 
     private Map<Task, Set<Member>> assignedTasks;
     private Set<Observer> observers;
 
-    public TaskAssigner() {
-        assignedTasks = new HashMap<>();
-        try {
-            Set<Object> objects = Discoverer.discover(CoreSettings.EXTENSIONS, Observer.class);
-            System.out.println("debugging: " + objects);
-            observers = objects.stream()
-                    .map(obj -> (Observer) obj)
-                    .collect(Collectors.toSet());
-        } catch (FileNotFoundException e) {
-            observers = new HashSet<>();
-            e.printStackTrace();
-        }
+    public TaskAssigner(Set<Observer> observers) {
+        this.assignedTasks = new HashMap<>();
+        this.observers = observers;
     }
 
     public void assignTask(Task task, Member member) {

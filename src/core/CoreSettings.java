@@ -10,5 +10,6 @@ public class CoreSettings {
     public static final String CONFIG = HOME + SLASH + ".TASkOcupado" + SLASH;
     public static final String RESOURCES = CONFIG + "Resources" + SLASH;
     public static final String EXTENSIONS = CONFIG + "Extensions" + SLASH;
+    public static final String PROPERTIES_FILE = RESOURCES + "config.properties";
 
 }

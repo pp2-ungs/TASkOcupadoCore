@@ -11,6 +11,10 @@ import java.util.Set;
 
 // DONE
 // JSONLoader no sabe nada, sólo sabe que tiene que cargar archivos .json.
+//
+// ???
+// Está hardcodeado el path de RESOURCES, aunque esto es una implementación de
+// testing únicamente.
 public class JSONLoader<T> implements DataSetLoader {
 
     @Override
