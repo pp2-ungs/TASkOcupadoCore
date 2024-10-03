@@ -32,7 +32,8 @@ public class TASkOcupado {
                 .collect(Collectors.toSet());
 
         // Create model
-        TaskAssigner taskAssigner = new TaskAssigner(observers);
+        TaskAssignment taskAssignment = new TaskAssignment();
+        TaskAssigner taskAssigner = new TaskAssigner(taskAssignment, observers);
 
         // Estas dos líneas están para que esto siga compilando.
         // Estas dos líneas no deberían estar, el init() debería devolver el

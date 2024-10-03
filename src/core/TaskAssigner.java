@@ -1,8 +1,5 @@
 package core;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 // FIXME
@@ -13,8 +10,8 @@ public class TaskAssigner implements Observable {
     private TaskAssignment taskAssignment;
     private Set<Observer> observers;
 
-    public TaskAssigner(Set<Observer> observers) {
-        this.taskAssignment = new TaskAssignment();
+    public TaskAssigner(TaskAssignment taskAssignment, Set<Observer> observers) {
+        this.taskAssignment = taskAssignment;
         this.observers = observers;
     }
 
