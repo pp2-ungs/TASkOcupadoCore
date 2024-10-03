@@ -6,25 +6,20 @@ import java.util.Map;
 import java.util.Set;
 
 // FIXME
-// Ya no conoce al Discoverer
 //
-// ???
-// Dijo Javier que esto no debería ser observable? no se oye bien en el audio.
+// Responsabilidad: notificarficar las asignaciones a los observers.
 public class TaskAssigner implements Observable {
 
-    private Map<Task, Set<Member>> assignedTasks;
+    private TaskAssignment taskAssignment;
     private Set<Observer> observers;
 
     public TaskAssigner(Set<Observer> observers) {
-        this.assignedTasks = new HashMap<>();
+        this.taskAssignment = new TaskAssignment();
         this.observers = observers;
     }
 
     public void assignTask(Task task, Member member) {
-        if (!assignedTasks.containsKey(task)) {
-            assignedTasks.put(task, new HashSet<>());
-        }
-        assignedTasks.get(task).add(member);
+        taskAssignment.assignTask(task, member);
         notifyObservers(task, member);
     }
 
@@ -38,6 +33,7 @@ public class TaskAssigner implements Observable {
         observers.remove(observer);
     }
 
+    // FIXME
     private void notifyObservers(Task task, Member member) {
         NotificationDTO notificationDTO = NotificationBuilder.createNotificationDTO(task, member);
         
