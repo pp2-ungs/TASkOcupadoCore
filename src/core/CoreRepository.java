@@ -5,6 +5,7 @@ import java.util.Set;
 // ???
 // Preguntar: si esto es el repo de los datos, podría ser ó debería ser un
 // Singleton? Javier dice que Singleton es el anti-pattern. Consultarle.
+// X: podría ser... no veo por qué no, la verdad
 //
 // Responsabilidad: brindar los datos del modelo a quien lo solicite.
 public class CoreRepository {
