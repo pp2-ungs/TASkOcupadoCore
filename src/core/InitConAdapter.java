@@ -10,15 +10,23 @@ class TASkOcupado {
         TaskAssigner taskAssigner = new TaskAssigner(observers, taskAssignment);
 
         DataSetLoader data = PluginFactory.getPlugin(...);  // no me convence el nombre de la clase
-        Repository allResources = new Repository(data); // ? check si esto está okay. podría ser uno por tipo de recurso
 
-        TaskAssignerAdapter adapter = new TaskAssignerAdapter(taskAssigner, allResources);
+        //Repository allResources = new Repository(data); // ? check si esto está okay. podría ser uno por tipo de recurso
+
+        tasks = loader.loadSet(Task.class);
+        members = loader.loadSet(Member.class);
+
+        TaskAssignerAdapter adapter = new TaskAssignerAdapter(taskAssigner, tasks, members);
         return Coso;
     }
 }
 
-// La diferencia de coso o TaskAssignerAdapter solo son los datos.
+// La diferencia de coso con TaskAssignerAdapter solo son los datos.
 // No sé si me cierran los datos sueltos.
+//
+// Esta clase sería el Adapter/Façade/Coso/Wrapper
+//
+// Responsabilidad: exponer la funcionalidad del core al exterior.
 public class Coso {
     private TaskAssigner taskAssigner; // el observable
     private Set<Task> tasks; // todas las tasks

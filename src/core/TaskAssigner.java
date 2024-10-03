@@ -2,6 +2,8 @@ package core;
 
 import java.util.Set;
 
+// FIXME
+
 // Responsabilidad: notificar las asignaciones a los observers.
 public class TaskAssigner implements Observable {
 

@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 
 // ???
 // Javier dijo algo de Façade y de Adapter en el audio? No se oye bien.
+
+// Responsabilidad: inicializar el Core.
 public class TASkOcupado {
     
     // ??? Dijo Javier que acá no debería tener nada?
@@ -24,6 +26,8 @@ public class TASkOcupado {
 
         // Cargar datos
         CoreRepository repository = new CoreRepository(loader);
+        // var tasks = loader.loadSet(Task.class);
+        // var members = loader.loadSet(Member.class);
 
         // Add observers
         Set<Object> objects = Discoverer.discover(CoreSettings.EXTENSIONS, Observer.class);
@@ -42,12 +46,18 @@ public class TASkOcupado {
         this.data = repository; // remove me
     }
 
+
+    // \begin{remove}
+    // Estas cosas las debería exponer el Adapter/Coso.
     public void assignTask(String task, String member) {
         Task assignedTask = data.obtainTask(task);
         Member assignated = data.obtainMember(member);
         taskAssigner.assignTask(assignedTask, assignated);
     }
 
+    // ???
+    // Esto serviría para la app externa que tiene que escuchar a nuestra app
+    // principal.
     public void addObserverToAssigner(Observer observer) {
         taskAssigner.addObserver(observer);
     }
@@ -59,5 +69,6 @@ public class TASkOcupado {
     public String[] obtainTasks() {
         return data.getTasks();
     }
+    // \end{remove}
 
 }
