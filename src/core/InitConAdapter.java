@@ -1,5 +1,8 @@
+/*
 class TASkOcupado {
 
+    // Esto ya está en el init() de TASkOcupado, lo que hay que ver es sólo qué
+    // devuelve.
     public TaskAssignerAdapter init() {
         Set<Observer> observers = Discoverer.discover(...);
         TaskAssignment taskAssignment = new TaskAssignment();
@@ -15,6 +18,8 @@ class TASkOcupado {
 }
 
 // esto no se llamaría así
+// H: y si esto tendría un taskAssigner, un Set<Member> y un Set<Task>? aunque con
+// eso volveríamos al comienzo cuando teníamos las tres cosas en TASkOcupado.
 class TaskAssignerAdapter {
     TaskAssigner taskAssigner;
     Repository allResources; // o uno por tipo de resource
@@ -36,6 +41,7 @@ class TaskAssignerAdapter {
     }
 }
 
+// Esto ya está así en la UI
 class UI {
   TaskAssignerAdapter adapter;
   
@@ -43,3 +49,5 @@ class UI {
       adapter = new TASkOcupado().init();  // no se por qué esto no podría ser static
   }
 }
+
+*/
