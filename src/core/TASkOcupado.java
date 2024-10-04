@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 public class TASkOcupado {
 
     public TaskAssignerAdapter init() {
+
+        /** UNA CLASE
         // \begin{Load observers}
         Set<Object> objects = Discoverer.discover(CoreSettings.EXTENSIONS, Observer.class);
         Set<Observer> observers = objects.stream()
@@ -15,10 +17,12 @@ public class TASkOcupado {
         // \end{Load observers}
 
         // \begin{Create model}
-        TaskAssignment taskAssignment = new TaskAssignment();
-        TaskAssigner taskAssigner = new TaskAssigner(taskAssignment, observers);
+        TaskAssigner taskAssigner = new TaskAssigner(observers);
         // \end{Create model}
 
+        */
+
+        /* OTRA CLASE
         // \begin{Elegir implementación de los datos a cargar}
         PluginFactory plugin = new PluginFactory(CoreSettings.PROPERTIES_FILE);
         DataSetLoader loader = (DataSetLoader) plugin.getPlugin(DataSetLoader.class);
@@ -29,8 +33,8 @@ public class TASkOcupado {
         // var tasks = loader.loadSet(Task.class);
         // var members = loader.loadSet(Member.class);
         // \end{Cargar datos}
-
-        // return Adapter
+        */
+        
         return new TaskAssignerAdapter(taskAssigner, coreData);
     }
 
