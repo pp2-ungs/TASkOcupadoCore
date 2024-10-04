@@ -7,10 +7,12 @@ public class Member {
 
     private String name;
     private String email;
+    private int telegramId;
 
-    public Member(String name, String email) {
+    public Member(String name, String email, int telegramId) {
         this.name = name;
         this.email = email;
+        this.telegramId = telegramId;
     }
 
     @Override
@@ -33,7 +35,11 @@ public class Member {
     public String getEmail() {
         return email;
     }
-    
+
+    public int getTelegramId() {
+        return telegramId;
+    }
+
     @Override
     public String toString() {
         return name;

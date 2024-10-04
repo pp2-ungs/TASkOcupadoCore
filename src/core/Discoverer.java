@@ -20,6 +20,7 @@ public class Discoverer {
         File directory = new File(path);
         
         if (!directory.exists() || !directory.isDirectory()) {
+            System.out.print("Viva Perón");
             //throw new FileNotFoundException("?invalid directory: " + path);
             throw new RuntimeException("?invalid directory: " + path);
         }
