@@ -1,17 +1,10 @@
 package core;
 
+import java.util.HashMap;
 import java.util.Set;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-// FIXME
-
-// Textual del documento:
-//
-// "US1: Notificación de asignación de tareas
-// Quiero notificar a un miembro  cuando se le asigne una tarea."
-//
-// Teniendo la US1 en mente, y lo que puse de responsabilidad de esta clase, es
-// claro que esta clase es el core de la funcionalidad.
-// 
 // Responsabilidad: asignar las tareas a notificar.
 public class TaskAssigner implements Observable {
 
@@ -23,10 +16,20 @@ public class TaskAssigner implements Observable {
         this.observers = observers;
     }
 
-    // Hace dos cosas.
     public void assignTask(Task task, Member member) {
         taskAssignment.assignTask(task, member);
-        notifyObservers(task, member);
+        var timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm'hs'"));
+        //var notification = "(" + timestamp + ")  Task: [" + task.getDescription() + "]  →  Member: [" + member.getName() + "]\n";
+
+        //\begin{FIXME}
+        var msg = new HashMap<String, String>();
+        msg.put("Task", task.getDescription());
+        msg.put("Name", member.getName());
+        msg.put("Email", member.getEmail());
+        msg.put("Time", timestamp);
+        //\end{FIXME}
+
+        notifyObservers(msg);
     }
 
     @Override
@@ -39,12 +42,9 @@ public class TaskAssigner implements Observable {
         observers.remove(observer);
     }
 
-    // FIXME
-    private void notifyObservers(Task task, Member member) {
-        NotificationDTO notificationDTO = NotificationBuilder.createNotificationDTO(task, member);
-        
-        // FIXME: como tenemos Observer y no notificator, no tenemos .notify
-        observers.forEach(observer -> observer.update(notificationDTO));
+    @Override
+    public void notifyObservers(Object event) {
+        observers.forEach(observer -> observer.update(event));
     }
 
 }
