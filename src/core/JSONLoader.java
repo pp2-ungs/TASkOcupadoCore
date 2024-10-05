@@ -19,10 +19,6 @@ import java.util.Set;
 // X: esta clase se supone que tiene que ir en Resources como un .class
 // por ahí no hace falta que hardcodee el path de RESOURCES
 public class JSONLoader<T> implements DataSetLoader {
-    
-    public JSONLoader() {
-        
-    }
 
     @Override
     public Set<T> loadSet() {
