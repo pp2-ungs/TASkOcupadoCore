@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Enumeration;
@@ -13,7 +15,6 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 // FIXME
-// X: aca no hay que hacer nada, no?
 public class Discoverer<T> {
     File directory;
     
@@ -26,15 +27,14 @@ public class Discoverer<T> {
         }
     }
     
-
     public Set<T> discover() {
         Set<T> implementations = new HashSet<>();
-        findClassesInPath(directory, T, implementations);
+        findClassesInPath(directory, getGenericType(), implementations);
         return implementations;
     }
 
-    // FIXME: otra vez, obtener el tipo de T...
-    private void findClassesInPath(File path, Class<?> targetInterface, Set<Object> implementations) {
+    // FIXME: quedo raro quizás
+    private void findClassesInPath(File path, Class<?> targetInterface, Set<T> implementations) {
         if (path.isDirectory() && !path.getName().equals("lib")) {
             File[] files = path.listFiles();
             if (files != null) {
@@ -67,12 +67,12 @@ public class Discoverer<T> {
         return implementations;
     }
 
-    private void instantiateClassFromJar(File jarFile, JarEntry entry, Class<?> targetInterface, Set<Object> implementations) {
+    private void instantiateClassFromJar(File jarFile, JarEntry entry, Class<?> targetInterface, Set<T> implementations) {
         try {
             if (entry.getName().endsWith(".class") && !entry.getName().contains("module-info") && !entry.getName().contains("META-INF")) {
                 Class<?> cls = loadClassFromJar(jarFile, entry.getName());
                 if (cls != null && targetInterface.isAssignableFrom(cls) && !cls.isInterface()) {
-                    implementations.add(cls.getDeclaredConstructor().newInstance());
+                    implementations.add((T) cls.getDeclaredConstructor().newInstance());
                 }
             }
         } catch (InstantiationException | NoSuchMethodException | InvocationTargetException
@@ -90,5 +90,15 @@ public class Discoverer<T> {
             System.err.println("?error loading class from jar: " + e.getMessage());
             return null;
         }
+    }
+    
+    // Refleja el tipo genérico para resolver el tipo de T
+    public Class<?> getGenericType() {
+        Type superclass = getClass().getGenericSuperclass();
+        if (superclass instanceof ParameterizedType) {
+            Type[] typeArguments = ((ParameterizedType) superclass).getActualTypeArguments();
+            return (Class<?>) typeArguments[0];
+        }
+        throw new RuntimeException("Cannot resolve generic type");
     }
 }
