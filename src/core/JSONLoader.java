@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,10 +21,10 @@ import java.util.Set;
 public class JSONLoader<T> implements DataSetLoader {
 
     @Override
-    public Set<T> loadSet(Class classObject) {
+    public Set<T> loadSet() {
         Gson gson = new Gson();
-        String fileName = CoreSettings.RESOURCES + classObject.getSimpleName() + ".json";
-        Type dataSetType = TypeToken.getParameterized(Set.class, classObject).getType();
+        String fileName = CoreSettings.RESOURCES + getGenericType().getSimpleName() + ".json";
+        Type dataSetType = TypeToken.getParameterized(Set.class, getGenericType()).getType();
 
         FileReader fileReader = null;
         try {
@@ -35,6 +36,16 @@ public class JSONLoader<T> implements DataSetLoader {
         }
 
         return gson.fromJson(new JsonReader(fileReader), dataSetType);
+    }
+    
+    // FIXME: codigo repetido en PluginFactory
+    private Class<?> getGenericType() {
+        Type superclass = getClass().getGenericSuperclass();
+        if (superclass instanceof ParameterizedType) {
+            Type[] typeArguments = ((ParameterizedType) superclass).getActualTypeArguments();
+            return (Class<?>) typeArguments[0];
+        }
+        throw new RuntimeException("Cannot resolve generic type");
     }
 
 }
