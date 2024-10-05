@@ -2,7 +2,6 @@ package core;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 // Responsabilidad: notificar cambios en asignaciones, miembros y tareas
 // (pensar si se puede escribir mejor) (este es el modelo)

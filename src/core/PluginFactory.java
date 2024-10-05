@@ -18,6 +18,16 @@ import java.util.Properties;
 
 // Responsabilidad: obtener una implementación de una "Separated Interface"
 // en runtime.
+
+// NOTA IMPORTANTE: esto me parece que no tiene que ser de tipo T. 
+// getPlugin tiene sentido que reciba un object, ya que le estamos 
+// diciendo qué object recibir.
+
+// si esto es de tipo T, es rarísimo, porque esto devuelve un DataSetLoader,
+// también de tipo T.
+
+// hay que ver si hay alguna justificación que convenza que esto NO es de tipo
+// T, y agarrarnos a eso o pensar cómo hacer que ande.
 public class PluginFactory<T> {
 
     private Properties properties;
