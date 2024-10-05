@@ -3,7 +3,9 @@ package core;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-// Responsabilidad: inicializar el Core.
+// Responsabilidad: notificar cambios en asignaciones, miembros y tareas
+// (pensar si se puede escribir mejor) (este es el modelo)
+
 public class TASkOcupado implements core.Observable {
     private Set<Observer> observers;
     private Set<Task> tasks;
