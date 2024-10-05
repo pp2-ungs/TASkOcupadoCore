@@ -33,7 +33,7 @@ public class TASkOcupadoFactory {
          
         // es un poco sucio...
         DataSetLoader<Task> tasksLoader = (DataSetLoader<Task>) pluginFactory.getPlugin(DataSetLoader.class);
-        return tasksLoader.loadSet();
+        return tasksLoader.loadSet(Task.class);
     }
     
     public Set<Member> getMembers() {
@@ -41,7 +41,7 @@ public class TASkOcupadoFactory {
          
         // es un poco sucio...
         DataSetLoader<Member> membersLoader = (DataSetLoader<Member>) pluginFactory.getPlugin(DataSetLoader.class);
-        return membersLoader.loadSet();
+        return membersLoader.loadSet(Member.class);
     }
     
 }
