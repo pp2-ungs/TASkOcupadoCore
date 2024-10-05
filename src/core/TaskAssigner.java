@@ -25,6 +25,7 @@ public class TaskAssigner implements Observable {
 
         //\begin{FIXME}
         var msg = new HashMap<String, String>();
+        msg.put("Email", "ebertz.xime@gmail.com");
         msg.put("Task", task.getDescription());
         msg.put("Name", member.getName());
         msg.put("Time", timestamp);

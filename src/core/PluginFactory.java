@@ -43,7 +43,7 @@ public class PluginFactory {
             throw new RuntimeException("?implementation not found: " + type);
         }
         try {
-            return Class.forName(type).getDeclaredConstructor().newInstance();
+            return Class.forName(className).getDeclaredConstructor().newInstance();
         } catch (Exception ex) {
             throw new RuntimeException("?factory unable to construct instance of " + type);
         }
