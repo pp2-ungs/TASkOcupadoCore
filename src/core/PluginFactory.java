@@ -2,6 +2,8 @@ package core;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.Properties;
 
 // ???
@@ -16,7 +18,7 @@ import java.util.Properties;
 
 // Responsabilidad: obtener una implementación de una "Separated Interface"
 // en runtime.
-public class PluginFactory {
+public class PluginFactory<T> {
 
     private Properties properties;
 
@@ -29,16 +31,27 @@ public class PluginFactory {
         }
     }
 
-    public Object getPlugin(Class classObject) {
-        String className = properties.getProperty(classObject.getName());
+    public T getPlugin() {
+        String className = properties.getProperty(getGenericType().getName());
         if (className == null) {
-            throw new RuntimeException("?implementation not found: " + classObject.getName());
+            throw new RuntimeException("?implementation not found: " + getGenericType().getName());
         }
         try {
-            return Class.forName(className).getDeclaredConstructor().newInstance();
+            return (T) Class.forName(getGenericType().getName()).getDeclaredConstructor().newInstance();
         } catch (Exception ex) {
-            throw new RuntimeException("?factory unable to construct instance of " + classObject.getName());
+            throw new RuntimeException("?factory unable to construct instance of " + getGenericType().getName());
         }
+    }
+    
+    
+    // revisar: añadido a lo bruto para obtener el tipo de T
+    private Class<?> getGenericType() {
+        Type superclass = getClass().getGenericSuperclass();
+        if (superclass instanceof ParameterizedType) {
+            Type[] typeArguments = ((ParameterizedType) superclass).getActualTypeArguments();
+            return (Class<?>) typeArguments[0];
+        }
+        throw new RuntimeException("Cannot resolve generic type");
     }
 
 }

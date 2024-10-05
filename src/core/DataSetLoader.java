@@ -6,6 +6,6 @@ import java.util.Set;
 // Responsabilidad: cargar data sets.
 public interface DataSetLoader<T> {
 
-    public Set<T> loadSet(Class classObject);
+    public Set<T> loadSet();
 
 }
