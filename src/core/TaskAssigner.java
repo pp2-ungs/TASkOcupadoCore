@@ -17,6 +17,8 @@ public class TaskAssigner implements Observable {
     }
 
     public void assignTask(Task task, Member member) {
+        // TODO: checkeos y excepciones
+        taskAssignment.get(task).add(member);
         
         var timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm'hs'"));
         //var notification = "(" + timestamp + ")  Task: [" + task.getDescription() + "]  →  Member: [" + member.getName() + "]\n";
@@ -26,8 +28,6 @@ public class TaskAssigner implements Observable {
         msg.put("Task", task.getDescription());
         msg.put("Name", member.getName());
         msg.put("Time", timestamp);
-        msg.put("Email", member.getEmail());
-        msg.put("TelegramId", Integer.toString(member.getTelegramId()));
         //\end{FIXME}
 
         notifyObservers(msg);
