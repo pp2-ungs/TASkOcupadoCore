@@ -16,8 +16,8 @@ public class TASkOcupado implements core.Observable {
         
     }
     
-    public boolean assignTask(Task task, Member member) {
-        return true;
+    public void assignTask(Task task, Member member) {
+        taskAssigner.assignTask(task, member);
     }
     
     public Set<Task> getTasks() {
@@ -28,19 +28,20 @@ public class TASkOcupado implements core.Observable {
         return members;
     }
     
+    // FIXME: codigo repetido...
     @Override
     public void addObserver(Observer observer) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        observers.add(observer);
     }
 
     @Override
     public void removeObserver(Observer observer) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        observers.remove(observer);
     }
 
     @Override
     public void notifyObservers(Object event) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        observers.forEach(observer -> observer.update(event));
     }
     
     
