@@ -32,13 +32,8 @@ public class PluginFactory {
 
     private Properties properties;
 
-    public PluginFactory(String configFileName) {
-        properties = new Properties();
-        try {
-            properties.load(new FileInputStream(configFileName));
-        } catch (IOException e) {
-            System.out.println("?plugin not working: I/O error");
-        }
+    public PluginFactory(Properties properties) {
+        this.properties = properties;
     }
 
    public Object getPlugin(Class classObject) {

@@ -8,16 +8,20 @@ import java.util.Set;
 public class TASkOcupadoFactory {
     private Properties properties;
     
-    // ojo esto, ver qué recibe
+    
     public TASkOcupadoFactory(String propertiesPath) {
         properties = new Properties();
+        
+        String path = (propertiesPath == null || propertiesPath.isEmpty()) ? CoreSettings.PROPERTIES_FILE : propertiesPath;
+        
         try {
-            properties.load(new FileInputStream(propertiesPath));
+            properties.load(new FileInputStream(path));
         } catch (IOException e) {
-            System.out.println("?TASkOcupadoFactory not working: I/O error");
+            System.out.println("?plugin not working: I/O error");
         }
     }
     
+    // el properties no es usado acá...
     public Set<Observer> getObservers() {
        Discoverer<Observer> discoverer = new Discoverer(CoreSettings.EXTENSIONS);
        return discoverer.discover();
@@ -25,7 +29,7 @@ public class TASkOcupadoFactory {
     
     // FIXME: codigo repetido
     public Set<Task> getTasks() {
-        PluginFactory pluginFactory = new PluginFactory(CoreSettings.PROPERTIES_FILE);
+        PluginFactory pluginFactory = new PluginFactory(properties);
          
         // es un poco sucio...
         DataSetLoader<Task> tasksLoader = (DataSetLoader<Task>) pluginFactory.getPlugin(DataSetLoader.class);
@@ -33,7 +37,7 @@ public class TASkOcupadoFactory {
     }
     
     public Set<Member> getMembers() {
-        PluginFactory pluginFactory = new PluginFactory(CoreSettings.PROPERTIES_FILE);
+        PluginFactory pluginFactory = new PluginFactory(properties);
          
         // es un poco sucio...
         DataSetLoader<Member> membersLoader = (DataSetLoader<Member>) pluginFactory.getPlugin(DataSetLoader.class);
