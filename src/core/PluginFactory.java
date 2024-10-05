@@ -28,7 +28,7 @@ import java.util.Properties;
 
 // hay que ver si hay alguna justificación que convenza que esto NO es de tipo
 // T, y agarrarnos a eso o pensar cómo hacer que ande.
-public class PluginFactory<T> {
+public class PluginFactory {
 
     private Properties properties;
 
@@ -41,27 +41,16 @@ public class PluginFactory<T> {
         }
     }
 
-    public T getPlugin() {
-        String className = properties.getProperty(getGenericType().getName());
+   public Object getPlugin(Class classObject) {
+        String type = classObject.getName();
+        String className = properties.getProperty(type);
         if (className == null) {
-            throw new RuntimeException("?implementation not found: " + getGenericType().getName());
+            throw new RuntimeException("?implementation not found: " + type);
         }
         try {
-            return (T) Class.forName(getGenericType().getName()).getDeclaredConstructor().newInstance();
+            return Class.forName(type).getDeclaredConstructor().newInstance();
         } catch (Exception ex) {
-            throw new RuntimeException("?factory unable to construct instance of " + getGenericType().getName());
+            throw new RuntimeException("?factory unable to construct instance of " + type);
         }
     }
-    
-    
-    // revisar: añadido a lo bruto para obtener el tipo de T
-    private Class<?> getGenericType() {
-        Type superclass = getClass().getGenericSuperclass();
-        if (superclass instanceof ParameterizedType) {
-            Type[] typeArguments = ((ParameterizedType) superclass).getActualTypeArguments();
-            return (Class<?>) typeArguments[0];
-        }
-        throw new RuntimeException("Cannot resolve generic type");
-    }
-
 }
