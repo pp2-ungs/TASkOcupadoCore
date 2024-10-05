@@ -6,13 +6,9 @@ import java.util.Objects;
 public class Member {
 
     private String name;
-    private String email;
-    private int telegramId;
 
-    public Member(String name, String email, int telegramId) {
+    public Member(String name) {
         this.name = name;
-        this.email = email;
-        this.telegramId = telegramId;
     }
 
     @Override
@@ -30,14 +26,6 @@ public class Member {
 
     public String getName() {
         return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public int getTelegramId() {
-        return telegramId;
     }
 
     @Override

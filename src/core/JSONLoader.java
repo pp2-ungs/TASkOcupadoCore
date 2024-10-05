@@ -30,6 +30,8 @@ public class JSONLoader<T> implements DataSetLoader {
         try {
             fileReader = new FileReader(fileName);
         } catch (FileNotFoundException e) {
+            // FIXME: prints?
+            
             System.out.println("?" + fileName + " not found");
             System.out.println("?using empty set");
             return new HashSet<>();
