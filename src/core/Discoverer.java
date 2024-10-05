@@ -27,9 +27,9 @@ public class Discoverer<T> {
     }
     
 
-    public Set<T> discover(String path) {
+    public Set<T> discover() {
         Set<T> implementations = new HashSet<>();
-        //findClassesInPath(directory, T, implementations);
+        findClassesInPath(directory, T, implementations);
         return implementations;
     }
 
