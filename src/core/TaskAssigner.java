@@ -25,8 +25,9 @@ public class TaskAssigner implements Observable {
         var msg = new HashMap<String, String>();
         msg.put("Task", task.getDescription());
         msg.put("Name", member.getName());
-        msg.put("Email", member.getEmail());
         msg.put("Time", timestamp);
+        msg.put("Email", member.getEmail());
+        msg.put("TelegramId", Integer.toString(member.getTelegramId()));
         //\end{FIXME}
 
         notifyObservers(msg);
