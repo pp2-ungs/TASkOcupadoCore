@@ -2,7 +2,6 @@ package core;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 
@@ -24,18 +23,21 @@ public class TASkOcupadoFactory {
        return discoverer.discover();
     }
     
-    
+    // FIXME: codigo repetido
     public Set<Task> getTasks() {
-         PluginFactory<DataSetLoader> puginFactory = new PluginFactory(CoreSettings.PROPERTIES_FILE);
+        PluginFactory pluginFactory = new PluginFactory(CoreSettings.PROPERTIES_FILE);
          
-         // FIXME: esto está claro que así no es
-         //return pluginFactory.getPlugin().loadSet();
-         return new HashSet<Task>();
-        
+        // es un poco sucio...
+        DataSetLoader<Task> tasksLoader = (DataSetLoader<Task>) pluginFactory.getPlugin(DataSetLoader.class);
+        return tasksLoader.loadSet();
     }
     
     public Set<Member> getMembers() {
-        return new HashSet<Member>();
+        PluginFactory pluginFactory = new PluginFactory(CoreSettings.PROPERTIES_FILE);
+         
+        // es un poco sucio...
+        DataSetLoader<Member> membersLoader = (DataSetLoader<Member>) pluginFactory.getPlugin(DataSetLoader.class);
+        return membersLoader.loadSet();
     }
     
 }
