@@ -14,29 +14,32 @@ import java.util.jar.JarFile;
 
 // FIXME
 // X: aca no hay que hacer nada, no?
-public class Discoverer {
-
-    public static Set<Object> discover(String path, Class<?> targetInterface) {
-        File directory = new File(path);
+public class Discoverer<T> {
+    File directory;
+    
+    public Discoverer(String path) {
+        directory = new File(path);
         
         if (!directory.exists() || !directory.isDirectory()) {
-            System.out.print("Viva Perón");
             //throw new FileNotFoundException("?invalid directory: " + path);
             throw new RuntimeException("?invalid directory: " + path);
         }
+    }
+    
 
-        Set<Object> implementations = new HashSet<>();
-        findClassesInPath(directory, targetInterface, implementations);
+    public Set<T> discover(String path) {
+        Set<T> implementations = new HashSet<>();
+        //findClassesInPath(directory, T, implementations);
         return implementations;
     }
 
-    private static void findClassesInPath(File path, Class<?> targetInterface, Set<Object> implementations) {
+    // FIXME: otra vez, obtener el tipo de T...
+    private void findClassesInPath(File path, Class<?> targetInterface, Set<Object> implementations) {
         if (path.isDirectory() && !path.getName().equals("lib")) {
             File[] files = path.listFiles();
             if (files != null) {
                 
                 for (File file : files) {
-                    System.out.println(file);
                     findClassesInPath(file, targetInterface, implementations);
                 }
             }
@@ -45,8 +48,8 @@ public class Discoverer {
         }
     }
 
-    private static Set<Object> findImplementationsInJar(File jarFile, Class<?> targetInterface) {
-        Set<Object> implementations = new HashSet<>();
+    private Set<T> findImplementationsInJar(File jarFile, Class<?> targetInterface) {
+        Set<T> implementations = new HashSet<>();
 
         try (JarFile jar = new JarFile(jarFile)) {
             Enumeration<JarEntry> entries = jar.entries();
@@ -64,7 +67,7 @@ public class Discoverer {
         return implementations;
     }
 
-    private static void instantiateClassFromJar(File jarFile, JarEntry entry, Class<?> targetInterface, Set<Object> implementations) {
+    private void instantiateClassFromJar(File jarFile, JarEntry entry, Class<?> targetInterface, Set<Object> implementations) {
         try {
             if (entry.getName().endsWith(".class") && !entry.getName().contains("module-info") && !entry.getName().contains("META-INF")) {
                 Class<?> cls = loadClassFromJar(jarFile, entry.getName());
@@ -78,7 +81,7 @@ public class Discoverer {
         }
     }
 
-    private static Class<?> loadClassFromJar(File jarFile, String className) {
+    private Class<?> loadClassFromJar(File jarFile, String className) {
         try {
             URLClassLoader classLoader = URLClassLoader.newInstance(new URL[]{jarFile.toURI().toURL()});
             String canonicalClassName = className.replace("/", ".").replace(".class", "");
