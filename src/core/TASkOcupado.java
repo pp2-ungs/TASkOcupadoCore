@@ -4,38 +4,44 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 // Responsabilidad: inicializar el Core.
-public class TASkOcupado {
-
-    public TaskAssignerAdapter init() {
-
-        /** UNA CLASE
-        // \begin{Load observers}
-        Set<Object> objects = Discoverer.discover(CoreSettings.EXTENSIONS, Observer.class);
-        Set<Observer> observers = objects.stream()
-            .map(obj -> (Observer) obj)
-            .collect(Collectors.toSet());
-        // \end{Load observers}
-
-        // \begin{Create model}
-        TaskAssigner taskAssigner = new TaskAssigner(observers);
-        // \end{Create model}
-
-        */
-
-        /* OTRA CLASE
-        // \begin{Elegir implementación de los datos a cargar}
-        PluginFactory plugin = new PluginFactory(CoreSettings.PROPERTIES_FILE);
-        DataSetLoader loader = (DataSetLoader) plugin.getPlugin(DataSetLoader.class);
-        // \end{Elegir implementación de los datos a cargar}
-
-        // \begin{Cargar datos}
-        CoreData coreData = new CoreData(loader);
-        // var tasks = loader.loadSet(Task.class);
-        // var members = loader.loadSet(Member.class);
-        // \end{Cargar datos}
-        */
+public class TASkOcupado implements core.Observable {
+    private Set<Observer> observers;
+    private Set<Task> tasks;
+    private Set<Member> members;
+    private TaskAssigner taskAssigner;
+    
+    public TASkOcupado(String propertiesPath) {
         
-        return new TaskAssignerAdapter(taskAssigner, coreData);
+    }
+    
+    public boolean assignTask(Task task, Member member) {
+        return true;
+    }
+    
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+    
+    public Set<Member> getMembers() {
+        return members;
+    }
+    
+    @Override
+    public void addObserver(Observer observer) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    @Override
+    public void removeObserver(Observer observer) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void notifyObservers(Object event) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    
+    
+    
 }
