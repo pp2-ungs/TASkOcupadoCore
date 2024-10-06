@@ -3,7 +3,7 @@ package core;
 import java.io.File;
 
 // DONE
-public class CoreSettings {
+public class Settings {
 
     public static final String HOME = System.getProperty("user.home");
     public static final String SLASH = File.separator;

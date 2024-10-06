@@ -22,7 +22,7 @@ public class JSONLoader<T> implements ContentLoader {
     @Override
     public Set<T> loadSet(Class classObject) {
         Gson gson = new Gson();
-        String fileName = CoreSettings.RESOURCES + classObject.getSimpleName() + ".json";
+        String fileName = Settings.RESOURCES + classObject.getSimpleName() + ".json";
         Type dataSetType = TypeToken.getParameterized(Set.class, classObject).getType();
 
         FileReader fileReader = null;

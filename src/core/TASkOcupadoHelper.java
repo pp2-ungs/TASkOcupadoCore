@@ -17,7 +17,7 @@ public class TASkOcupadoHelper {
     public TASkOcupadoHelper(String path) {
         this.properties = new Properties();
 
-        path = path == null || path.isEmpty() ? CoreSettings.PROPERTIES_FILE : path;
+        path = path == null || path.isEmpty() ? Settings.PROPERTIES_FILE : path;
 
         try {
             properties.load(new FileInputStream(path));
@@ -27,7 +27,7 @@ public class TASkOcupadoHelper {
     }
 
     public Set<Observer> getObservers() {
-        Discoverer discoverer = new Discoverer(CoreSettings.EXTENSIONS);
+        Discoverer discoverer = new Discoverer(Settings.EXTENSIONS);
         Set<Observer> observers = discoverer.discover(Observer.class);
         return observers;
     }

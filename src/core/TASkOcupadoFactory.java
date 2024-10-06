@@ -15,7 +15,7 @@ public class TASkOcupadoFactory {
     public TASkOcupadoFactory(String propertiesPath) {
         properties = new Properties();
         
-        String path = (propertiesPath == null || propertiesPath.isEmpty()) ? CoreSettings.PROPERTIES_FILE : propertiesPath;
+        String path = (propertiesPath == null || propertiesPath.isEmpty()) ? Settings.PROPERTIES_FILE : propertiesPath;
         
         try {
             properties.load(new FileInputStream(path));
@@ -26,7 +26,7 @@ public class TASkOcupadoFactory {
     
     // el properties no es usado acá...
     public Set<Observer> getObservers() {
-       Discoverer<Observer> discoverer = new Discoverer(CoreSettings.EXTENSIONS);
+       Discoverer<Observer> discoverer = new Discoverer(Settings.EXTENSIONS);
        
        return discoverer.discover(Observer.class);
     }
