@@ -28,11 +28,7 @@ public class TASkOcupadoHelper {
 
     public Set<Observer> getObservers() {
         Discoverer discoverer = new Discoverer(CoreSettings.EXTENSIONS);
-
-        Set<Object> objects = discoverer.discover(Observer.class);
-        Set<Observer> observers = objects.stream()
-            .map(obj -> (Observer) obj)
-            .collect(Collectors.toSet());
+        Set<Observer> observers = discoverer.discover(Observer.class);
         return observers;
     }
 
