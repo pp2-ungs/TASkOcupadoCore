@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Set;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 import java.util.Map;
 
 // Responsabilidad: asignar las tareas.
@@ -16,10 +17,14 @@ public class TaskAssigner implements Observable {
 
     public TaskAssigner(Set<Observer> observers) {
         this.observers = observers;
+        taskAssignment = new HashMap<>();
     }
 
     public void assignTask(Task task, Member member) {
-        // TODO: checkeos y excepciones
+        if (taskAssignment.get(task) == null) {
+            taskAssignment.put(task, new HashSet<>());
+        }
+        
         taskAssignment.get(task).add(member);
         
         var timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm'hs'"));
