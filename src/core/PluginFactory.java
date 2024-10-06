@@ -36,7 +36,8 @@ public class PluginFactory {
         this.properties = properties;
     }
 
-   public Object getPlugin(Class classObject) {
+    // queda así
+    public Object getPlugin(Class classObject) {
         String type = classObject.getName();
         String className = properties.getProperty(type);
         if (className == null) {

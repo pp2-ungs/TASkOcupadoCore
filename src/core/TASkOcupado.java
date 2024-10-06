@@ -24,7 +24,6 @@ public class TASkOcupado implements core.Observable, core.Observer {
         taskAssigner = new TaskAssigner(taskAssignerObservers);
         
         taskAssigner.addObserver(this);
-        
     }
     
     public void assignTask(Task task, Member member) {

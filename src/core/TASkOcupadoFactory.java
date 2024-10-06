@@ -24,7 +24,8 @@ public class TASkOcupadoFactory {
     // el properties no es usado acá...
     public Set<Observer> getObservers() {
        Discoverer<Observer> discoverer = new Discoverer(CoreSettings.EXTENSIONS);
-       return discoverer.discover();
+       
+       return discoverer.discover(Observer.class);
     }
     
     // FIXME: codigo repetido
