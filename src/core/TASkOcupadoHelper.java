@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.Set;
 import java.util.stream.Collectors;
+import observer.Observer;
+import tools.Discoverer;
+import tools.PluginFactory;
 
 // Responsabilidad: inicializar el Core.
 public class TASkOcupadoHelper {
@@ -24,7 +27,7 @@ public class TASkOcupadoHelper {
     }
 
     public Set<Observer> getObservers() {
-        Discoverer discoverer = new Discoverer(properties);
+        Discoverer discoverer = new Discoverer(CoreSettings.EXTENSIONS);
 
         Set<Object> objects = discoverer.discover(Observer.class);
         Set<Observer> observers = objects.stream()
