@@ -4,7 +4,7 @@ import java.util.Set;
 
 // DONE
 // Responsabilidad: cargar data sets.
-public interface DataSetLoader<T> {
+public interface ContentLoader<T> {
 
     public Set<T> loadSet(Class<T> classObject);
 

@@ -32,9 +32,9 @@ public class TASkOcupadoHelper {
         return observers;
     }
 
-    private DataSetLoader getLoader() {
+    private ContentLoader getLoader() {
         PluginFactory plugin = new PluginFactory(properties);
-        DataSetLoader loader = (DataSetLoader) plugin.getPlugin(DataSetLoader.class);
+        ContentLoader loader = (ContentLoader) plugin.getPlugin(ContentLoader.class);
         return loader;
     }
 

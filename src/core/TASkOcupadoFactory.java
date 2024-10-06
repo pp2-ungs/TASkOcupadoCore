@@ -36,7 +36,7 @@ public class TASkOcupadoFactory {
         PluginFactory pluginFactory = new PluginFactory(properties);
          
         // es un poco sucio...
-        DataSetLoader<Task> tasksLoader = (DataSetLoader<Task>) pluginFactory.getPlugin(DataSetLoader.class);
+        ContentLoader<Task> tasksLoader = (ContentLoader<Task>) pluginFactory.getPlugin(ContentLoader.class);
         return tasksLoader.loadSet(Task.class);
     }
     
@@ -44,7 +44,7 @@ public class TASkOcupadoFactory {
         PluginFactory pluginFactory = new PluginFactory(properties);
          
         // es un poco sucio...
-        DataSetLoader<Member> membersLoader = (DataSetLoader<Member>) pluginFactory.getPlugin(DataSetLoader.class);
+        ContentLoader<Member> membersLoader = (ContentLoader<Member>) pluginFactory.getPlugin(ContentLoader.class);
         return membersLoader.loadSet(Member.class);
     }
     

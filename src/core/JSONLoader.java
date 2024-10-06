@@ -3,8 +3,6 @@ package core;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import core.CoreSettings;
-import core.DataSetLoader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
@@ -19,7 +17,7 @@ import java.util.Set;
 // testing únicamente.
 // X: esta clase se supone que tiene que ir en Resources como un .class
 // por ahí no hace falta que hardcodee el path de RESOURCES
-public class JSONLoader<T> implements DataSetLoader {
+public class JSONLoader<T> implements ContentLoader {
 
     @Override
     public Set<T> loadSet(Class classObject) {
