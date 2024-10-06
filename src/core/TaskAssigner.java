@@ -27,13 +27,18 @@ public class TaskAssigner implements Observable {
         assignedTasks.get(task).add(member);
         
         var timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm'hs'"));
-        var time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm'hs'"));
+        //var time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm'hs'"));
         //var notification = "(" + timestamp + ")  Task: [" + task.getDescription() + "]  →  Member: [" + member.getName() + "]\n";
 
         //\begin{FIXME}
         var msg = new HashMap<String, String>();
-        msg.put("Email", "ebertz.xime@gmail.com");
         msg.put("Task", task.getDescription());
+        
+        // \begin{ESTO NO VA}
+        msg.put("Email", "PUT YOUR EMAIL HERE TO TEST");
+        msg.put("TelegramId", "PUT YOUR TELEGRAM UID HERE TO TEST");
+        // \end{ESTO NO VA}
+        
         msg.put("Name", member.getName());
         msg.put("Time", timestamp);
         //\end{FIXME}
