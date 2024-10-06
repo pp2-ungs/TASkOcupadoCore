@@ -33,12 +33,6 @@ public class TaskAssigner implements Observable {
         //\begin{FIXME}
         var msg = new HashMap<String, String>();
         msg.put("Task", task.getDescription());
-        
-        // \begin{ESTO NO VA}
-        msg.put("Email", "PUT YOUR EMAIL HERE TO TEST");
-        msg.put("TelegramId", "PUT YOUR TELEGRAM UID HERE TO TEST");
-        // \end{ESTO NO VA}
-       
         msg.put("Name", member.getName());
         msg.put("Time", timestamp);
         //\end{FIXME}
@@ -61,7 +55,7 @@ public class TaskAssigner implements Observable {
         observers.forEach(observer -> observer.update(event));
     }
 
-	// Para la UI, quizás no está muy bien.
+    // Para la UI, quizás no está muy bien.
     public Set<Observer> getNotificationMethods() {
         return observers;
     }

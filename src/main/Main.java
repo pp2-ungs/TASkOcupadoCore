@@ -3,8 +3,6 @@ package main;
 import core.Member;
 import core.TASkOcupado;
 import core.Task;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 public class Main {
@@ -18,7 +16,7 @@ public class Main {
         System.out.println(members);
         
         Task task = new Task("Ir al gym");
-        Member member = new Member("Ximena Ebertz");
+        Member member = new Member("Gonzalo Javier López");
      
         taskOcupado.assignTask(task, member);
     }
