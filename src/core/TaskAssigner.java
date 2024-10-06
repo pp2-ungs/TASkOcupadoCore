@@ -1,5 +1,7 @@
 package core;
 
+import observer.Observer;
+import observer.Observable;
 import java.util.HashMap;
 import java.util.Set;
 import java.time.LocalDateTime;

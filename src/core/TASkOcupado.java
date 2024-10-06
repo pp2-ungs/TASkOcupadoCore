@@ -1,12 +1,13 @@
 package core;
 
+import observer.Observer;
 import java.util.HashSet;
 import java.util.Set;
 
 // Responsabilidad: notificar cambios en asignaciones, miembros y tareas
 // (pensar si se puede escribir mejor) (este es el modelo)
 
-public class TASkOcupado implements core.Observable, core.Observer {
+public class TASkOcupado implements observer.Observable, observer.Observer {
     private Set<Observer> observers;
     private Set<Task> tasks;
     private Set<Member> members;
