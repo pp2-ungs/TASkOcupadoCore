@@ -12,22 +12,22 @@ import java.util.Map;
 // Responsabilidad: asignar las tareas.
 public class TaskAssigner implements Observable {
 
-    private Map<Task, Set<Member>> taskAssignment;
+    private Map<Task, Set<Member>> assignedTasks;
     private Set<Observer> observers;
 
     public TaskAssigner(Set<Observer> observers) {
+        this.assignedTasks = new HashMap<>();
         this.observers = observers;
-        taskAssignment = new HashMap<>();
     }
 
     public void assignTask(Task task, Member member) {
-        if (taskAssignment.get(task) == null) {
-            taskAssignment.put(task, new HashSet<>());
+        if (assignedTasks.get(task) == null) {
+            assignedTasks.put(task, new HashSet<>());
         }
-        
-        taskAssignment.get(task).add(member);
+        assignedTasks.get(task).add(member);
         
         var timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm'hs'"));
+        var time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm'hs'"));
         //var notification = "(" + timestamp + ")  Task: [" + task.getDescription() + "]  →  Member: [" + member.getName() + "]\n";
 
         //\begin{FIXME}
@@ -54,6 +54,11 @@ public class TaskAssigner implements Observable {
     @Override
     public void notifyObservers(Object event) {
         observers.forEach(observer -> observer.update(event));
+    }
+
+	// Para la UI, quizás no está muy bien.
+    public Set<Observer> getNotificationMethods() {
+        return observers;
     }
 
 }
