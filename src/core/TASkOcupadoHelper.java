@@ -22,7 +22,7 @@ public class TASkOcupadoHelper {
         try {
             properties.load(new FileInputStream(path));
         } catch (IOException e) {
-            System.out.println("?properties I/O error: " + path);
+            System.err.println("?properties I/O error: " + path);
         }
     }
 
@@ -32,18 +32,18 @@ public class TASkOcupadoHelper {
         return observers;
     }
 
-    private ContentLoader getLoader() {
+    private ContentLoader getLoader(Class<?> objective) {
         PluginFactory plugin = new PluginFactory(properties);
-        ContentLoader loader = (ContentLoader) plugin.getPlugin(ContentLoader.class);
+        ContentLoader<?> loader = (ContentLoader) plugin.getPlugin(ContentLoader.class);
         return loader;
     }
 
     public Set<Task> getTasks() {
-        return getLoader().loadSet(Task.class);
+        return getLoader(Task.class).loadSet(Task.class);
     }
 
     public Set<Member> getMembers() {
-        return getLoader().loadSet(Member.class);
+        return getLoader(Member.class).loadSet(Member.class);
     }
 
 }

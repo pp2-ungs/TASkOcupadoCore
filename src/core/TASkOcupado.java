@@ -14,14 +14,14 @@ public class TASkOcupado implements observer.Observable, observer.Observer {
     private TaskAssigner taskAssigner;
     
     public TASkOcupado(String propertiesPath) {
-        TASkOcupadoFactory factory = new TASkOcupadoFactory(propertiesPath);
+        TASkOcupadoHelper helper = new TASkOcupadoHelper(propertiesPath);
              
-        tasks = factory.getTasks();
-        members = factory.getMembers();
+        tasks = helper.getTasks();
+        members = helper.getMembers();
         
         observers = new HashSet<>();
         
-        Set<Observer> taskAssignerObservers = factory.getObservers();
+        Set<Observer> taskAssignerObservers = helper.getObservers();
         taskAssigner = new TaskAssigner(taskAssignerObservers);
         
         taskAssigner.addObserver(this);
@@ -59,8 +59,4 @@ public class TASkOcupado implements observer.Observable, observer.Observer {
     public void update(Object event) {
         notifyObservers(event);
     }
-    
-    
-    
-    
 }

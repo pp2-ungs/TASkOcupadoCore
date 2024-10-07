@@ -16,7 +16,7 @@ public class Main {
         System.out.println(members);
         
         Task task = new Task("Ir al gym");
-        Member member = new Member("Gonzalo Javier López");
+        Member member = new Member("Ximena Ebertz");
      
         taskOcupado.assignTask(task, member);
     }
