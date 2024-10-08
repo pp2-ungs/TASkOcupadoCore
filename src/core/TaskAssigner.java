@@ -20,11 +20,18 @@ public class TaskAssigner implements Observable {
     }
 
     public void assignTask(Task task, Member member) {
+        assign(task, member);
+        notifyAssignment(task, member);
+    }
+
+    private void assign(Task task, Member member) {
         if (assignedTasks.get(task) == null) {
             assignedTasks.put(task, new HashSet<>());
         }
         assignedTasks.get(task).add(member);
-        
+    }
+
+    private void notifyAssignment(Task task, Member member) {
         var timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm'hs'"));
 
         var msg = new HashMap<String, String>();
