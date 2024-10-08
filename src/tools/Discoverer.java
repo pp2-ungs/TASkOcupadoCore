@@ -15,7 +15,6 @@ import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-// FIXME
 public class Discoverer<T> {
     File directory;
     
@@ -23,20 +22,16 @@ public class Discoverer<T> {
         directory = new File(path);
         
         if (!directory.exists() || !directory.isDirectory()) {
-            //throw new FileNotFoundException("?invalid directory: " + path);
             throw new RuntimeException("?invalid directory: " + path);
         }
     }
     
-    
-    // 
     public Set<T> discover(Class<T> clazz) {
         Set<T> implementations = new HashSet<>();
         findClassesInPath(directory, clazz, implementations);
         return implementations;
     }
-
-    // FIXME: quedo raro quizás
+    
     private void findClassesInPath(File path, Class<T> targetInterface, Set<T> implementations) {
         if (path.isDirectory() && !path.getName().equals("lib")) {
             File[] files = path.listFiles();
@@ -66,7 +61,6 @@ public class Discoverer<T> {
         } catch (IOException e) {
             System.err.println("?error reading jar file: " + e.getMessage());
         }
-
         return implementations;
     }
 
