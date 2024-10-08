@@ -4,9 +4,6 @@ import observer.Observer;
 import java.util.HashSet;
 import java.util.Set;
 
-// Responsabilidad: notificar cambios en asignaciones, miembros y tareas
-// (pensar si se puede escribir mejor) (este es el modelo)
-
 public class TASkOcupado implements observer.Observable, observer.Observer {
     private Set<Observer> observers;
     private Set<Task> tasks;
@@ -39,7 +36,6 @@ public class TASkOcupado implements observer.Observable, observer.Observer {
         return members;
     }
     
-    // FIXME: codigo repetido...
     @Override
     public void addObserver(Observer observer) {
         observers.add(observer);
