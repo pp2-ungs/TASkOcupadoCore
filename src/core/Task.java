@@ -2,8 +2,6 @@ package core;
 
 import java.util.Objects;
 
-// DONE
-// Clase vacía: las tareas se traen un calendario externo.
 public class Task {
 
     private String description;
