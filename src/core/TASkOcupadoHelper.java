@@ -9,7 +9,6 @@ import observer.Observer;
 import tools.Discoverer;
 import tools.PluginFactory;
 
-// Responsabilidad: inicializar el Core.
 public class TASkOcupadoHelper {
 
     private Properties properties;
