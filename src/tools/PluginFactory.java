@@ -1,9 +1,5 @@
 package tools;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.Properties;
 
 public class PluginFactory<T> {
