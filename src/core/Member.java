@@ -2,7 +2,6 @@ package core;
 
 import java.util.Objects;
 
-// DONE
 public class Member {
 
     private String name;
