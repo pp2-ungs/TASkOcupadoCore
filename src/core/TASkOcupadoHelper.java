@@ -39,8 +39,8 @@ public class TASkOcupadoHelper {
     }
     
     private ContentLoader getLoader() {
-        PluginFactory plugin = new PluginFactory(properties);
-        ContentLoader<?> loader = (ContentLoader) plugin.getPlugin(ContentLoader.class);
+        PluginFactory<ContentLoader> plugin = new PluginFactory<ContentLoader>(properties);
+        ContentLoader<?> loader = plugin.getPlugin(ContentLoader.class);
         return loader;
     }
 }
