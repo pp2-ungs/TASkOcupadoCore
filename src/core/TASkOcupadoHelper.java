@@ -31,18 +31,17 @@ public class TASkOcupadoHelper {
         return observers;
     }
 
-    private ContentLoader getLoader(Class<?> objective) {
+    public Set<Task> getTasks() {
+        return getLoader().loadSet(Task.class);
+    }
+
+    public Set<Member> getMembers() {
+        return getLoader().loadSet(Member.class);
+    }
+    
+    private ContentLoader getLoader() {
         PluginFactory plugin = new PluginFactory(properties);
         ContentLoader<?> loader = (ContentLoader) plugin.getPlugin(ContentLoader.class);
         return loader;
     }
-
-    public Set<Task> getTasks() {
-        return getLoader(Task.class).loadSet(Task.class);
-    }
-
-    public Set<Member> getMembers() {
-        return getLoader(Member.class).loadSet(Member.class);
-    }
-
 }
