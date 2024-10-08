@@ -2,7 +2,6 @@ package core;
 
 import java.io.File;
 
-// DONE
 public class Settings {
 
     public static final String HOME = System.getProperty("user.home");
