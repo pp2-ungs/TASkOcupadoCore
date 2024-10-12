@@ -29,7 +29,7 @@ public class Discoverer<T> {
     }
     
     private void findClassesInPath(File path, Class<T> targetInterface, Set<T> implementations) {
-        if (path.isDirectory() && !path.getName().equals("lib")) {
+        if (path.isDirectory()) {
             File[] files = path.listFiles();
             if (files != null) {
                 
