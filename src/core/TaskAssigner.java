@@ -1,5 +1,6 @@
 package core;
 
+import annotation.Notificator;
 import observer.Observer;
 import observer.Observable;
 import java.util.HashMap;
@@ -40,6 +41,17 @@ public class TaskAssigner implements Observable {
         msg.put("Time", timestamp);
 
         notifyObservers(msg);
+    }
+    
+    public Set<String> getNotificationMethods() {
+        Set<String> notificationMethods = new HashSet<>();
+        for (Observer observer : observers) {
+            if (observer.getClass().isAnnotationPresent(Notificator.class)) {
+                notificationMethods.add(observer.getClass().getSimpleName()); // FIXME?
+            }
+        }
+        System.out.println("Notificators: " + notificationMethods);
+        return notificationMethods;
     }
 
     @Override

@@ -1,10 +1,12 @@
 package core;
 
+import annotation.Notificator;
 import observer.Observer;
 import java.util.HashSet;
 import java.util.Set;
 
 public class TASkOcupado implements observer.Observable, observer.Observer {
+    
     private Set<Observer> observers;
     private Set<Task> tasks;
     private Set<Member> members;
@@ -36,6 +38,10 @@ public class TASkOcupado implements observer.Observable, observer.Observer {
         return members;
     }
     
+    public Set<String> getNotificationMethods() {
+        return taskAssigner.getNotificationMethods();
+    }
+    
     @Override
     public void addObserver(Observer observer) {
         observers.add(observer);
@@ -55,4 +61,5 @@ public class TASkOcupado implements observer.Observable, observer.Observer {
     public void update(Object event) {
         notifyObservers(event);
     }
+    
 }
