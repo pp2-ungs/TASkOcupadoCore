@@ -13,11 +13,12 @@ import java.util.Map;
 public class TaskAssigner implements Observable {
 
     private Map<Task, Set<Member>> assignedTasks;
-    private Set<Observer> observers;
+    private Map<Observer, Boolean> observersActive;
 
     public TaskAssigner(Set<Observer> observers) {
-        this.assignedTasks = new HashMap<>();
-        this.observers = observers;
+        assignedTasks = new HashMap<>();
+        observersActive = new HashMap<>();
+        observers.forEach(obs -> observersActive.put(obs, true));
     }
 
     public void assignTask(Task task, Member member) {
@@ -42,30 +43,44 @@ public class TaskAssigner implements Observable {
 
         notifyObservers(msg);
     }
-    
-    public Set<String> getNotificationMethods() {
-        Set<String> notificationMethods = new HashSet<>();
-        for (Observer observer : observers) {
-            if (observer.getClass().isAnnotationPresent(Notificator.class)) {
-                notificationMethods.add(observer.getClass().getSimpleName()); // FIXME?
+
+    public Set<Observer> getNotificators() {
+        Set<Observer> notificators = new HashSet<>();
+        for (Observer observer : observersActive.keySet()) {
+            boolean isActive = observersActive.get(observer);
+            if (observer.getClass().isAnnotationPresent(Notificator.class) && isActive) {
+                notificators.add(observer);
             }
         }
-        System.out.println("Notificators: " + notificationMethods);
-        return notificationMethods;
+        
+        //Set<Observer> notificators = (Set<Observer>) observersActive.keySet().stream().filter(obs -> obs.getClass().isAnnotationPresent(Notificator.class));
+        System.out.println("Notificators: " + notificators);
+        return notificators;
+    }
+    
+    public void activateObserver(Observer observer) {
+        observersActive.replace(observer, true);
+    }
+    
+    public void deactivateObserver(Observer observer) {
+        observersActive.replace(observer, false);
     }
 
     @Override
     public void addObserver(Observer observer) {
-        observers.add(observer);
+        observersActive.put(observer, true);
     }
 
     @Override
     public void removeObserver(Observer observer) {
-        observers.remove(observer);
+        observersActive.remove(observer);
     }
 
     @Override
     public void notifyObservers(Object event) {
-        observers.forEach(observer -> observer.update(event));
+        for (Observer obs: observersActive.keySet()) {
+            boolean isActive = observersActive.get(obs);
+            if (isActive) obs.update(event);
+        }
     }
 }

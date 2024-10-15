@@ -38,8 +38,8 @@ public class TASkOcupado implements observer.Observable, observer.Observer {
         return members;
     }
     
-    public Set<String> getNotificationMethods() {
-        return taskAssigner.getNotificationMethods();
+    public Set<Observer> getNotificators() {
+        return taskAssigner.getNotificators();
     }
     
     @Override
@@ -60,6 +60,14 @@ public class TASkOcupado implements observer.Observable, observer.Observer {
     @Override
     public void update(Object event) {
         notifyObservers(event);
+    }
+    
+    public void activeTaskAssignerObserver(Observer observer) {
+        taskAssigner.activateObserver(observer);
+    }
+
+    public void deactiveObserverToTaskAssigner(Observer observer) {
+        taskAssigner.deactivateObserver(observer);
     }
     
 }
