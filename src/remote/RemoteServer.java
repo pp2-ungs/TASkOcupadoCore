@@ -6,7 +6,7 @@ import java.rmi.registry.Registry;
 import java.rmi.RemoteException;
 
 public class RemoteServer {
-    public static void startServer(TaskAssigner taskAssigner){ 
+    public void startServer(TaskAssigner taskAssigner){ 
         try { 
             RemoteController c = new RemoteController(taskAssigner); 
             Registry createRegistry = LocateRegistry.createRegistry(5050); 

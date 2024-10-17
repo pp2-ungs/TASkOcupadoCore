@@ -2,14 +2,14 @@ package core;
 
 import annotation.Notificator;
 import java.rmi.RemoteException;
-import observer.Observer;
+import observer.*;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import remote.RemoteServer;
 
-public class TASkOcupado implements observer.Observable, observer.Observer {
+public class TASkOcupado implements Observable, Observer {
     
     private Set<Observer> observers;
     private Set<Task> tasks;
@@ -29,7 +29,7 @@ public class TASkOcupado implements observer.Observable, observer.Observer {
         
         taskAssigner.addObserver(this);
         
-        RemoteServer.startServer(taskAssigner);
+        new RemoteServer().startServer(taskAssigner);
     }
     
     public void assignTask(Task task, Member member) {
