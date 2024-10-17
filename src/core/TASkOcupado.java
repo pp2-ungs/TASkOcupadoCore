@@ -24,6 +24,8 @@ public class TASkOcupado implements observer.Observable, observer.Observer {
         taskAssigner = new TaskAssigner(taskAssignerObservers);
         
         taskAssigner.addObserver(this);
+        
+        // RemoteServerFactory factory = new RemoteServerFactory().init(taskAssigner);
     }
     
     public void assignTask(Task task, Member member) {
