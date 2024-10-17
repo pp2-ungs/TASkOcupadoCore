@@ -1,14 +1,14 @@
-
 package remote;
 
+import core.TaskAssigner;
 import java.rmi.registry.LocateRegistry; 
 import java.rmi.registry.Registry;
 import java.rmi.RemoteException;
 
 public class RemoteServer {
-    public static void startServer(){ 
+    public static void startServer(TaskAssigner taskAssigner){ 
         try { 
-            RemoteController c = new RemoteController(); 
+            RemoteController c = new RemoteController(taskAssigner); 
             Registry createRegistry = LocateRegistry.createRegistry(5050); 
             createRegistry.rebind("server", c); 
             System.out.println("Server started.... "); 
@@ -16,7 +16,4 @@ public class RemoteServer {
             System.err.println("?Remote server failed " + ex.getMessage());
         } 
     } 
-    public static void main(String[] args)  { 
-        startServer(); 
-    }
 }
