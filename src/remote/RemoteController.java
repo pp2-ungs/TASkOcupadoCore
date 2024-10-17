@@ -22,7 +22,7 @@ public class RemoteController extends UnicastRemoteObject implements RemoteTaskC
     
     // deberíamos exponer dos cosas: Observer (o RemoteObserver, pero trae problemas) y RemoteController
     public synchronized void addObserver(RemoteObserver observer) throws RemoteException {
-        taskAssigner.addObserver(observer);
+        taskAssigner.addObserver(observer.getObserver());
     }
     
 }

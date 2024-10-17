@@ -63,7 +63,7 @@ public class TASkOcupado implements Observable, Observer {
         observers.forEach(observer -> {
             try {
                 observer.update(event);
-            } catch (RemoteException ex) {
+            } catch (Exception ex) {
                 Logger.getLogger(TASkOcupado.class.getName()).log(Level.SEVERE, null, ex);
             }
         });

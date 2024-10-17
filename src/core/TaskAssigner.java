@@ -88,7 +88,7 @@ public class TaskAssigner implements Observable {
             boolean isActive = observersActive.get(obs);
             if (isActive) try {
                 obs.update(event);
-            } catch (RemoteException ex) {
+            } catch (Exception ex) {
                 Logger.getLogger(TaskAssigner.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
