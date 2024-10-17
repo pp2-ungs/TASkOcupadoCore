@@ -1,12 +1,8 @@
 package core;
 
-import annotation.Notificator;
-import java.rmi.RemoteException;
 import observer.*;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import remote.RemoteServer;
 
 public class TASkOcupado implements Observable, Observer {
@@ -65,7 +61,8 @@ public class TASkOcupado implements Observable, Observer {
             try {
                 observer.update(event);
             } catch (Exception ex) {
-                Logger.getLogger(TASkOcupado.class.getName()).log(Level.SEVERE, null, ex);
+                // esto para todo lo demás, añadido de miembros, de tareas, bla
+                System.err.println("?notification not delivered to " + observer.getClass().getSimpleName());
             }
         });
     }
@@ -83,5 +80,4 @@ public class TASkOcupado implements Observable, Observer {
     public void deactiveObserverToTaskAssigner(Observer observer) {
         taskAssigner.deactivateObserver(observer);
     }
-    
 }
