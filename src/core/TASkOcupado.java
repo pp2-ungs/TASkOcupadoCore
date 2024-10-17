@@ -29,6 +29,7 @@ public class TASkOcupado implements Observable, Observer {
         
         taskAssigner.addObserver(this);
         
+        // TODO: init, ver que onda
         new RemoteServer().startServer(taskAssigner);
     }
     
@@ -74,6 +75,7 @@ public class TASkOcupado implements Observable, Observer {
         notifyObservers(event);
     }
     
+    // TODO: fixname, abstraction leak
     public void activeTaskAssignerObserver(Observer observer) {
         taskAssigner.activateObserver(observer);
     }

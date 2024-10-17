@@ -13,7 +13,7 @@ public class RemoteServer {
             createRegistry.rebind("server", c); 
             System.out.println("Server started.... "); 
         } catch (RemoteException ex)  {
-            System.err.println("?Remote server failed " + ex.getMessage());
+            System.err.println("?remote server failed " + ex.getMessage());
         } 
     } 
 }

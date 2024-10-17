@@ -5,11 +5,8 @@
 package remote;
 
 import core.TaskAssigner;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
-import observer.Observer;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.HashSet;
 
 public class RemoteController extends UnicastRemoteObject implements RemoteTaskController {
     TaskAssigner taskAssigner;
@@ -23,5 +20,4 @@ public class RemoteController extends UnicastRemoteObject implements RemoteTaskC
     public synchronized void addObserver(RemoteObserver observer) throws RemoteException {
         taskAssigner.addObserver(observer);
     }
-    
 }

@@ -1,7 +1,6 @@
 package core;
 
 import annotation.Notificator;
-import java.rmi.RemoteException;
 import observer.Observer;
 import observer.Observable;
 import java.util.HashMap;
@@ -10,10 +9,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import remote.RemoteObservable;
-import remote.RemoteObserver;
 
 public class TaskAssigner implements Observable {
 
@@ -59,7 +54,7 @@ public class TaskAssigner implements Observable {
         }
         
         //Set<Observer> notificators = (Set<Observer>) observersActive.keySet().stream().filter(obs -> obs.getClass().isAnnotationPresent(Notificator.class));
-        System.out.println("Notificators: " + notificators);
+        System.out.println("Notifiers: " + notificators);
         return notificators;
     }
     
@@ -89,7 +84,7 @@ public class TaskAssigner implements Observable {
             if (isActive) try {
                 obs.update(event);
             } catch (Exception ex) {
-                Logger.getLogger(TaskAssigner.class.getName()).log(Level.SEVERE, null, ex);
+                System.err.println("?notification not delivered to " + obs.getClass().getSimpleName());
             }
         }
     }

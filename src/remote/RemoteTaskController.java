@@ -2,8 +2,8 @@ package remote;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import observer.Observer;
 
+// TODO: rename
 public interface RemoteTaskController extends Remote {
     void addObserver(RemoteObserver observer) throws RemoteException;
 }
