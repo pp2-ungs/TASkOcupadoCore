@@ -1,6 +1,7 @@
 package core;
 
 import annotation.Notificator;
+import java.rmi.RemoteException;
 import observer.Observer;
 import observer.Observable;
 import java.util.HashMap;
@@ -9,6 +10,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import remote.RemoteObservable;
+import remote.RemoteObserver;
 
 public class TaskAssigner implements Observable {
 
@@ -69,6 +74,7 @@ public class TaskAssigner implements Observable {
     @Override
     public void addObserver(Observer observer) {
         observersActive.put(observer, true);
+        System.out.println("Observer agregado: " + observer.getClass().getSimpleName());
     }
 
     @Override
@@ -80,7 +86,11 @@ public class TaskAssigner implements Observable {
     public void notifyObservers(Object event) {
         for (Observer obs: observersActive.keySet()) {
             boolean isActive = observersActive.get(obs);
-            if (isActive) obs.update(event);
+            if (isActive) try {
+                obs.update(event);
+            } catch (RemoteException ex) {
+                Logger.getLogger(TaskAssigner.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }

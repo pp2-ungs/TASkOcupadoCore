@@ -9,13 +9,14 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import observer.Observer;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.HashSet;
 
-public class RemoteController extends UnicastRemoteObject implements Remote {
+public class RemoteController extends UnicastRemoteObject implements RemoteTaskController {
     TaskAssigner taskAssigner;
     
     // se tiene que construir de alguna manera... necesita saber a TaskAssigner (o TASkOcupado, para más logeos(?)
     public RemoteController() throws RemoteException {
-        
+        taskAssigner = new TaskAssigner(new HashSet<>());
     }
     
     public void setAssigner(TaskAssigner taskAssigner) {
@@ -23,7 +24,7 @@ public class RemoteController extends UnicastRemoteObject implements Remote {
     }
     
     // deberíamos exponer dos cosas: Observer (o RemoteObserver, pero trae problemas) y RemoteController
-    public synchronized void addObserver(Observer observer) throws RemoteException {
+    public synchronized void addObserver(RemoteObserver observer) throws RemoteException {
         taskAssigner.addObserver(observer);
     }
     

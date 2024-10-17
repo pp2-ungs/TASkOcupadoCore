@@ -9,4 +9,6 @@ import observer.Observable;
 
 public interface RemoteObservable extends Remote, Observable {
     // ???? necesaria?? o va en TaskAssigner?
+    
+    public void addObserver(RemoteObserver observer);
 }

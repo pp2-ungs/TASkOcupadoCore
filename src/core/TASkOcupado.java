@@ -1,9 +1,12 @@
 package core;
 
 import annotation.Notificator;
+import java.rmi.RemoteException;
 import observer.Observer;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TASkOcupado implements observer.Observable, observer.Observer {
     
@@ -56,7 +59,13 @@ public class TASkOcupado implements observer.Observable, observer.Observer {
 
     @Override
     public void notifyObservers(Object event) {
-        observers.forEach(observer -> observer.update(event));
+        observers.forEach(observer -> {
+            try {
+                observer.update(event);
+            } catch (RemoteException ex) {
+                Logger.getLogger(TASkOcupado.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
     }
 
     @Override

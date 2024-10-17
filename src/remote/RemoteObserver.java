@@ -1,15 +1,13 @@
 package remote;
  
-import java.rmi.Remote; 
-import java.rmi.RemoteException;
 import observer.Observer;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 // permitime dudar
-public abstract class RemoteObserver implements Remote, Observer {
-    
-    @Override
-    public void update(Object event) { // throws RemoteException
-         
-    }
-    
+public interface RemoteObserver extends Remote, Observer {
+
+    public void update(Object event) throws RemoteException;  // Mantener RemoteException
+
 }
