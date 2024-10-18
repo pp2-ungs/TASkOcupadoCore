@@ -18,7 +18,7 @@ public class TaskAssigner implements Observable {
     public TaskAssigner(Set<Observer> observers) {
         assignedTasks = new HashMap<>();
         activeObservers = new HashMap<>();
-        observers.forEach(obs -> activeObservers.put(obs, true));
+        observers.forEach(obs -> activeObservers.put(obs, false));
     }
 
     public void assignTask(Task task, Member member) {
@@ -48,7 +48,7 @@ public class TaskAssigner implements Observable {
         Set<Observer> notificators = new HashSet<>();
         for (Observer observer : activeObservers.keySet()) {
             boolean isActive = activeObservers.get(observer);
-            if (observer.getClass().isAnnotationPresent(Notificator.class) && isActive) {
+            if (observer.getClass().isAnnotationPresent(Notificator.class)) {
                 notificators.add(observer);
             }
         }
