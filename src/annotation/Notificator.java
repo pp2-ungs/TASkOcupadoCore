@@ -8,5 +8,4 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE) // La anotación puede ser usada en clases
 public @interface Notificator {
-    
 }

@@ -8,11 +8,11 @@ import observer.Observer;
 import tools.Discoverer;
 import tools.PluginFactory;
 
-public class TASkOcupadoHelper {
+public class CoreFactory {
 
     private Properties properties;
 
-    public TASkOcupadoHelper(String path) {
+    public CoreFactory(String path) {
         this.properties = new Properties();
 
         path = path == null || path.isEmpty() ? Settings.PROPERTIES_FILE : path;
@@ -37,10 +37,11 @@ public class TASkOcupadoHelper {
     public Set<Member> getMembers() {
         return getLoader().loadSet(Member.class);
     }
-    
+
     private ContentLoader getLoader() {
         PluginFactory<ContentLoader> plugin = new PluginFactory<ContentLoader>(properties);
         ContentLoader<?> loader = plugin.getPlugin(ContentLoader.class);
         return loader;
     }
+
 }

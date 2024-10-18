@@ -12,27 +12,27 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class Discoverer<T> {
-    File directory;
-    
+
+    private File directory;
+
     public Discoverer(String path) {
         directory = new File(path);
-        
+
         if (!directory.exists() || !directory.isDirectory()) {
             throw new RuntimeException("?invalid directory: " + path);
         }
     }
-    
-    public Set<T> discover(Class<T> clazz) {
+
+    public Set<T> discover(Class<T> classObject) {
         Set<T> implementations = new HashSet<>();
-        findClassesInPath(directory, clazz, implementations);
+        findClassesInPath(directory, classObject, implementations);
         return implementations;
     }
-    
+
     private void findClassesInPath(File path, Class<T> targetInterface, Set<T> implementations) {
         if (path.isDirectory()) {
             File[] files = path.listFiles();
             if (files != null) {
-                
                 for (File file : files) {
                     findClassesInPath(file, targetInterface, implementations);
                 }
@@ -47,7 +47,6 @@ public class Discoverer<T> {
 
         try (JarFile jar = new JarFile(jarFile)) {
             Enumeration<JarEntry> entries = jar.entries();
-
             while (entries.hasMoreElements()) {
                 JarEntry entry = entries.nextElement();
                 if (!entry.isDirectory() && entry.getName().endsWith(".class")) {
@@ -69,7 +68,7 @@ public class Discoverer<T> {
                 }
             }
         } catch (InstantiationException | NoSuchMethodException | InvocationTargetException
-                | IllegalAccessException e) {
+            | IllegalAccessException e) {
             System.err.println("?error instantiating class: " + e.getMessage());
         }
     }
