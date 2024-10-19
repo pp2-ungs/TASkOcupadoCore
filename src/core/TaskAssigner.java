@@ -1,6 +1,5 @@
 package core;
 
-import annotation.Notificator;
 import observer.Observer;
 import observer.Observable;
 import java.util.HashMap;
@@ -9,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Map;
+import annotation.Notifier;
 
 public class TaskAssigner implements Observable {
 
@@ -44,18 +44,16 @@ public class TaskAssigner implements Observable {
         notifyObservers(msg);
     }
 
-    public Set<Observer> getNotificators() {
-        Set<Observer> notificators = new HashSet<>();
+    public Set<Observer> getNotifiers() {
+        Set<Observer> notifiers = new HashSet<>();
         for (Observer observer : activeObservers.keySet()) {
             boolean isActive = activeObservers.get(observer);
-            if (observer.getClass().isAnnotationPresent(Notificator.class)) {
-                notificators.add(observer);
+            if (observer.getClass().isAnnotationPresent(Notifier.class)) {
+                notifiers.add(observer);
             }
         }
-
-        //Set<Observer> notificators = (Set<Observer>) observersActive.keySet().stream().filter(obs -> obs.getClass().isAnnotationPresent(Notificator.class));
-        System.out.println("Notifiers: " + notificators);
-        return notificators;
+        System.out.println("Notifiers: " + notifiers);
+        return notifiers;
     }
 
     public void activateObserver(Observer observer) {
@@ -69,7 +67,6 @@ public class TaskAssigner implements Observable {
     @Override
     public void addObserver(Observer observer) {
         activeObservers.put(observer, true);
-        System.out.println("Observer agregado: " + observer.getClass().getSimpleName());
     }
 
     @Override
