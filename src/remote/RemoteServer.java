@@ -9,7 +9,7 @@ public class RemoteServer {
 
     public void startServer(TaskAssigner taskAssigner) {
         try {
-            RemoteController remoteController = new RemoteController(taskAssigner);
+            RemoteAssigner remoteController = new RemoteAssigner(taskAssigner);
             Registry createRegistry = LocateRegistry.createRegistry(5050);
             createRegistry.rebind("TASkOcupado", remoteController);
 

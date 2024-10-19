@@ -25,7 +25,6 @@ public class TASkOcupado implements Observable, Observer {
 
         taskAssigner.addObserver(this);
 
-        // TODO: init, ver que onda
         new RemoteServer().startServer(taskAssigner);
     }
 
@@ -41,8 +40,8 @@ public class TASkOcupado implements Observable, Observer {
         return members;
     }
 
-    public Set<Observer> getNotificators() {
-        return taskAssigner.getNotificators();
+    public Set<Observer> getNotifiers() {
+        return taskAssigner.getNotifiers();
     }
 
     @Override
