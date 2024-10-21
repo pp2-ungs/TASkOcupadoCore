@@ -47,7 +47,6 @@ public class TaskAssigner implements Observable {
     public Set<Observer> getNotifiers() {
         Set<Observer> notifiers = new HashSet<>();
         for (Observer observer : activeObservers.keySet()) {
-            boolean isActive = activeObservers.get(observer);
             if (observer.getClass().isAnnotationPresent(Notifier.class)) {
                 notifiers.add(observer);
             }
