@@ -2,6 +2,7 @@ package core;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 import observer.Observer;
@@ -22,6 +23,16 @@ public class CoreFactory {
         } catch (IOException e) {
             System.err.println("?properties I/O error: " + path);
         }
+    }
+    
+    public TASkOcupado create() {
+        Set<Task> tasks = getTasks();
+        Set<Member> members = getMembers();
+        
+        Set<Observer> taskAssignerObservers = getObservers();
+        TaskAssigner taskAssigner = new TaskAssigner(taskAssignerObservers);
+        
+        return new TASkOcupado(tasks, members, taskAssigner);
     }
 
     public Set<Observer> getObservers() {

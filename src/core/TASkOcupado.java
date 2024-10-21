@@ -24,6 +24,15 @@ public class TASkOcupado implements observer.Observable, observer.Observer {
         taskAssigner.addObserver(this);
     }
     
+    public TASkOcupado(Set<Task> tasks, Set<Member> members, TaskAssigner taskAssigner) {
+        this.tasks = tasks;
+        this.members = members;
+        this.taskAssigner = taskAssigner;
+        
+        observers = new HashSet<>();
+        taskAssigner.addObserver(this);
+    }
+    
     public void assignTask(Task task, Member member) {
         taskAssigner.assignTask(task, member);
     }
