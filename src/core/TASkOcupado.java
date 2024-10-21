@@ -3,26 +3,13 @@ package core;
 import observer.Observer;
 import java.util.HashSet;
 import java.util.Set;
+import observer.Observable;
 
-public class TASkOcupado implements observer.Observable, observer.Observer {
+public class TASkOcupado implements Observable, Observer {
     private Set<Observer> observers;
     private Set<Task> tasks;
     private Set<Member> members;
     private TaskAssigner taskAssigner;
-    
-    public TASkOcupado(String propertiesPath) {
-        CoreFactory helper = new CoreFactory(propertiesPath);
-             
-        tasks = helper.getTasks();
-        members = helper.getMembers();
-        
-        observers = new HashSet<>();
-        
-        Set<Observer> taskAssignerObservers = helper.getObservers();
-        taskAssigner = new TaskAssigner(taskAssignerObservers);
-        
-        taskAssigner.addObserver(this);
-    }
     
     public TASkOcupado(Set<Task> tasks, Set<Member> members, TaskAssigner taskAssigner) {
         this.tasks = tasks;

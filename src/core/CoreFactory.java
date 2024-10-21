@@ -2,7 +2,6 @@ package core;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 import observer.Observer;
@@ -35,17 +34,17 @@ public class CoreFactory {
         return new TASkOcupado(tasks, members, taskAssigner);
     }
 
-    public Set<Observer> getObservers() {
+    private Set<Observer> getObservers() {
         Discoverer discoverer = new Discoverer(Settings.EXTENSIONS);
         Set<Observer> observers = discoverer.discover(Observer.class);
         return observers;
     }
 
-    public Set<Task> getTasks() {
+    private Set<Task> getTasks() {
         return getLoader().loadSet(Task.class);
     }
 
-    public Set<Member> getMembers() {
+    private Set<Member> getMembers() {
         return getLoader().loadSet(Member.class);
     }
     
