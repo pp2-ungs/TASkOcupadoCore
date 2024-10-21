@@ -16,7 +16,5 @@ public class Main {
         
         System.out.println(tasks);
         System.out.println(members);
-        
-        taskOcupado.assignTask(new Task("Ir al gym"), new Member("Ximena Ebertz"));
     }
 }
