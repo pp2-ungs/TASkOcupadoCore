@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.Set;
 import observer.Observer;
+import remote.RemoteServer;
 import tools.Discoverer;
 import tools.PluginFactory;
 
@@ -30,6 +31,8 @@ public class CoreFactory {
         
         Set<Observer> taskAssignerObservers = getObservers();
         TaskAssigner taskAssigner = new TaskAssigner(taskAssignerObservers);
+        
+        new RemoteServer().startServer(taskAssigner);
         
         return new TASkOcupado(tasks, members, taskAssigner);
     }

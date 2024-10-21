@@ -3,7 +3,6 @@ package core;
 import observer.*;
 import java.util.HashSet;
 import java.util.Set;
-import remote.RemoteServer;
 
 public class TASkOcupado implements Observable, Observer {
 
@@ -19,8 +18,6 @@ public class TASkOcupado implements Observable, Observer {
         
         observers = new HashSet<>();
         taskAssigner.addObserver(this);
-        
-        new RemoteServer().startServer(taskAssigner);
     }
 
     public void assignTask(Task task, Member member) {
