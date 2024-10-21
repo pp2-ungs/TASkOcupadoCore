@@ -11,7 +11,7 @@ public class TASkOcupado implements observer.Observable, observer.Observer {
     private TaskAssigner taskAssigner;
     
     public TASkOcupado(String propertiesPath) {
-        TASkOcupadoHelper helper = new TASkOcupadoHelper(propertiesPath);
+        CoreFactory helper = new CoreFactory(propertiesPath);
              
         tasks = helper.getTasks();
         members = helper.getMembers();
