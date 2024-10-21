@@ -11,20 +11,15 @@ public class TASkOcupado implements Observable, Observer {
     private Set<Task> tasks;
     private Set<Member> members;
     private Set<Observer> observers;
-
-    public TASkOcupado(String propertiesPath) {
-        CoreFactory helper = new CoreFactory(propertiesPath);
-
-        tasks = helper.getTasks();
-        members = helper.getMembers();
-
+    
+    public TASkOcupado(Set<Task> tasks, Set<Member> members, TaskAssigner taskAssigner) {
+        this.tasks = tasks;
+        this.members = members;
+        this.taskAssigner = taskAssigner;
+        
         observers = new HashSet<>();
-
-        Set<Observer> taskAssignerObservers = helper.getObservers();
-        taskAssigner = new TaskAssigner(taskAssignerObservers);
-
         taskAssigner.addObserver(this);
-
+        
         new RemoteServer().startServer(taskAssigner);
     }
 

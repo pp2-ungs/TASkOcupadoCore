@@ -23,18 +23,28 @@ public class CoreFactory {
             System.err.println("?properties I/O error: " + path);
         }
     }
+    
+    public TASkOcupado create() {
+        Set<Task> tasks = getTasks();
+        Set<Member> members = getMembers();
+        
+        Set<Observer> taskAssignerObservers = getObservers();
+        TaskAssigner taskAssigner = new TaskAssigner(taskAssignerObservers);
+        
+        return new TASkOcupado(tasks, members, taskAssigner);
+    }
 
-    public Set<Observer> getObservers() {
+    private Set<Observer> getObservers() {
         Discoverer discoverer = new Discoverer(Settings.EXTENSIONS);
         Set<Observer> observers = discoverer.discover(Observer.class);
         return observers;
     }
 
-    public Set<Task> getTasks() {
+    private Set<Task> getTasks() {
         return getLoader().loadSet(Task.class);
     }
 
-    public Set<Member> getMembers() {
+    private Set<Member> getMembers() {
         return getLoader().loadSet(Member.class);
     }
 
