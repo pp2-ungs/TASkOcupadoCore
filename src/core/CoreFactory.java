@@ -38,7 +38,7 @@ public class CoreFactory {
     }
 
     private Set<Observer> getObservers() {
-        Discoverer discoverer = new Discoverer(Settings.EXTENSIONS);
+        Discoverer<Observer> discoverer = new Discoverer<>(Settings.EXTENSIONS);
         Set<Observer> observers = discoverer.discover(Observer.class);
         return observers;
     }
