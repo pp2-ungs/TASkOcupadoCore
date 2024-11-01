@@ -22,16 +22,15 @@ public class CoreFactory {
         } catch (IOException e) {
             System.err.println("?properties I/O error: " + path);
         }
-        
     }
-    
+
     public TASkOcupado create() {
         Set<Task> tasks = getTasks();
-        Set<Member> members = getMembers();
-        
+        Set<Person> members = getMembers();
+
         Set<Observer> taskAssignerObservers = getObservers();
         TaskAssigner taskAssigner = new TaskAssigner(taskAssignerObservers);
-        
+
         return new TASkOcupado(tasks, members, taskAssigner);
     }
 
@@ -43,15 +42,15 @@ public class CoreFactory {
 
     private ContentFactory getContentFactory() {
         var classInstanceFactory = new ClassInstanceFactory<ContentFactory>(properties);
-        return classInstanceFactory.getClassInstance(ContentFactory.class);
+        return classInstanceFactory.instance(ContentFactory.class);
     }
 
-     private Set<Task> getTasks() {
+    private Set<Task> getTasks() {
         return getContentFactory().createSetOf(Task.class);
     }
 
-    private Set<Member> getMembers() {
-        return getContentFactory().createSetOf(Member.class);
+    private Set<Person> getMembers() {
+        return getContentFactory().createSetOf(Person.class);
     }
 
 }

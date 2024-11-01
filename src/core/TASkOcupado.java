@@ -8,10 +8,10 @@ import observer.Observable;
 public class TASkOcupado implements Observable, Observer {
     private Set<Observer> observers;
     private Set<Task> tasks;
-    private Set<Member> members;
+    private Set<Person> members;
     private TaskAssigner taskAssigner;
     
-    public TASkOcupado(Set<Task> tasks, Set<Member> members, TaskAssigner taskAssigner) {
+    public TASkOcupado(Set<Task> tasks, Set<Person> members, TaskAssigner taskAssigner) {
         this.tasks = tasks;
         this.members = members;
         this.taskAssigner = taskAssigner;
@@ -20,7 +20,7 @@ public class TASkOcupado implements Observable, Observer {
         taskAssigner.addObserver(this);
     }
     
-    public void assignTask(Task task, Member member) {
+    public void assignTask(Task task, Person member) {
         taskAssigner.assignTask(task, member);
     }
     
@@ -28,7 +28,7 @@ public class TASkOcupado implements Observable, Observer {
         return tasks;
     }
     
-    public Set<Member> getMembers() {
+    public Set<Person> getMembers() {
         return members;
     }
     

@@ -1,7 +1,7 @@
 package main;
 
 import core.CoreFactory;
-import core.Member;
+import core.Person;
 import core.TASkOcupado;
 import core.Task;
 import java.util.Set;
@@ -12,7 +12,7 @@ public class Main {
         TASkOcupado taskOcupado = coreFactory.create();
         
         Set<Task> tasks = taskOcupado.getTasks();
-        Set<Member> members = taskOcupado.getMembers();
+        Set<Person> members = taskOcupado.getMembers();
         
         System.out.println(tasks);
         System.out.println(members);

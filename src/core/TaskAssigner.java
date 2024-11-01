@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class TaskAssigner implements Observable {
 
-    private Map<Task, Set<Member>> assignedTasks;
+    private Map<Task, Set<Person>> assignedTasks;
     private Set<Observer> observers;
 
     public TaskAssigner(Set<Observer> observers) {
@@ -19,19 +19,19 @@ public class TaskAssigner implements Observable {
         this.observers = observers;
     }
 
-    public void assignTask(Task task, Member member) {
+    public void assignTask(Task task, Person member) {
         assign(task, member);
         notifyAssignment(task, member);
     }
 
-    private void assign(Task task, Member member) {
+    private void assign(Task task, Person member) {
         if (assignedTasks.get(task) == null) {
             assignedTasks.put(task, new HashSet<>());
         }
         assignedTasks.get(task).add(member);
     }
 
-    private void notifyAssignment(Task task, Member member) {
+    private void notifyAssignment(Task task, Person member) {
         var timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm'hs'"));
 
         var msg = new HashMap<String, String>();

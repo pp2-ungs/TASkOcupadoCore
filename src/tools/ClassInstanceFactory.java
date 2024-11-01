@@ -10,7 +10,7 @@ public class ClassInstanceFactory<T> {
         this.properties = properties;
     }
     
-    public T getClassInstance(Class<T> classObject) {
+    public T instance(Class<T> classObject) {
         String type = classObject.getName();
         String className = properties.getProperty(type);
         if (className == null) {
@@ -19,7 +19,7 @@ public class ClassInstanceFactory<T> {
         try {
             return (T) Class.forName(className).getDeclaredConstructor().newInstance();
         } catch (Exception ex) {
-            throw new RuntimeException("?factory unable to construct instance of " + type);
+            throw new RuntimeException("?unable to construct instance of " + type);
         }
     }
 }

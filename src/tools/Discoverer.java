@@ -12,7 +12,8 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class Discoverer<T> {
-    File directory;
+
+    private File directory;
     
     public Discoverer(String path) {
         directory = new File(path);
