@@ -6,12 +6,11 @@ import java.util.Properties;
 import java.util.Set;
 import observer.Observer;
 import tools.Discoverer;
-import tools.PluginFactory;
+import tools.ClassInstanceFactory;
 
 public class CoreFactory {
 
     private Properties properties;
-    private ContentLoader loader;
 
     public CoreFactory(String path) {
         this.properties = new Properties();
@@ -24,7 +23,6 @@ public class CoreFactory {
             System.err.println("?properties I/O error: " + path);
         }
         
-        loader = getLoader();
     }
     
     public TASkOcupado create() {
@@ -43,16 +41,17 @@ public class CoreFactory {
         return observers;
     }
 
+    private ContentFactory getContentFactory() {
+        var classInstanceFactory = new ClassInstanceFactory<ContentFactory>(properties);
+        return classInstanceFactory.getClassInstance(ContentFactory.class);
+    }
+
      private Set<Task> getTasks() {
-        return loader.loadSet(Task.class);
+        return getContentFactory().createSetOf(Task.class);
     }
 
     private Set<Member> getMembers() {
-        return loader.loadSet(Member.class);
+        return getContentFactory().createSetOf(Member.class);
     }
 
-    private ContentLoader getLoader() {
-        PluginFactory<ContentLoader> plugin = new PluginFactory<>(properties);
-        return plugin.getPlugin(ContentLoader.class);
-    }
 }
