@@ -1,35 +1,41 @@
 package core;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import observer.Observer;
-import java.util.HashSet;
 import java.util.Set;
 import observer.Observable;
 
-public class TASkOcupado implements Observable, Observer {
-    private Set<Observer> observers;
+public class TASkOcupado implements Observable {
+
     private Set<Task> tasks;
-    private Set<Person> members;
+    private Set<Person> people;
     private TaskAssigner taskAssigner;
+    private Set<Observer> observers;
     
-    public TASkOcupado(Set<Task> tasks, Set<Person> members, TaskAssigner taskAssigner) {
+    public TASkOcupado(Set<Task> tasks, Set<Person> people, Set<Observer> observers) {
         this.tasks = tasks;
-        this.members = members;
-        this.taskAssigner = taskAssigner;
-        
-        observers = new HashSet<>();
-        taskAssigner.addObserver(this);
+        this.people = people;
+        this.taskAssigner = new TaskAssigner();
+        this.observers = observers;
     }
     
     public void assignTask(Task task, Person member) {
         taskAssigner.assignTask(task, member);
+        notifyAssignment(task, member);
     }
-    
-    public Set<Task> getTasks() {
-        return tasks;
-    }
-    
-    public Set<Person> getMembers() {
-        return members;
+
+    // FIXME
+    private void notifyAssignment(Task task, Person people) {
+        var timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm'hs'"));
+
+        var msg = new HashMap<String, String>();
+        msg.put("Task", task.getDescription());
+        msg.put("Name", people.getName());
+        msg.put("Time", timestamp);
+
+        notifyObservers(msg);
     }
     
     @Override
@@ -47,8 +53,12 @@ public class TASkOcupado implements Observable, Observer {
         observers.forEach(observer -> observer.update(event));
     }
 
-    @Override
-    public void update(Object event) {
-        notifyObservers(event);
+    public Set<Task> getTasks() {
+        return tasks;
     }
+    
+    public Set<Person> getPeople() {
+        return people;
+    }
+    
 }

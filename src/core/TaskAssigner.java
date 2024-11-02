@@ -1,59 +1,27 @@
 package core;
 
-import observer.Observer;
-import observer.Observable;
 import java.util.HashMap;
 import java.util.Set;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Map;
 
-public class TaskAssigner implements Observable {
+public class TaskAssigner {
 
     private Map<Task, Set<Person>> assignedTasks;
-    private Set<Observer> observers;
 
-    public TaskAssigner(Set<Observer> observers) {
+    public TaskAssigner() {
         this.assignedTasks = new HashMap<>();
-        this.observers = observers;
     }
 
-    public void assignTask(Task task, Person member) {
-        assign(task, member);
-        notifyAssignment(task, member);
+    public void assignTask(Task task, Person person) {
+        assign(task, person);
     }
 
-    private void assign(Task task, Person member) {
+    private void assign(Task task, Person person) {
         if (assignedTasks.get(task) == null) {
             assignedTasks.put(task, new HashSet<>());
         }
-        assignedTasks.get(task).add(member);
+        assignedTasks.get(task).add(person);
     }
 
-    private void notifyAssignment(Task task, Person member) {
-        var timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm'hs'"));
-
-        var msg = new HashMap<String, String>();
-        msg.put("Task", task.getDescription());
-        msg.put("Name", member.getName());
-        msg.put("Time", timestamp);
-
-        notifyObservers(msg);
-    }
-
-    @Override
-    public void addObserver(Observer observer) {
-        observers.add(observer);
-    }
-
-    @Override
-    public void removeObserver(Observer observer) {
-        observers.remove(observer);
-    }
-
-    @Override
-    public void notifyObservers(Object event) {
-        observers.forEach(observer -> observer.update(event));
-    }
 }

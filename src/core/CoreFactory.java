@@ -27,16 +27,18 @@ public class CoreFactory {
     public TASkOcupado create() {
         Set<Task> tasks = getTasks();
         Set<Person> members = getMembers();
-
-        Set<Observer> taskAssignerObservers = getObservers();
-        TaskAssigner taskAssigner = new TaskAssigner(taskAssignerObservers);
-
-        return new TASkOcupado(tasks, members, taskAssigner);
+        Set<Observer> observers = getObservers();
+        return new TASkOcupado(tasks, members, observers);
     }
 
     private Set<Observer> getObservers() {
-        Discoverer<Observer> discoverer = new Discoverer<>(Settings.EXTENSIONS);
-        Set<Observer> observers = discoverer.discover(Observer.class);
+        // ???
+        // Si vamos a usar properties, Discoverer debería tomar un properties.
+        // De esta manera, se justifican un poco más los archivos properties.
+        // Discoverer<Observer> discoverer = new Discoverer<>(Settings.EXTENSIONS);
+        var discoverer = new Discoverer<Observer>(properties); // FIXME
+        //var discoverer = new Discoverer<Observer>(Settings.EXTENSIONS);
+        var observers = discoverer.discover(Observer.class);
         return observers;
     }
 
