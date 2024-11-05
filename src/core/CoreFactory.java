@@ -12,15 +12,15 @@ public class CoreFactory {
 
     private Properties properties;
 
-    public CoreFactory(String path) {
+    public CoreFactory(String propertiesPath) {
         this.properties = new Properties();
 
-        path = path == null || path.isEmpty() ? Settings.PROPERTIES_FILE : path;
+        propertiesPath = propertiesPath == null || propertiesPath.isEmpty() ? Settings.PROPERTIES_FILE : propertiesPath;
 
         try {
-            properties.load(new FileInputStream(path));
+            properties.load(new FileInputStream(propertiesPath));
         } catch (IOException e) {
-            System.err.println("?properties I/O error: " + path);
+            System.err.println("?properties I/O error: " + propertiesPath);
         }
     }
 
@@ -28,16 +28,10 @@ public class CoreFactory {
         Set<Task> tasks = createTasks();
         Set<Person> members = createPeople();
         Set<Observer> observers = searchObservers();
-        System.out.println(observers);
         return new TASkOcupado(tasks, members, observers);
     }
 
-    private Set<Observer> searchObservers() {
-        // ???
-        // Si vamos a usar properties, Discoverer debería tomar un properties.
-        // De esta manera, se justifican un poco más los archivos properties.
-        //var discoverer = new Discoverer<Observer>(properties); // FIXME
-        
+    private Set<Observer> searchObservers() {        
         Discoverer<Observer> discoverer = new Discoverer<>(Settings.EXTENSIONS, Observer.class);
         discoverer.discover();
         return discoverer.getDiscoveredImpls();

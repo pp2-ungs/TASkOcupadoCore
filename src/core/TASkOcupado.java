@@ -26,7 +26,6 @@ public class TASkOcupado implements Observable {
         notifyAssignment(task, member);
     }
 
-    // FIXME
     private void notifyAssignment(Task task, Person people) {
         var timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm'hs'"));
 

@@ -14,14 +14,9 @@ public class TaskAssigner {
     }
 
     public void assignTask(Task task, Person person) {
-        assign(task, person);
-    }
-
-    private void assign(Task task, Person person) {
         if (assignedTasks.get(task) == null) {
             assignedTasks.put(task, new HashSet<>());
         }
         assignedTasks.get(task).add(person);
     }
-
 }
