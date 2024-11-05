@@ -26,9 +26,9 @@ public class CoreFactory {
 
     public TASkOcupado create() {
         Set<Task> tasks = createTasks();
-        Set<Person> members = createPeople();
+        Set<Person> people = createPeople();
         Set<Observer> observers = searchObservers();
-        return new TASkOcupado(tasks, members, observers);
+        return new TASkOcupado(tasks, people, observers);
     }
 
     private Set<Observer> searchObservers() {        
@@ -37,17 +37,17 @@ public class CoreFactory {
         return discoverer.getDiscoveredImpls();
     }
 
-    private ContentFactory getContentFactory() {
+    private ContentFactory createContentFactory() {
         var classInstanceFactory = new ClassInstanceFactory<ContentFactory>(properties);
-        return classInstanceFactory.instance(ContentFactory.class);
+        return classInstanceFactory.create(ContentFactory.class);
     }
 
     private Set<Task> createTasks() {
-        return getContentFactory().createSetOf(Task.class);
+        return createContentFactory().createSetOf(Task.class);
     }
 
     private Set<Person> createPeople() {
-        return getContentFactory().createSetOf(Person.class);
+        return createContentFactory().createSetOf(Person.class);
     }
 
 }

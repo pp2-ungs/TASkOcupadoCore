@@ -10,7 +10,7 @@ public class ClassInstanceFactory<T> {
         this.properties = properties;
     }
     
-    public T instance(Class<T> classObject) {
+    public T create(Class<T> classObject) {
         String type = classObject.getName();
         String className = properties.getProperty(type);
         if (className == null) {
