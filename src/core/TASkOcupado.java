@@ -3,6 +3,7 @@ package core;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.HashSet;
 import observer.Observer;
 import java.util.Set;
 import observer.Observable;
@@ -14,11 +15,11 @@ public class TASkOcupado implements Observable {
     private TaskAssigner taskAssigner;
     private Set<Observer> observers;
     
-    public TASkOcupado(Set<Task> tasks, Set<Person> people, Set<Observer> observers) {
+    public TASkOcupado(Set<Task> tasks, Set<Person> people) {
         this.tasks = tasks;
         this.people = people;
         this.taskAssigner = new TaskAssigner();
-        this.observers = observers;
+        this.observers = new HashSet<Observer>();
     }
     
     public void assignTask(Task task, Person member) {

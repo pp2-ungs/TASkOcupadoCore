@@ -27,8 +27,13 @@ public class CoreFactory {
     public TASkOcupado create() {
         Set<Task> tasks = createSetOfTasks();
         Set<Person> people = createSetOfPeople();
+    
+        TASkOcupado taskOcupado = new TASkOcupado(tasks, people);
+        
         Set<Observer> observers = searchObservers();
-        return new TASkOcupado(tasks, people, observers);
+        observers.forEach(observer -> taskOcupado.addObserver(observer));
+        
+        return taskOcupado;
     }
 
     private Set<Observer> searchObservers() {        
