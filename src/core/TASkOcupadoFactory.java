@@ -6,7 +6,7 @@ import java.util.Properties;
 import java.util.Set;
 import observer.Observer;
 import tools.Discoverer;
-import tools.ClassInstanceFactory;
+import tools.PluginFactory;
 
 public class TASkOcupadoFactory {
 
@@ -43,7 +43,7 @@ public class TASkOcupadoFactory {
     }
 
     private ContentLoader getContentLoader() {
-        var classInstanceFactory = new ClassInstanceFactory<ContentLoader>(properties);
+        var classInstanceFactory = new PluginFactory<ContentLoader>(properties);
         return classInstanceFactory.create(ContentLoader.class);
     }
 
