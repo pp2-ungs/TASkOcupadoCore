@@ -30,13 +30,13 @@ public class TASkOcupadoFactory {
     
         TASkOcupado taskOcupado = new TASkOcupado(tasks, people);
         
-        Set<Observer> observers = searchObservers();
+        Set<Observer> observers = loadObservers();
         observers.forEach(observer -> taskOcupado.addObserver(observer));
         
         return taskOcupado;
     }
 
-    private Set<Observer> searchObservers() {        
+    private Set<Observer> loadObservers() {        
         Discoverer<Observer> discoverer = new Discoverer<>(Settings.EXTENSIONS, Observer.class);
         discoverer.discover();
         return discoverer.getDiscoveredImpls();
@@ -54,5 +54,4 @@ public class TASkOcupadoFactory {
     private Set<Person> loadSetOfPeople() {
         return getContentLoader().loadSetOf(Person.class);
     }
-
 }
