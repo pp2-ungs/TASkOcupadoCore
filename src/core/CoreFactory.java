@@ -5,23 +5,27 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.Set;
 import observer.Observer;
+import remote.RemoteServer;
 import tools.Discoverer;
 import tools.PluginFactory;
 
 public class CoreFactory {
 
     private Properties properties;
+    private ContentLoader loader;
 
     public CoreFactory(String path) {
         this.properties = new Properties();
 
         path = path == null || path.isEmpty() ? Settings.PROPERTIES_FILE : path;
-
+        
         try {
             properties.load(new FileInputStream(path));
         } catch (IOException e) {
             System.err.println("?properties I/O error: " + path);
         }
+         
+        loader = getLoader();
     }
     
     public TASkOcupado create() {
@@ -31,27 +35,28 @@ public class CoreFactory {
         Set<Observer> taskAssignerObservers = getObservers();
         TaskAssigner taskAssigner = new TaskAssigner(taskAssignerObservers);
         
+        new RemoteServer().startServer(taskAssigner);
+        
         return new TASkOcupado(tasks, members, taskAssigner);
     }
 
     private Set<Observer> getObservers() {
-        Discoverer discoverer = new Discoverer(Settings.EXTENSIONS);
+        Discoverer<Observer> discoverer = new Discoverer<>(Settings.EXTENSIONS);
         Set<Observer> observers = discoverer.discover(Observer.class);
         return observers;
     }
 
     private Set<Task> getTasks() {
-        return getLoader().loadSet(Task.class);
+        return loader.loadSet(Task.class);
     }
 
     private Set<Member> getMembers() {
-        return getLoader().loadSet(Member.class);
+        return loader.loadSet(Member.class);
     }
 
     private ContentLoader getLoader() {
-        PluginFactory<ContentLoader> plugin = new PluginFactory<ContentLoader>(properties);
-        ContentLoader<?> loader = plugin.getPlugin(ContentLoader.class);
-        return loader;
+        PluginFactory<ContentLoader> plugin = new PluginFactory<>(properties);
+        return plugin.getPlugin(ContentLoader.class);
     }
 
 }
