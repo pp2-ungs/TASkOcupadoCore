@@ -42,17 +42,17 @@ public class CoreFactory {
         return discoverer.getDiscoveredImpls();
     }
 
-    private ContentFactory createContentFactory() {
+    private ContentFactory getContentFactory() {
         var classInstanceFactory = new ClassInstanceFactory<ContentFactory>(properties);
         return classInstanceFactory.create(ContentFactory.class);
     }
 
     private Set<Task> createSetOfTasks() {
-        return createContentFactory().createSetOf(Task.class);
+        return getContentFactory().createSetOf(Task.class);
     }
 
     private Set<Person> createSetOfPeople() {
-        return createContentFactory().createSetOf(Person.class);
+        return getContentFactory().createSetOf(Person.class);
     }
 
 }
