@@ -8,11 +8,11 @@ import observer.Observer;
 import tools.Discoverer;
 import tools.ClassInstanceFactory;
 
-public class CoreFactory {
+public class TASkOcupadoFactory {
 
     private Properties properties;
 
-    public CoreFactory(String propertiesPath) {
+    public TASkOcupadoFactory(String propertiesPath) {
         this.properties = new Properties();
 
         propertiesPath = propertiesPath == null || propertiesPath.isEmpty() ? Settings.PROPERTIES_FILE : propertiesPath;
