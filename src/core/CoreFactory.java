@@ -25,8 +25,8 @@ public class CoreFactory {
     }
 
     public TASkOcupado create() {
-        Set<Task> tasks = createSetOfTasks();
-        Set<Person> people = createSetOfPeople();
+        Set<Task> tasks = loadSetOfTasks();
+        Set<Person> people = loadSetOfPeople();
     
         TASkOcupado taskOcupado = new TASkOcupado(tasks, people);
         
@@ -47,12 +47,12 @@ public class CoreFactory {
         return classInstanceFactory.create(ContentLoader.class);
     }
 
-    private Set<Task> createSetOfTasks() {
-        return getContentLoader().createSetOf(Task.class);
+    private Set<Task> loadSetOfTasks() {
+        return getContentLoader().loadSetOf(Task.class);
     }
 
-    private Set<Person> createSetOfPeople() {
-        return getContentLoader().createSetOf(Person.class);
+    private Set<Person> loadSetOfPeople() {
+        return getContentLoader().loadSetOf(Person.class);
     }
 
 }
