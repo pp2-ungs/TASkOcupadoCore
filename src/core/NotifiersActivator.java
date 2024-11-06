@@ -10,4 +10,21 @@ package core;
  */
 public class NotifiersActivator {
     
+    Set<Notifier> activeNotifiers;
+    
+    
+    //NotifiersRegistry registry;
+    
+    void activate(Notifier obs) {
+        activeNotifiers.add(registry.getNotifier(obs));
+    }
+    
+    void deactivate(Notifier obs) {
+        activeNotifiers.remove(registry.getNotifier(obs));
+    }
+    
+    Set<Notifier> getActiveNotifiers() {
+        return activeNotifiers;
+    }
+    
 }
