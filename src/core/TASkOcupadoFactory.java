@@ -27,9 +27,15 @@ public class TASkOcupadoFactory {
     public TASkOcupado create() {
         Set<Task> tasks = loadSetOfTasks();
         Set<Person> people = loadSetOfPeople();
+    
+        TASkOcupado taskOcupado = new TASkOcupado(tasks, people);
+        
         Set<Observer> observers = loadSetOfObservers();
+        observers.forEach(observer -> taskOcupado.addObserver(observer));
+        
         System.out.println(observers);
-        return new TASkOcupado(tasks, people, observers);
+        
+        return taskOcupado;
     }
 
     private ContentLoader createContentLoader() {
