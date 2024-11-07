@@ -53,8 +53,7 @@ public class TASkOcupadoFactory {
     
     private Set<Observer> loadSetOfObservers() {        
         Discoverer<Observer> discoverer = new Discoverer<>(Settings.EXTENSIONS, Observer.class);
-        discoverer.discover();
-        return discoverer.getDiscoveredImpls();
+        return discoverer.discover();
     }
 
 }

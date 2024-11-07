@@ -15,11 +15,9 @@ public class Discoverer<T> {
 
     private File directory;
     private Class<T> type;
-    private Set<T> discoveredImpls;
     
     public Discoverer(String path, Class<T> type) {
         this.type = type;
-        discoveredImpls = new HashSet<>();
         directory = new File(path);
         
         if (!directory.exists() || !directory.isDirectory()) {
@@ -27,40 +25,45 @@ public class Discoverer<T> {
         }
     }
     
-    public void discover() {
-        findClassesInPath(directory);
+    public Set<T> discover() {
+        Set<T> discoveredImpls = new HashSet<>();
+        findClassesInPath(directory, discoveredImpls);
+        return discoveredImpls;
     }
     
-    private void findClassesInPath(File path) {
+    private void findClassesInPath(File path, Set<T> discoveredImpls) {
         if (path.isDirectory()) {
             File[] files = path.listFiles();
             if (files != null) {
                 
                 for (File file : files) {
-                    findClassesInPath(file);
+                    findClassesInPath(file, discoveredImpls);
                 }
             }
         } else if (path.isFile() && path.getName().endsWith(".jar")) {
-            findImplementationsInJar(path);
+            discoveredImpls.addAll(findImplementationsInJar(path));
         }
     }
 
-    private void findImplementationsInJar(File jarFile) {
+    private Set<T> findImplementationsInJar(File jarFile) {
+        Set<T> implementations = new HashSet<>();
+        
         try (JarFile jar = new JarFile(jarFile)) {
             Enumeration<JarEntry> entries = jar.entries();
 
             while (entries.hasMoreElements()) {
                 JarEntry entry = entries.nextElement();
                 if (!entry.isDirectory() && entry.getName().endsWith(".class")) {
-                    instantiateClassFromJar(jarFile, entry);
+                    instantiateClassFromJar(jarFile, entry, implementations);
                 }
             }
         } catch (IOException e) {
             System.err.println("?error reading jar file: " + e.getMessage());
         }
+        return implementations;
     }
 
-    private void instantiateClassFromJar(File jarFile, JarEntry entry) {
+    private void instantiateClassFromJar(File jarFile, JarEntry entry, Set<T> discoveredImpls) {
         try {
             if (entry.getName().endsWith(".class") && !entry.getName().contains("module-info") && !entry.getName().contains("META-INF")) {
                 Class<?> cls = loadClassFromJar(jarFile, entry.getName());
@@ -83,9 +86,5 @@ public class Discoverer<T> {
             System.err.println("?error loading class from jar: " + e.getMessage());
             return null;
         }
-    }
-    
-    public Set<T> getDiscoveredImpls() {
-        return discoveredImpls;
     }
 }
