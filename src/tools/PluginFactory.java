@@ -2,11 +2,11 @@ package tools;
 
 import java.util.Properties;
 
-public class ClassInstanceFactory<T> {
+public class PluginFactory<T> {
 
     private Properties properties;
 
-    public ClassInstanceFactory(Properties properties) {
+    public PluginFactory(Properties properties) {
         this.properties = properties;
     }
     
