@@ -25,17 +25,17 @@ public class Discoverer {
     
     public <T> Set<T> discover(Class<T> type) {
         Set<T> discoveredImpls = new HashSet<>();
-        findClassesInPath(directory, discoveredImpls, type);
+        findClassesInPath(directory, type, discoveredImpls);
         return discoveredImpls;
     }
     
-    private <T> void findClassesInPath(File path, Set<T> discoveredImpls, Class<T> type) {
+    private <T> void findClassesInPath(File path, Class<T> type, Set<T> discoveredImpls) {
         if (path.isDirectory()) {
             File[] files = path.listFiles();
             if (files != null) {
                 
                 for (File file : files) {
-                    findClassesInPath(file, discoveredImpls, type);
+                    findClassesInPath(file, type, discoveredImpls);
                 }
             }
         } else if (path.isFile() && path.getName().endsWith(".jar")) {
@@ -52,7 +52,7 @@ public class Discoverer {
             while (entries.hasMoreElements()) {
                 JarEntry entry = entries.nextElement();
                 if (!entry.isDirectory() && entry.getName().endsWith(".class")) {
-                    instantiateClassFromJar(jarFile, entry, implementations, type);
+                    instantiateClassFromJar(jarFile, entry, type, implementations);
                 }
             }
         } catch (IOException e) {
@@ -61,7 +61,7 @@ public class Discoverer {
         return implementations;
     }
 
-    private <T> void instantiateClassFromJar(File jarFile, JarEntry entry, Set<T> discoveredImpls, Class<T> type) {
+    private <T> void instantiateClassFromJar(File jarFile, JarEntry entry, Class<T> type, Set<T> discoveredImpls) {
         try {
             if (entry.getName().endsWith(".class") && !entry.getName().contains("module-info") && !entry.getName().contains("META-INF")) {
                 Class<?> cls = loadClassFromJar(jarFile, entry.getName());
