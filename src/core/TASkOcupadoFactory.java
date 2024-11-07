@@ -38,22 +38,22 @@ public class TASkOcupadoFactory {
         return taskOcupado;
     }
 
-    private ContentLoader createContentLoader() {
+    private ContentLoader getContentLoader() {
         var pluginFactory = new PluginFactory<ContentLoader>(properties);
         return pluginFactory.create(ContentLoader.class);
     }
 
     private Set<Task> loadSetOfTasks() {
-        return createContentLoader().loadSetOf(Task.class);
+        return getContentLoader().loadSetOf(Task.class);
     }
 
     private Set<Person> loadSetOfPeople() {
-        return createContentLoader().loadSetOf(Person.class);
+        return getContentLoader().loadSetOf(Person.class);
     }
     
     private Set<Observer> loadSetOfObservers() {        
-        Discoverer<Observer> discoverer = new Discoverer<>(Settings.EXTENSIONS, Observer.class);
-        return discoverer.discover();
+        Discoverer discoverer = new Discoverer(Settings.EXTENSIONS);
+        return discoverer.discover(Observer.class);
     }
 
 }
