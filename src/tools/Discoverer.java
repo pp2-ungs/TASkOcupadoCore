@@ -11,46 +11,48 @@ import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-public class Discoverer<T> {
+public class Discoverer {
 
     private File directory;
-
+    
     public Discoverer(String path) {
         directory = new File(path);
-
+        
         if (!directory.exists() || !directory.isDirectory()) {
             throw new RuntimeException("?invalid directory: " + path);
         }
     }
-
-    public Set<T> discover(Class<T> classObject) {
-        Set<T> implementations = new HashSet<>();
-        findClassesInPath(directory, classObject, implementations);
-        return implementations;
+    
+    public <T> Set<T> discover(Class<T> type) {
+        Set<T> discoveredImpls = new HashSet<>();
+        findClassesInPath(directory, type, discoveredImpls);
+        return discoveredImpls;
     }
-
-    private void findClassesInPath(File path, Class<T> targetInterface, Set<T> implementations) {
+    
+    private <T> void findClassesInPath(File path, Class<T> type, Set<T> discoveredImpls) {
         if (path.isDirectory()) {
             File[] files = path.listFiles();
             if (files != null) {
+                
                 for (File file : files) {
-                    findClassesInPath(file, targetInterface, implementations);
+                    findClassesInPath(file, type, discoveredImpls);
                 }
             }
         } else if (path.isFile() && path.getName().endsWith(".jar")) {
-            implementations.addAll(findImplementationsInJar(path, targetInterface));
+            discoveredImpls.addAll(findImplementationsInJar(path, type));
         }
     }
 
-    private Set<T> findImplementationsInJar(File jarFile, Class<T> targetInterface) {
+    private <T> Set<T> findImplementationsInJar(File jarFile, Class<T> type) {
         Set<T> implementations = new HashSet<>();
-
+        
         try (JarFile jar = new JarFile(jarFile)) {
             Enumeration<JarEntry> entries = jar.entries();
+
             while (entries.hasMoreElements()) {
                 JarEntry entry = entries.nextElement();
                 if (!entry.isDirectory() && entry.getName().endsWith(".class")) {
-                    instantiateClassFromJar(jarFile, entry, targetInterface, implementations);
+                    instantiateClassFromJar(jarFile, entry, type, implementations);
                 }
             }
         } catch (IOException e) {
@@ -59,16 +61,16 @@ public class Discoverer<T> {
         return implementations;
     }
 
-    private void instantiateClassFromJar(File jarFile, JarEntry entry, Class<T> targetInterface, Set<T> implementations) {
+    private <T> void instantiateClassFromJar(File jarFile, JarEntry entry, Class<T> type, Set<T> discoveredImpls) {
         try {
             if (entry.getName().endsWith(".class") && !entry.getName().contains("module-info") && !entry.getName().contains("META-INF")) {
                 Class<?> cls = loadClassFromJar(jarFile, entry.getName());
-                if (cls != null && targetInterface.isAssignableFrom(cls) && !cls.isInterface()) {
-                    implementations.add((T) cls.getDeclaredConstructor().newInstance());
+                if (cls != null && type.isAssignableFrom(cls) && !cls.isInterface()) {
+                    discoveredImpls.add((T) cls.getDeclaredConstructor().newInstance());
                 }
             }
         } catch (InstantiationException | NoSuchMethodException | InvocationTargetException
-            | IllegalAccessException e) {
+                | IllegalAccessException e) {
             System.err.println("?error instantiating class: " + e.getMessage());
         }
     }

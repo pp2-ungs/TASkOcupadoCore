@@ -1,41 +1,43 @@
 package core;
 
-import observer.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.HashSet;
+import observer.Observer;
 import java.util.Set;
+import observer.Observable;
 
-public class TASkOcupado implements Observable, Observer {
+public class TASkOcupado implements Observable {
 
-    private TaskAssigner taskAssigner;
     private Set<Task> tasks;
-    private Set<Member> members;
+    private Set<Person> people;
+    private TaskAssigner taskAssigner;
     private Set<Observer> observers;
     
-    public TASkOcupado(Set<Task> tasks, Set<Member> members, TaskAssigner taskAssigner) {
+    public TASkOcupado(Set<Task> tasks, Set<Person> people) {
         this.tasks = tasks;
-        this.members = members;
-        this.taskAssigner = taskAssigner;
-        
-        observers = new HashSet<>();
-        taskAssigner.addObserver(this);
+        this.people = people;
+        this.taskAssigner = new TaskAssigner();
+        this.observers = new HashSet<Observer>();
     }
-
-    public void assignTask(Task task, Member member) {
+    
+    public void assignTask(Task task, Person member) {
         taskAssigner.assignTask(task, member);
+        notifyAssignment(task, member);
     }
 
-    public Set<Task> getTasks() {
-        return tasks;
-    }
+    private void notifyAssignment(Task task, Person people) {
+        var timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm'hs'"));
 
-    public Set<Member> getMembers() {
-        return members;
-    }
+        var msg = new HashMap<String, String>();
+        msg.put("Task", task.getDescription());
+        msg.put("Name", people.getName());
+        msg.put("Time", timestamp);
 
-    public Set<Observer> getNotifiers() {
-        return taskAssigner.getNotifiers();
+        notifyObservers(msg);
     }
-
+    
     @Override
     public void addObserver(Observer observer) {
         observers.add(observer);
@@ -48,27 +50,15 @@ public class TASkOcupado implements Observable, Observer {
 
     @Override
     public void notifyObservers(Object event) {
-        observers.forEach(observer -> {
-            try {
-                observer.update(event);
-            } catch (Exception ex) {
-                // esto para todo lo demás, añadido de miembros, de tareas, bla
-                System.err.println("?notification not delivered to " + observer.getClass().getSimpleName());
-            }
-        });
+        observers.forEach(observer -> observer.update(event));
     }
 
-    @Override
-    public void update(Object event) {
-        notifyObservers(event);
+    public Set<Task> getTasks() {
+        return tasks;
     }
-
-    // TODO: fixname, abstraction leak
-    public void activeTaskAssignerObserver(Observer observer) {
-        taskAssigner.activateObserver(observer);
+    
+    public Set<Person> getPeople() {
+        return people;
     }
-
-    public void deactiveObserverToTaskAssigner(Observer observer) {
-        taskAssigner.deactivateObserver(observer);
-    }
+    
 }

@@ -2,8 +2,8 @@ package core;
 
 import java.util.Set;
 
-public interface ContentLoader<T> {
+public interface ContentLoader {
 
-    public Set<T> loadSet(Class<T> classObject);
+    public <T> Set<T> loadSetOf(Class<T> classObject);
 
 }
