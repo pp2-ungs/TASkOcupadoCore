@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import observer.Observer;
 import java.util.Set;
+import notifier.Notifier;
+import notifier.NotifiersActivator;
 import observer.Observable;
 
 public class TASkOcupado implements Observable {
@@ -14,14 +16,15 @@ public class TASkOcupado implements Observable {
     private Set<Person> people;
     private TaskAssigner taskAssigner;
     private Set<Observer> observers;
-    
+    private NotifiersActivator notifiersActivator;
+
     public TASkOcupado(Set<Task> tasks, Set<Person> people) {
         this.tasks = tasks;
         this.people = people;
         this.taskAssigner = new TaskAssigner();
         this.observers = new HashSet<Observer>();
     }
-    
+
     public void assignTask(Task task, Person member) {
         taskAssigner.assignTask(task, member);
         notifyAssignment(task, member);
@@ -37,10 +40,14 @@ public class TASkOcupado implements Observable {
 
         notifyObservers(msg);
     }
-    
+
     @Override
     public void addObserver(Observer observer) {
-        observers.add(observer);
+        if (observer instanceof Notifier) {
+            notifiersActivator.addNotifier((Notifier) observer);
+        } else {
+            observers.add(observer);
+        }
     }
 
     @Override
@@ -51,14 +58,27 @@ public class TASkOcupado implements Observable {
     @Override
     public void notifyObservers(Object event) {
         observers.forEach(observer -> observer.update(event));
+        notifiersActivator.getActiveNotifiers().forEach(notifier -> notifier.update(event));
     }
 
     public Set<Task> getTasks() {
         return tasks;
     }
-    
+
     public Set<Person> getPeople() {
         return people;
     }
     
+    public Set<Notifier> getNotifiers() {
+        return null;
+    }
+
+    public void activateNotifier(String notifier) {
+        notifiersActivator.activateNotifier(notifier);
+    }
+
+    public void deactivateNotifier(String notifier) {
+        notifiersActivator.deactivateNotifier(notifier);
+    }
+
 }
