@@ -2,7 +2,7 @@ package tools;
 
 import java.util.Properties;
 
-public class PluginFactory<T> {
+public class PluginFactory {
 
     private Properties properties;
 
@@ -10,7 +10,7 @@ public class PluginFactory<T> {
         this.properties = properties;
     }
     
-    public T create(Class<T> classObject) {
+    public <T> T create(Class<T> classObject) {
         String type = classObject.getName();
         String className = properties.getProperty(type);
         if (className == null) {

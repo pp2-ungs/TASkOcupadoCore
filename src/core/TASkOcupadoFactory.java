@@ -39,7 +39,7 @@ public class TASkOcupadoFactory {
     }
 
     private ContentLoader getContentLoader() {
-        var pluginFactory = new PluginFactory<ContentLoader>(properties);
+        var pluginFactory = new PluginFactory(properties);
         return pluginFactory.create(ContentLoader.class);
     }
 
