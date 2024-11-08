@@ -6,6 +6,10 @@ import java.util.Set;
 public class NotifiersActivator {
 
     private Set<ActivatableNotifier> activatableNotifiers;
+    
+    public NotifiersActivator() {
+        activatableNotifiers = new HashSet<>();
+    }
 
     public void addNotifier(Notifier notifier) {
         activatableNotifiers.add(new ActivatableNotifier(notifier));
@@ -40,9 +44,9 @@ public class NotifiersActivator {
         return activeNotifiers;
     }
 
-    public Set<Notifier> getNotifiers() {
-        Set<Notifier> notifiers = new HashSet<>();
-        activatableNotifiers.forEach(activatableNotifier -> notifiers.add(activatableNotifier.getNotifier()));
+    public Set<String> getNotifiers() {
+        Set<String> notifiers = new HashSet<>();
+        activatableNotifiers.forEach(activatableNotifier -> notifiers.add(activatableNotifier.getName()));
         return notifiers;
     }
 }

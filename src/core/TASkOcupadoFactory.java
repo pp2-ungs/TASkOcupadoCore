@@ -4,7 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.Set;
-import observer.Observer;
+import notifier.Notifier;
 import tools.Discoverer;
 import tools.PluginFactory;
 
@@ -30,10 +30,8 @@ public class TASkOcupadoFactory {
     
         TASkOcupado taskOcupado = new TASkOcupado(tasks, people);
         
-        Set<Observer> observers = loadSetOfObservers();
-        observers.forEach(observer -> taskOcupado.addObserver(observer));
-        
-        System.out.println(observers);
+        Set<Notifier> notifiers = loadSetOfNotifiers();
+        notifiers.forEach(notifier -> taskOcupado.addObserver(notifier));
         
         return taskOcupado;
     }
@@ -51,9 +49,9 @@ public class TASkOcupadoFactory {
         return getContentLoader().loadSetOf(Person.class);
     }
     
-    private Set<Observer> loadSetOfObservers() {        
+    private Set<Notifier> loadSetOfNotifiers() {        
         Discoverer discoverer = new Discoverer(Settings.EXTENSIONS);
-        return discoverer.discover(Observer.class);
+        return discoverer.discover(Notifier.class);
     }
 
 }

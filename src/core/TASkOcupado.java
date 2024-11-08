@@ -23,6 +23,7 @@ public class TASkOcupado implements Observable {
         this.people = people;
         this.taskAssigner = new TaskAssigner();
         this.observers = new HashSet<Observer>();
+        this.notifiersActivator = new NotifiersActivator();
     }
 
     public void assignTask(Task task, Person member) {
@@ -69,8 +70,8 @@ public class TASkOcupado implements Observable {
         return people;
     }
     
-    public Set<Notifier> getNotifiers() {
-        return null;
+    public Set<String> getNotifiers() {
+        return notifiersActivator.getNotifiers();
     }
 
     public void activateNotifier(String notifier) {
