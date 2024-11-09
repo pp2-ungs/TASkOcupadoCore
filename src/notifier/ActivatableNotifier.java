@@ -9,11 +9,11 @@ public class ActivatableNotifier {
         this.notifier = notifier;
     }
     
-    public void active() {
+    public void activateNotifier() {
         isActive = true;
     }
     
-    public void deactive() {
+    public void deactivateNotifier() {
         isActive = false;
     }
     
