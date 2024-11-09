@@ -17,12 +17,12 @@ public class NotifiersActivator {
 
     public void activateNotifier(String notifier) {
         var activatableNotifier = getActivatableNotifier(notifier);
-        if (activatableNotifier != null) activatableNotifier.active();
+        if (activatableNotifier != null) activatableNotifier.activate();
     }
 
     public void deactivateNotifier(String notifier) {
         var activatableNotifier = getActivatableNotifier(notifier);
-        if (activatableNotifier != null) activatableNotifier.deactive();
+        if (activatableNotifier != null) activatableNotifier.deactivate();
     }
 
     private ActivatableNotifier getActivatableNotifier(String notifier) {
