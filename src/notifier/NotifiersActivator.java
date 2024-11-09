@@ -18,14 +18,14 @@ public class NotifiersActivator {
     public void activateNotifier(String notifier) {
         var activatableNotifier = getActivatableNotifier(notifier);
         if (activatableNotifier != null) {
-            activatableNotifier.activateNotifier();
+            activatableNotifier.activate();
         }
     }
 
     public void deactivateNotifier(String notifier) {
         var activatableNotifier = getActivatableNotifier(notifier);
         if (activatableNotifier != null) {
-            activatableNotifier.deactivateNotifier();
+            activatableNotifier.deactivate();
         }
     }
 
