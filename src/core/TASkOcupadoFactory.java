@@ -2,11 +2,18 @@ package core;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import observer.Observer;
-import tools.Discoverer;
+import tools.discovery.Discoverer;
+import tools.Instantiator;
 import tools.PluginFactory;
+import tools.discovery.ResourceFinder;
+import tools.discovery.ResourceParser;
+import tools.discovery.finders.FileSystemResourceFinder;
+import tools.discovery.parsers.ClassFileParser;
+import tools.discovery.parsers.JarFileParser;
 
 public class TASkOcupadoFactory {
 
@@ -31,7 +38,7 @@ public class TASkOcupadoFactory {
         TASkOcupado taskOcupado = new TASkOcupado(tasks, people);
         
         Set<Observer> observers = loadSetOfObservers();
-        observers.forEach(observer -> taskOcupado.addObserver(observer));
+        observers.forEach(taskOcupado::addObserver);
         
         System.out.println(observers);
         
@@ -51,9 +58,15 @@ public class TASkOcupadoFactory {
         return getContentLoader().loadSetOf(Person.class);
     }
     
-    private Set<Observer> loadSetOfObservers() {        
-        Discoverer discoverer = new Discoverer(Settings.EXTENSIONS);
-        return discoverer.discover(Observer.class);
+    private Set<Observer> loadSetOfObservers() {
+        ResourceFinder finder = new FileSystemResourceFinder();
+        List<ResourceParser> parsers = List.of(new ClassFileParser(), new JarFileParser());
+
+        Discoverer discoverer = new Discoverer(finder, parsers);
+        Set<Class<? extends Observer>> observerClasses = discoverer.discover(Settings.EXTENSIONS, Observer.class);
+
+        Instantiator instantiator = new Instantiator();
+        return instantiator.instantiate(observerClasses);
     }
 
 }

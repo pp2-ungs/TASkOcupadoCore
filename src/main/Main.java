@@ -17,6 +17,8 @@ public class Main {
         
         System.out.println(tasks);
         System.out.println(members);
+
+        taskOcupado.assignTask(new Task("Realizar la actividad extra."), new Person("Gonzalo Javier López"));
     }
 
 }
