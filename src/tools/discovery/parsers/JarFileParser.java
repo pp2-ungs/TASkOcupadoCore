@@ -13,9 +13,12 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class JarFileParser implements ResourceParser {
+
+    private static final String SUPPORTED_EXTENSION = ".jar";
+
     @Override
     public boolean supports(Path resource) {
-        return resource.toString().endsWith(".jar");
+        return resource.toString().endsWith(SUPPORTED_EXTENSION);
     }
 
     @Override
@@ -38,7 +41,7 @@ public class JarFileParser implements ResourceParser {
                         classes.add(cls.asSubclass(type));
                     }
                 } catch (ClassNotFoundException | NoClassDefFoundError e) {
-                    // Ignorar clases que no se pueden cargar o tienen dependencias faltantes
+                    System.err.println("Error en JarFileParser: " + e.getMessage());
                 }
             }
         } catch (IOException e) {

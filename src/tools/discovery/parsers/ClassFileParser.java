@@ -12,7 +12,7 @@ import java.util.Set;
 
 public class ClassFileParser implements ResourceParser {
 
-    private final String SUPPORTED_EXTENSION = ".class";
+    private static final String SUPPORTED_EXTENSION = ".class";
 
     @Override
     public boolean supports(Path resource) {
