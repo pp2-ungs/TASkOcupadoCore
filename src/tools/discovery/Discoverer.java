@@ -15,14 +15,15 @@ public class Discoverer {
         this.resourceParsers = resourceParsers;
     }
 
-    public <T> Set<Class<? extends T>> discover(String basePath, Class<T> type) {
+    public <T> Set<Class<? extends T>> discover(String basePathString, Class<T> type) {
+        Path basePath = Paths.get(basePathString);
         Set<Class<? extends T>> foundClasses = new HashSet<>();
-        List<Path> resources = resourceFinder.findResources(Paths.get(basePath));
+        List<Path> resources = resourceFinder.findResources(Paths.get(basePath.toUri()));
 
         for (Path resource : resources) {
             for (ResourceParser parser : resourceParsers) {
                 if (parser.supports(resource)) {
-                    foundClasses.addAll(parser.parse(resource, type));
+                    foundClasses.addAll(parser.parse(resource, basePath, type));
                     break; // Un solo parser por recurso
                 }
             }

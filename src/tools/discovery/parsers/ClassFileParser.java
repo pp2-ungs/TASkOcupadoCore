@@ -2,6 +2,7 @@ package tools.discovery.parsers;
 
 import tools.discovery.ResourceParser;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -10,26 +11,36 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ClassFileParser implements ResourceParser {
+
+    private final String SUPPORTED_EXTENSION = ".class";
+
     @Override
     public boolean supports(Path resource) {
-        return resource.toString().endsWith(".class");
+        return resource.toString().endsWith(SUPPORTED_EXTENSION);
     }
 
     @Override
-    public <T> Set<Class<? extends T>> parse(Path resource, Class<T> type) {
+    public <T> Set<Class<? extends T>> parse(Path resource, Path basePath, Class<T> type) {
         Set<Class<? extends T>> foundClasses = new HashSet<>();
         try {
-            URLClassLoader classLoader = URLClassLoader.newInstance(new URL[]{resource.getParent().toUri().toURL()});
-            String className = resource.getFileName().toString().replace(".class", "");
+            URL[] urls = { basePath.toUri().toURL() };
+            // Obtener el classloader que cargó esta misma clase.
+            ClassLoader parentClassLoader = getClass().getClassLoader();
+            URLClassLoader classLoader = new URLClassLoader(urls, parentClassLoader);
+
+            // Calcular el nombre de la clase a partir de la ruta relativa a la base
+            Path relativePath = basePath.relativize(resource);
+            String className = relativePath.toString()
+                    .replace(File.separator, ".")
+                    .replace(SUPPORTED_EXTENSION, "");
 
             Class<?> cls = Class.forName(className, false, classLoader);
             if (type.isAssignableFrom(cls) && !cls.isInterface()) {
                 foundClasses.add(cls.asSubclass(type));
             }
         } catch (MalformedURLException | ClassNotFoundException | NoClassDefFoundError e) {
-            // Ignorar errores de carga
+            System.err.println("Error en ClassFileParser: " + e.getMessage());
         }
         return foundClasses;
     }
-
 }

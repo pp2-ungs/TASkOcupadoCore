@@ -5,5 +5,5 @@ import java.util.Set;
 
 public interface ResourceParser {
     boolean supports(Path resource);
-    <T> Set<Class<? extends T>> parse(Path resource, Class<T> type);
+    <T> Set<Class<? extends T>> parse(Path resource, Path basePath, Class<T> type);
 }

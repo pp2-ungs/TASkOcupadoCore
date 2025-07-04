@@ -19,7 +19,7 @@ public class JarFileParser implements ResourceParser {
     }
 
     @Override
-    public <T> Set<Class<? extends T>> parse(Path resource, Class<T> type) {
+    public <T> Set<Class<? extends T>> parse(Path resource, Path basePath, Class<T> type) {
         Set<Class<? extends T>> classes = new HashSet<>();
         try (JarFile jar = new JarFile(resource.toFile())) {
             URL[] urls = { resource.toUri().toURL() };
