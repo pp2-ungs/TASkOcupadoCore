@@ -22,8 +22,8 @@ public class JarFileParser implements ResourceParser {
     }
 
     @Override
-    public <T> Set<Class<? extends T>> parse(Path resource, Path basePath, Class<T> type) {
-        Set<Class<? extends T>> classes = new HashSet<>();
+    public <T> Set<Class<T>> parse(Path resource, Path basePath, Class<T> type) {
+        Set<Class<T>> classes = new HashSet<>();
         try (JarFile jar = new JarFile(resource.toFile())) {
             URL[] urls = { resource.toUri().toURL() };
             URLClassLoader classLoader = new URLClassLoader(urls);
@@ -38,7 +38,7 @@ public class JarFileParser implements ResourceParser {
                 try {
                     Class<?> cls = classLoader.loadClass(className);
                     if (type.isAssignableFrom(cls) && !cls.isInterface()) {
-                        classes.add(cls.asSubclass(type));
+                        classes.add((Class<T>) cls);
                     }
                 } catch (ClassNotFoundException | NoClassDefFoundError e) {
                     System.err.println("Error en JarFileParser: " + e.getMessage());

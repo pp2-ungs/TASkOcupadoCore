@@ -20,8 +20,8 @@ public class ClassFileParser implements ResourceParser {
     }
 
     @Override
-    public <T> Set<Class<? extends T>> parse(Path resource, Path basePath, Class<T> type) {
-        Set<Class<? extends T>> foundClasses = new HashSet<>();
+    public <T> Set<Class<T>> parse(Path resource, Path basePath, Class<T> type) {
+        Set<Class<T>> foundClasses = new HashSet<>();
         try {
             URL[] urls = { basePath.toUri().toURL() };
             // Obtener el classloader que cargó esta misma clase.
@@ -36,7 +36,7 @@ public class ClassFileParser implements ResourceParser {
 
             Class<?> cls = Class.forName(className, false, classLoader);
             if (type.isAssignableFrom(cls) && !cls.isInterface()) {
-                foundClasses.add(cls.asSubclass(type));
+                foundClasses.add((Class<T>) cls);
             }
         } catch (MalformedURLException | ClassNotFoundException | NoClassDefFoundError e) {
             System.err.println("Error en ClassFileParser: " + e.getMessage());

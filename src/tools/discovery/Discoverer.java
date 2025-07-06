@@ -15,9 +15,9 @@ public class Discoverer {
         this.resourceParsers = resourceParsers;
     }
 
-    public <T> Set<Class<? extends T>> discover(String basePathString, Class<T> type) {
+    public <T> Set<Class<T>> discover(String basePathString, Class<T> type) {
         Path basePath = Paths.get(basePathString);
-        Set<Class<? extends T>> foundClasses = new HashSet<>();
+        Set<Class<T>> foundClasses = new HashSet<>();
         List<Path> resources = resourceFinder.findResources(Paths.get(basePath.toUri()));
 
         for (Path resource : resources) {

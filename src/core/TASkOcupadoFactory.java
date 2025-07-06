@@ -63,7 +63,7 @@ public class TASkOcupadoFactory {
         List<ResourceParser> parsers = List.of(new ClassFileParser(), new JarFileParser());
 
         Discoverer discoverer = new Discoverer(finder, parsers);
-        Set<Class<? extends Observer>> observerClasses = discoverer.discover(Settings.EXTENSIONS, Observer.class);
+        Set<Class<Observer>> observerClasses = discoverer.discover(Settings.EXTENSIONS, Observer.class);
 
         Instantiator instantiator = new Instantiator();
         return instantiator.instantiate(observerClasses);

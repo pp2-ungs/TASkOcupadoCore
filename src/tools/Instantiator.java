@@ -6,9 +6,9 @@ import java.util.Set;
 
 public class Instantiator {
 
-    public <T> Set<T> instantiate(Set<Class<? extends T>> classes) {
+    public <T> Set<T> instantiate(Set<Class<T>> classes) {
         Set<T> instances = new HashSet<>();
-        for (Class<? extends T> cls : classes) {
+        for (Class<T> cls : classes) {
             try {
                 instances.add(cls.getDeclaredConstructor().newInstance());
             } catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
