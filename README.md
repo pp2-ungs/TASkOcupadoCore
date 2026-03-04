@@ -179,3 +179,5 @@ TASkOcupadoFactory
                             └── notifyObservers({ Task, Name, Time })
                                     └── Observer.update(event) × N
 ```
+
+© 2024 [Ebertz](https://github.com/xebertz), [López](https://github.com/Gonza-JL), [Rondelli](https://github.com/rondelli)
