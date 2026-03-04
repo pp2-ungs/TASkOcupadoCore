@@ -2,6 +2,8 @@
 
 **TASkOcupado Core** is the heart of an extensible task management and assignment system, written in Java. It allows you to organize a set of tasks and people, assign tasks to team members, and automatically notify external observers (e-mail, Telegram, etc.) through a plugin-based architecture.
 
+© 2024 [Ebertz](https://github.com/xebertz), [López](https://github.com/Gonza-JL), [Rondelli](https://github.com/rondelli)
+
 ---
 
 ## What does it do?
@@ -179,5 +181,3 @@ TASkOcupadoFactory
                             └── notifyObservers({ Task, Name, Time })
                                     └── Observer.update(event) × N
 ```
-
-© 2024 [Ebertz](https://github.com/xebertz), [López](https://github.com/Gonza-JL), [Rondelli](https://github.com/rondelli)
